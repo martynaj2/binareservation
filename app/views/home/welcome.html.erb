@@ -1,25 +1,33 @@
+<div class="jumbotron">
+
 <% if current_user %>
-  <h1>Logged</h1>
-  Admin :
-  <% if current_user.is_admin? %>
-    True
+    <h2>Logged</h2>
+    Admin :
+    <% if current_user.is_admin? %>
+      True
     <% else %>
-    False
-  <% end %>
+      False
+    <% end %>
   <li>
   <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
   </li>
-  <% else %>
-  <h1>Not Logged</h1>
+<% else %>
+  <h2>Not Logged</h2>
+</div>
 
-  <%= form_for(:user, :url => session_path(:user)) do |f| %>
-    <%= f.text_field :email %>
-    <%= f.password_field :password %>
-    <%= f.check_box :remember_me %>
-    <%= f.label :remember_me %>
-    <%= f.submit 'Sign in' %>
-    <%= link_to "Forgot your password?", new_password_path(:user) %>
-    <%= render "devise/shared/links" %>
-  <% end %>
+  <div class="container">
 
+    <%= form_for(:user, :url => session_path(:user)) do |f| %>
+    <div class="form-group">
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password, class: "form-control" %>
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+      <%= f.submit 'Sign in', class: "btn btn-primary" %>
+      <%= render "devise/shared/links" %>
+    <% end %>
+  </div>
 <% end %>
