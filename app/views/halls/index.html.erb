@@ -1,9 +1,9 @@
 <div class="halls-index text-center">
-  <h1 class="text-center"> Halls list </h1>
+  <h1 class="text-center"> Rooms list </h1>
      <ol>
        <% @halls.each do |hall| %>
          <li>
-          <%= "Hall's name: " %>
+          <%= "Rooms's name: " %>
           <%= link_to "#{hall.title}", hall_path(id: hall.id)%>
           <%= "capacity: #{hall.capacity}" %>
          </li>
