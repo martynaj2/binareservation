@@ -26,8 +26,10 @@ ActiveRecord::Schema.define(version: 2018_07_16_135412) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "inviter"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-  
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,4 +50,5 @@ ActiveRecord::Schema.define(version: 2018_07_16_135412) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end
