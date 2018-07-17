@@ -1,7 +1,12 @@
 <div class="container">
 	<% @users = User.all %>
 	<% @users.each do |user| %>
-	  <%= user.fullname %><br/>
-	  <%= user.email %><br/>
+	<div data-user-id="<%= user.id %>" class="row">
+	  <%= user.fullname %><br>
+	  <%= user.email %>
+
+		<%= link_to "Destroy", admin_destroy_user_path(user), method: :delete, data: { confirm: "You sure?" } %>
+		<br><br>
+	</div>
 	<% end %>
 </div>
