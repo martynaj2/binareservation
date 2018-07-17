@@ -36,11 +36,13 @@
         </li>
         <% end %>
       <% end %>
+      <% if current_user %>
       <li class="nav-item">
           <% if current_user.is_admin? %>
            <a class="nav-link">Logged as admin</a>
            <% end %>
       </li>
+      <% end %>
     </ul>
   </div>
 </nav>
