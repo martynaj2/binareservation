@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-	def verify
-		@user = User.all
+	def index
+		@users = User.all
 	end
 
 	def destroy
@@ -21,6 +21,16 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+	def verify
+		@user = User.find(params[:id])
+		if @user.update_attribute(:is_verified?, true)
+			redirect_to '/users#index', notice: 'User Updated'
+		else
+			render :index
+		end
+
+	end
 
 	private
 

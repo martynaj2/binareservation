@@ -1,5 +1,5 @@
 <div class="container">
-	<% @users = User.all %>
+
 	<% @users.each do |user| %>
 	<% if user.is_verified? %>
 		<div data-user-id="<%= user.id %>" class="row">
@@ -12,19 +12,5 @@
 		</div>
 		<% end %>
 	<% end %>
-</div>
-
-
-<div class="container">
-	<h2>For verification : </h2>
-	<% @users = User.all %>
-	<% @users.each do |user| %>
-		<% if !user.is_verified? %>
-			<div data-user-id="<%= user.id %>" class="row">
-			  <%= user.fullname %><br>
-			  <%= user.email %>
-				<%= user.is_verified? %>
-			</div>
-		<% end %>
-	<% end %>
+	<br><br><br><br>
 </div>
