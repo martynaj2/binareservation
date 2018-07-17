@@ -5,7 +5,6 @@ $binar-red: #ef3f4a;
 .btn-outline-success, .btn-success {
     border-color: $binar-red;
     color: $binar-violet;
-    font-weight: bold;
     background-color: white;
 }
 
@@ -41,8 +40,8 @@ $binar-red: #ef3f4a;
 }
 
 .login-form {
-  width: 400px;
   padding: 10px;
+  width: 60%;
   border-radius: 20px;
   background-color: whitesmoke;
 }
