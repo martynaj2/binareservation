@@ -1,4 +1,4 @@
-<%=  form_for @hall, remote: true, html: { class: "new-hall" }  do |f| %>
+<%=  form_for @hall do |f| %>
   <div class="form-group">
     <%= f.label :title, class: "control-label" %>
     <%= f.text_field :title, class: "form-control col-md-2 text-center", placeholder: "Enter name of room"%>
