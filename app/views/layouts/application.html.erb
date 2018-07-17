@@ -16,7 +16,9 @@
   </head>
 
   <body>
+    <% if current_user %>
       <%= render 'layouts/partials/navbar' %>
+    <% end %>
       <%= render 'layouts/partials/flash', flash: flash %>
 
     <%= yield %>
