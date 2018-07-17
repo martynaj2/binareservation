@@ -1,0 +1,7 @@
+<div class="container">
+	<% @users = User.all %>
+	<% @users.each do |user| %>
+	  <%= user.fullname %><br/>
+	  <%= user.email %><br/>
+	<% end %>
+</div>
