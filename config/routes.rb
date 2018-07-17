@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 	root 'home#welcome'
-
+	resources :reservations
 	resources :halls
 	devise_for :users, :path_prefix => 'my'
 
