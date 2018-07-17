@@ -10,7 +10,7 @@ class VerifyController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
-		if @user.update_attribute(:is_verified?, true)
+		if @user.update_attribute(:is_verified, true)
 			redirect_to '/verify#index', notice: 'User Updated'
 		else
 			render :index
