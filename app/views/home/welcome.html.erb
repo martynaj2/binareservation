@@ -1,16 +1,19 @@
-<div class="jumbotron">
+<div class="home-logo text-center">
+  <%= image_tag("binarApps.png", alt:"BA logo")%>
+</div>
 
-<% if current_user %>
-    <h2>Logged</h2>
-    Admin :
-    <% if current_user.is_admin? %>
-      True
+<div class="home-page-header text-center">
+  <h2> Welcome to Binar::Meeting</h2>
+  <% if current_user %>
+    <h3>Logged</h3>
+    Admin:
+      <% if current_user.is_admin? %>
+        True
+      <% else %>
+        False
+      <% end %>
     <% else %>
-      False
-    <% end %>
-
-<% else %>
-  <h2>Not Logged</h2>
+  <h3>Not Logged</h3>
 </div>
 
   <div class="container">
