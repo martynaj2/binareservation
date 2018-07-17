@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-	def verify
-		@user = User.all
+	def index
+		@users = User.all
 	end
 
 	def destroy
