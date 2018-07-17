@@ -1,0 +1,26 @@
+<h1 class="show-reservation text-center">
+ <%= "Reservation: #{@reservation.title}" %>
+</h1>
+<div class="info-reservation">
+  <div class="reservation-label">
+    Description:
+    <p class="description-value"><%= @reservation.description%></p>
+  </div>
+  <hr />
+  <div class="reservation-people">
+    Number of people:
+    <p class="number_of_people-value"><%= @reservation.number_of_people%></p>
+  </div>
+  <hr />
+  <div class="start-date-label">
+    Start date:
+    <p class="start-date-value"><%= @reservation.start_date%></p>
+  </div>
+  <hr />
+  <div class="end-date-label">
+    End date:
+    <p class="end-date-value"><%= @reservation.end_date%></p>
+  </div>
+  <%= link_to 'Back to reservation', reservations_path, role: 'button', class:'btn btn-outline-success'%>
+  <%= link_to 'New reservation', new_reservation_path, role: 'button', class:'btn btn-outline-success'%>
+</div>

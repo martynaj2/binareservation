@@ -10,16 +10,33 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
   end
-  
-  def create
-    @reservation = Reservation.new(reservation_params)
-    if @reservation.save
-      redirect_to halls_path, notice: 'Reservation was created.'
+
+  def edit
+    @reservation = Reservation.find(params[:id])
+  end
+
+  def update
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update(reservation_params)
+      redirect_to reservations_path, notice: 'Reservation Updated'
     else
-       redirect_to halls_path, alert: 'bla bla bla'
+      render :edit
     end
   end
 
+  def create
+    @reservation = Reservation.new(reservation_params)
+    if @reservation.save
+      redirect_to reservations_path, notice: 'Reservation was created.'
+    else
+       redirect_to reservations_path, alert: 'Something went wrong'
+    end
+  end
+
+  def destroy
+      @reservation = Reservation.find(params[:id])
+      @reservation.destroy
+  end
   private
 
   def reservation_params
