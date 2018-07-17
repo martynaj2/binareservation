@@ -1,14 +1,13 @@
-<div class="halls-index text-center">
+<div class="halls-index">
   <h1 class="text-center"> Rooms list </h1>
-     <ol>
-       <% @halls.each do |hall| %>
-         <li>
-          <%= "Rooms's name: " %>
-          <%= link_to "#{hall.title}", hall_path(id: hall.id)%>
-          <%= "capacity: #{hall.capacity}" %>
-         </li>
-       <% end %>
-     </ol>
+    <div class="container autors">
+        <% @halls.each do |hall| %>
+        <!-- kazdy row ma zawsze 12 kolumn -->
+         <%= render 'hall', hall: hall %>
+        <% end %>
+    </div>
 </div>
 
+<% if current_user.is_admin? %>
 <div class="text-center"><%= link_to 'Add new room', new_hall_path, role: 'button', class:'btn btn-outline-success' %></div>
+<% end %>
