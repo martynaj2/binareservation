@@ -1,0 +1,21 @@
+<h1 class="show-hall text-center">
+ <%= "Room: #{@hall.title}" %>
+</h1>
+
+<div class="info-hall">
+  <div class="hall-label">
+    Capacity:
+    <p class="capacity-value"><%= @hall.capacity%></p>
+  </div>
+  <hr />
+  <div class="date-label">
+    Created at:
+    <p class="date-value"><%= @hall.created_at%></p>
+  </div>
+  <hr />
+  <div class="update-label">
+    Updated at:
+    <p class="update-value"><%= @hall.updated_at%></p>
+  </div>
+  <%= link_to 'Back to rooms', halls_path, role: 'button', class:'btn btn-outline-success'%>
+</div>
