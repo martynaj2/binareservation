@@ -10,11 +10,13 @@
      <%= f.number_field :number_of_people %>
      <hr />
      <%= f.label :start_date %>
-     <%= f.date_field :start_date %>
+     <%= f.datetime_local_field :start_date %>
      <hr />
      <%= f.label :end_date %>
-     <%= f.date_field :end_date %>
+     <%= f.datetime_local_field :end_date %>
      <hr />
-     
+     <%= f.label :inviter %>
+     <%= f.text_field :inviter %>
+     <hr />
      <%= f.submit 'Save' %>
    <%  end %>
