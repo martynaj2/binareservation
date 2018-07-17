@@ -1,0 +1,13 @@
+<div class="container">
+	<% @users = User.all %>
+	<% @users.each do |user| %>
+	<div data-user-id="<%= user.id %>" class="row">
+	  <%= user.fullname %><br>
+	  <%= user.email %>
+
+		<%= link_to "Destroy", user_path(user), method: :delete, data: { confirm: "You sure?" } %>
+		<%= link_to 'Edit', edit_user_path(id: user.id)%>
+		<br><br>
+	</div>
+	<% end %>
+</div>
