@@ -2,6 +2,29 @@
 $binar-violet: #3b0c64;
 $binar-red: #ef3f4a;
 
+.btn-outline-success, .btn-success {
+    border-color: $binar-red;
+    color: $binar-violet;
+    font-weight: bold;
+    background-color: white;
+}
+
+.btn-outline-success:hover, .btn-success:hover {
+    background-color: $binar-red;
+    color: white;
+    // transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+
+.form-group {
+  padding-bottom: 10px;
+}
+
 
 .home-page-header {
   margin-top: 0px;
@@ -17,24 +40,9 @@ $binar-red: #ef3f4a;
   border-bottom: 2px solid #3b0c64;
 }
 
-.col-centered {
-  float: none;
-  margin: 0 auto;
-  width: 50%;
-}
-
-.form-group {
-  padding-bottom: 10px;
-}
-
-.btn-outline-success {
-    border-color: $binar-red;
-    color: $binar-violet;
-    font-weight: bold;
-}
-
-.btn-outline-success:hover {
-    background-color: $binar-red;
-    color: white;
-    // transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+.login-form {
+  width: 400px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: whitesmoke;
 }
