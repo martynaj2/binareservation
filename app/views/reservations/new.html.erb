@@ -1,3 +1,9 @@
 <h1> <%= "Hi #{current_user.fullname}, make your reservation." %></h1>
 
-  <%= render 'form2' %>
+
+  <% if reservations_path %>
+    <%= render 'form2' %>
+    <% end %>
+  <!-- <% if halls_path %>
+    <%= render 'form' %>
+  <% end %> -->

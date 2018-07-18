@@ -26,15 +26,15 @@ class ReservationsController < ApplicationController
 
   def create
     #@reservation = Reservation.new(reservation_params)
-    # @reservation = hall.reservations.build(reservation_params)
     @reservation = current_user.reservations.build(reservation_params)
     if @reservation.save
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-       redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+       redirect_to reservations_path, alert: "Something went wrong "
 
     end
   end
+
 
   def destroy
       @reservation = Reservation.find(params[:id])
