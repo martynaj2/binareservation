@@ -33,14 +33,14 @@
      <a class="nav-link text-center nav-a" href="/users">Users</a>
    </li>
 
-   <li class="nav-item">
+   <li class="nav-item nav-a">
      <a class="nav-link text-center nav-a" href="/verify">Verify</a>
    </li>
    <% end %>
  <% end %>
 
- <li class="nav-item">
-     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link text-center nav-a nav-log") %>
+ <li class="nav-item nav-a">
+     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link text-center nav-log nav-a") %>
  </li>
 
  <%end%>
