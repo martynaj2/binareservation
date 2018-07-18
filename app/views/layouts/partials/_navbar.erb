@@ -29,21 +29,20 @@
       <li class="nav-item">
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
       </li>
+      <li class="nav-item">
+        <%= link_to 'Edit', edit_user_path(id: current_user.id), class: "nav-link"%>
+      </li>
         <% if current_user.is_admin %>
         <li class="nav-item">
-          <a class="nav-link" href="/users">Users</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/verify">Verify</a>
+          <a class="nav-link" href="/admins">Users</a>
         </li>
         <% end %>
       <% end %>
-      <% if current_user %>
+      <% if current_user.is_admin %>
       <li class="nav-item">
-          <% if current_user.is_admin %>
+
            <a class="nav-link">Logged as admin</a>
-           <% end %>
+
       </li>
       <% end %>
     </ul>

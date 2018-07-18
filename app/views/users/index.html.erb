@@ -1,15 +1,7 @@
 <div class="container">
-
-	<% @users.each do |user| %>
-	<% if user.is_verified? %>
-		<div data-user-id="<%= user.id %>" class="row">
-	  <%= user.fullname %><br>
-	  <%= user.email %>
-		<%= link_to "Destroy", user_path(user), method: :delete, data: { confirm: "You sure?" } %>
-		<%= link_to 'Edit', edit_user_path(id: user.id)%>
-		<br><br>
-		</div>
-		<% end %>
-	<% end %>
-	<br><br><br><br>
+	Name :
+	<%= current_user.fullname %>
+	<br>
+	E-mail :
+	<%= current_user.email %>
 </div>
