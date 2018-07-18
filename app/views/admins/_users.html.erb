@@ -1,8 +1,8 @@
 <% if user.is_verified? %>
 	<div data-user-id="<%= user.id %>" class="row">
-	<%= user.fullname %><br>
-	<%= user.email %>
-	<%= link_to "Destroy", admin_path(user), method: :delete, remote: true, data: { confirm: "You sure?" } %>
-	<%= link_to 'Edit', edit_admin_path(id: user.id)%>
+		<%= user.fullname %><br>
+		<%= user.email %>
+		<%= link_to "Destroy", admin_path(user), method: :delete, remote: true, data: { confirm: "You sure?" } %>
+		<%= link_to 'Edit', edit_admin_path(id: user.id)%>
 	</div>
 	<% end %>

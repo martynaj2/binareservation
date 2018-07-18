@@ -3,6 +3,6 @@
 		<%= user.fullname %><br>
 		<%= user.email %>
 		<%= link_to "Verify", verify_admin_path(id: user.id), method: :put %>
-		<%= link_to "Destroy", admin_path(user), method: :delete, data: { confirm: "You sure?" } %>
+		<%= link_to "Destroy", admin_path(user), method: :delete, remote: true, data: { confirm: "You sure?" } %>
 	</div>
 <% end %>
