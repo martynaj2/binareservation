@@ -13,45 +13,21 @@
         False
       <% end %>
 <h3 class="rooms-header"> Available rooms: </h3>
-<h5 class="small-header">click "see more" to make reservation </h5>
-<div class="row room-card">
-  <div class="col-md-2 col-centered">
-    <div class="card">
-      <div class="card-body">
-         <h5 class="card-title"><%="#{Hall.find(5).title}"%></h5>
-         <p class="card-text"><%="Beautiful, cozy room for #{Hall.find(5).capacity} people"%></p>
-         <a href="/halls/5" class="btn btn-outline-success">See more</a>
+<h5 class="small-header">click "See more" to make reservation </h5>
+
+<% @roomc.each do |f| %>
+  <div class="row room-card">
+    <div class="col-md-2 col-centered">
+      <div class="card">
+        <div class="card-body">
+           <h5 class="card-title"><%="#{f.title}"%></h5>
+           <p class="card-text"><%="Beautiful, cozy room for #{f.capacity} people"%></p>
+           <%= link_to 'See more', hall_path(id: f.id), role: 'button', class:'btn btn-danger text-center' %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-2 col-centered">
-    <div class="card">
-      <div class="card-body">
-         <h5 class="card-title"><%="#{Hall.find(2).title}"%></h5>
-         <p class="card-text"><%="Beautiful, cozy room for #{Hall.find(2).capacity} people"%></p>
-         <a href="/halls/2" class="btn btn-outline-success">See more</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2 col-centered">
-    <div class="card">
-      <div class="card-body">
-         <h5 class="card-title"><%="#{Hall.find(4).title}"%></h5>
-         <p class="card-text"><%="Beautiful, cozy room for #{Hall.find(4).capacity} people"%></p>
-         <a href="/halls/4" class="btn btn-outline-success">See more</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2 col-centered">
-    <div class="card">
-      <div class="card-body">
-         <h5 class="card-title"><%="#{Hall.find(7).title}"%></h5>
-         <p class="card-text"><%="Beautiful, cozy room for #{Hall.find(2).capacity} people"%></p>
-         <a href="/halls/7" class="btn btn-outline-success">See more</a>
-      </div>
-    </div>
-  </div>
-</div>
+<% end %>
 
   <% else %>
   <h3>Not Logged</h3>
