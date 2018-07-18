@@ -1,0 +1,47 @@
+// color variables
+$binar-violet: #3b0c64;
+$binar-red: #ef3f4a;
+
+.btn-outline-success, .btn-success {
+    border-color: $binar-red;
+    color: $binar-violet;
+    background-color: white;
+}
+
+.btn-outline-success:hover, .btn-success:hover {
+    background-color: $binar-red;
+    color: white;
+    // transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+
+.form-group {
+  padding-bottom: 10px;
+}
+
+
+.home-page-header {
+  margin-top: 0px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+// jak chcemy pasek przez cala strone to wykomentowac width i margin
+.home-logo {
+  padding-top: 10px;
+  width: 50%;
+  margin: 0 auto;
+  border-bottom: 2px solid #3b0c64;
+}
+
+.login-form {
+  padding: 10px;
+  width: 60%;
+  border-radius: 20px;
+  background-color: whitesmoke;
+}

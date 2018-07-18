@@ -14,7 +14,12 @@
      <%= f.label :end_date %>
      <%= f.datetime_local_field :end_date %>
      <hr />
-     <%= "Inviter: #{current_user.fullname}" %>
+     <!-- <%= "Inviter: #{current_user.fullname}" %>
      <hr />
+     <%= f.label :inviter %>
+     <%= f.text_field :inviter %>
+     <hr /> -->
+     <%= f.label :user_id %>
+     <%= f.collection_select(:user_id, User.all, :id, :fullname) %>
      <%= f.submit 'Save' %>
    <%  end %>
