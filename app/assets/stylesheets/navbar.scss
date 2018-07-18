@@ -54,7 +54,7 @@ $binar-red: #ef3f4a;
 }
 
 .dropdown-menu {
-  height: 140px;
+  height: 170px;
   width: 190px;
   background-color: #f3e9fc;
 }
@@ -68,7 +68,8 @@ $binar-red: #ef3f4a;
   font-weight: bold;
 }
 
-.edit-nav:visited {
+.edit-nav:visited,
+.edit-nav:active {
   color: black;
 }
 
