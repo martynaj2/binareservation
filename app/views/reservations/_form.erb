@@ -1,4 +1,3 @@
-
    <%= form_for @reservation do |f| %>
      <%= f.label :title %>
      <%= f.text_field :title %>
@@ -14,9 +13,6 @@
      <hr />
      <%= f.label :end_date %>
      <%= f.datetime_local_field :end_date %>
-     <hr />
-     <%= f.label :inviter %>
-     <%= f.text_field :inviter %>
      <hr />
      <%= f.submit 'Save' %>
    <%  end %>
