@@ -10,24 +10,23 @@ $binar-red: #ef3f4a;
    left: 0;
    background-color: $binar-violet;
    overflow-x: hidden; /* Disable horizontal scroll */
-   padding-top: 60px; /* Place content 60px from the top */
+   padding-top: 40px; /* Place content 60px from the top */
    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
 /* The navigation menu links */
-.sidenav a {
+.nav-a {
    // padding: 8px 8px 8px 32px;
-   padding-bottom: 20px;
    text-decoration: none;
    font-size: 17px;
-   color: #818181;
+   color: white;
    display: block;
    transition: 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-   color: #f1f1f1;
+   color: grey;
 }
 
 /* Position and style the close button (top right corner) */
@@ -37,6 +36,7 @@ $binar-red: #ef3f4a;
    right: 25px;
    font-size: 36px;
    margin-left: 50px;
+   color: white;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -48,12 +48,22 @@ $binar-red: #ef3f4a;
 }
 
 .if-admin {
-  margin-top: 60px;
-  color: white;
+  color: $binar-red;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .dropdown-menu {
-  height: 180px;
+  height: 140px;
   width: 190px;
+  background-color: #f3e9fc;
+}
+
+.dropdown-a {
+  color: black;
+}
+
+.nav-log {
+  margin-top: 20px;
+  font-weight: bold;
 }

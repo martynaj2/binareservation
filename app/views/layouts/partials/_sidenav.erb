@@ -1,20 +1,5 @@
 <div id="mySidenav" class="sidenav">
  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
- <li class="nav-item dropdown text-center">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User panel</a>
-    <div class="dropdown-menu text-center">
-      <a class="dropdown-item" href="#">My reservations</a>
-      <a class="dropdown-item" href="#">My profile</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Add new reservation</a>
-    </div>
-  </li>
- <li class="nav-item text-center">
-    <a class="nav-link" href="/reservations#index">Reservations</a>
- </li>
- <li class="nav-item text-center">
-     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
- </li>
 
  <% if current_user %>
  <li class="nav-item text-center if-admin">
@@ -22,5 +7,39 @@
       <a class="nav-link">Logged as admin</a>
     <% end %>
  </li>
+
+ <li class="nav-item dropdown text-center">
+    <a class="nav-link dropdown-toggle nav-a" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User panel</a>
+    <div class="dropdown-menu text-center">
+      <a class="dropdown-item dropdown-a" href="/reservations#index">My reservations</a>
+      <a class="dropdown-item dropdown-a" href="#">My profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item dropdown-a" href="#">Add new reservation</a>
+    </div>
+  </li>
+ <li class="nav-item text-center nav-a">
+    <a class="nav-link nav-a" href="/reservations#index">Reservations</a>
+ </li>
+ <li class="nav-item text-center nav-a">
+    <a class="nav-link nav-a" href="/halls#index">All rooms</a>
+ </li>
+
+
+ <% if current_user %>
+   <% if current_user.is_admin %>
+   <li class="nav-item">
+     <a class="nav-link text-center nav-a" href="/users">Users</a>
+   </li>
+
+   <li class="nav-item">
+     <a class="nav-link text-center nav-a" href="/verify">Verify</a>
+   </li>
+   <% end %>
+ <% end %>
+
+ <li class="nav-item">
+     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link text-center nav-a nav-log") %>
+ </li>
+
  <%end%>
 </div>
