@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :surname, presence: true
-  validates :surname, :surname, length: { minimum: 2}
+  validates :name, :surname, length: { minimum: 2}
 
   has_many :reservations
 
