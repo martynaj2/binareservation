@@ -1,27 +1,17 @@
 <div class="container">
-	<% @users.each do |user| %>
-	<% if user.is_verified? %>
-		<div data-user-id="<%= user.id %>" class="row">
-	  <%= user.fullname %><br>
-	  <%= user.email %>
-		<%= link_to "Destroy", admin_path(user), method: :delete, data: { confirm: "You sure?" } %>
-		<%= link_to 'Edit', edit_admin_path(id: user.id)%>
-		</div>
-		<% end %>
-	<% end %>
+	<div class="users">
+		<% @users.each do |user| %>
+			<%= render 'users', user: user %>
+		<%end%>
+	</div>
 </div>
+
+
 
 <br><br>
 Not Verified :
 <div class="container">
 	<% @users.each do |user| %>
-		<% if !user.is_verified? %>
-			<div data-user-id="<%= user.id %>" class="row">
-			  <%= user.fullname %><br>
-			  <%= user.email %>
-				<%= link_to "Verify", verify_admin_path(id: user.id), method: :put %>
-				<%= link_to "Destroy", admin_path(user), method: :delete, data: { confirm: "You sure?" } %>
-			</div>
-		<% end %>
+		<%= render 'not_verified', user: user %>
 	<% end %>
 </div>

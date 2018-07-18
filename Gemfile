@@ -63,6 +63,7 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
+  gem 'letter_opener'
 end
 
 group :test do
