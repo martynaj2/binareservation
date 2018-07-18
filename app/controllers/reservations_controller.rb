@@ -32,7 +32,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-       redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+       redirect_to reservations_path, alert: "Something went wrong "
 
     end
   end
