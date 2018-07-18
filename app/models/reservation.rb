@@ -5,7 +5,6 @@ class Reservation < ActiveRecord::Base
   validates :number_of_people, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  # validates :inviter, presence: true
 
   belongs_to :user
   belongs_to :hall

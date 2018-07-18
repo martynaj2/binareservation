@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @reservations = Reservation.all
   end
@@ -27,7 +27,7 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    #@reservation = Reservation.new(reservation_params)
+    # @reservation = Reservation.new(reservation_params)
     @reservation = current_user.reservations.build(reservation_params)
     if @reservation.save
       redirect_to reservations_path, notice: 'Reservation was created.'
