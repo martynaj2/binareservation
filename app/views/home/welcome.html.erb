@@ -15,21 +15,5 @@
     <% else %>
   <h3>Not Logged</h3>
 </div>
-
-
-
-<div class="container login-form text-center">
-  <%= form_for(:user, :url => session_path(:user)) do |f| %>
-    <div class="form-group col-md-4 col-centered">
-      <%= f.text_field :email, class: "form-control", placeholder: "Enter email" %>
-    </div>
-    <div class="form-group col-md-4 col-centered">
-      <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-      <%= f.submit 'Sign in', class: "btn btn-outline-success" %>
-      <%= render "devise/shared/links" %>
+<%= render 'layouts/partials/login_form' %>
   <% end %>
-  <% end %>
-</div>
