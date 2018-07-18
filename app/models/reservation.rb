@@ -8,7 +8,6 @@ class Reservation < ActiveRecord::Base
   # validates :inviter, presence: true
 
   belongs_to :user
-  has_many :halls
-  has_many :halls, through: :reservation_halls
+  belongs_to :hall
 
 end

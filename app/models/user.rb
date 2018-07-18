@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :name, :surname, presence: true
   validates :surname, :surname, length: { minimum: 2}
 
-  has_many :resevations
+  has_many :reservations
 
   def fullname
     "#{name} #{surname}"

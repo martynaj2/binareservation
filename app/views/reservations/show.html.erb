@@ -22,8 +22,12 @@
     <p class="end-date-value"><%= @reservation.end_date%></p>
   </div>
   <div class="invitor-label">
-    Invitor
+    Invitor:
     <p class="invitor-value"><%= @reservation.user.fullname%></p>
+  </div>
+  <div class="invitor-label">
+    Hall:
+    <p class="invitor-value"><%= @reservation.hall.title%></p>
   </div>
   <hr />
   <%= link_to 'Back to reservation', reservations_path, role: 'button', class:'btn btn-outline-success'%>
