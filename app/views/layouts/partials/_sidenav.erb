@@ -2,11 +2,11 @@
  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
  <% if current_user %>
- <li class="nav-item text-center if-admin">
+ <div class="nav-item text-center if-admin">
     <% if current_user.is_admin %>
       <a class="nav-link">Logged as admin</a>
     <% end %>
- </li>
+ </div>
 
  <li class="nav-item dropdown text-center">
     <a class="nav-link dropdown-toggle nav-a" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User panel</a>
