@@ -30,9 +30,9 @@ class ReservationsController < ApplicationController
     # @reservation = Reservation.new(reservation_params)
     @reservation = current_user.reservations.build(reservation_params)
     if @reservation.save
-      redirect_to reservations_path, notice: 'Reservation was created.'
+      redirect_to reservations_path, notice: 'Reservation was created'
     else
-       redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+       redirect_to reservations_path, alert: "Something went wrong"
 
     end
   end
@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(
-      :title, :description, :number_of_people, :start_date, :end_date,:hall_id)
+      :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
     # ).merge(user_id: current_user.id)
   end
 end
