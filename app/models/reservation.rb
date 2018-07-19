@@ -1,7 +1,11 @@
 class DateValidator < ActiveModel::Validator
   def validate(reservation)
-    if reservation.start_date >= reservation.end_date
-      reservation.errors[:base] << "start_date > end_date"
+    if reservation.start_date < Time.now
+      reservation.errors[:base] << "start_date > Time.now"
+    else
+      if reservation.start_date >= reservation.end_date
+        reservation.errors[:base] << "start_date > end_date"
+      end
     end
   end
 end
