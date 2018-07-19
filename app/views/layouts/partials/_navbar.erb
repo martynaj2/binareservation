@@ -30,7 +30,7 @@
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
       </li>
       <li class="nav-item">
-        <%= link_to 'Edit', edit_user_path(id: current_user.id), class: "nav-link"%>
+        <a class="nav-link" href="/users#index">My Profile</a>
       </li>
         <% if current_user.is_admin %>
         <li class="nav-item">
