@@ -61,9 +61,7 @@ class ReservationsController < ApplicationController
     else
       redirect_to reservations_path, alert: "Reservation conflict with
       #{
-      @conflict.each do |c|
-        c.title
-      end
+      @conflict.each.map(&:title)
       }"
     end
   end
@@ -79,7 +77,7 @@ class ReservationsController < ApplicationController
       @conflict = []
     else
       reservations.each do |r|
-         if date_check(@reservation.start_date, @reservation.end_date, r.start_date, r.end_date)
+         if !date_check(@reservation.start_date, @reservation.end_date, r.start_date, r.end_date)
           @conflict.push(r)
         end
       end
@@ -88,8 +86,10 @@ class ReservationsController < ApplicationController
 
   def date_check(start_date, end_date, next_start_date, next_end_date)
     if (start_date >= next_end_date)
+      @reservation.title = 'dupa1'
       true
     elsif (end_date <= next_start_date)
+      @reservation.title = 'dupa2'
       true
     else
       false
