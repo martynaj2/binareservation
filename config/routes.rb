@@ -6,6 +6,11 @@ Rails.application.routes.draw do
 	resources :reservations
 	resources :halls
 	resources :users
+	resource :user, only: [:edit] do
+	  collection do
+	    patch 'update_password'
+	  end
+	end
 	resources :admins
 	resources :admins do
   	member do

@@ -8,10 +8,5 @@ class RegistrationsController < Devise::RegistrationsController
     UserMailer.hello_mail(current_user).deliver_later
   end
 
-	protected
-
-		def configure_permitted_parameters
-			devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :surname, :email, :password, :password_confirmation)}
-		end
 
 end
