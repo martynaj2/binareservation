@@ -27,19 +27,9 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservations = Reservation.all
+
     @reservation = current_user.reservations.build(reservation_params)
-    if reservations.empty?
-      @valid = true
-    else
-      reservations.each do |r|
-        if (@reservation.start_date <= r.start_date && @reservation.end_date >= r.start_date)
-          @valid = true
-        else
-          @valid = false
-        end
-      end
-    end
+    @valid = date_validation
 
     if @valid == true
        if @reservation.save
@@ -64,5 +54,20 @@ class ReservationsController < ApplicationController
     params.require(:reservation).permit(
       :title, :description, :number_of_people, :start_date, :end_date,:hall_id)
     # ).merge(user_id: current_user.id)
+  end
+
+  def date_validation
+    reservations = Reservation.all
+    if reservations.empty?
+      valid = true
+    else
+      reservations.each do |r|
+        if (@reservation.start_date <= r.start_date && @reservation.end_date >= r.start_date)
+          valid = true
+        else
+          valid = false
+        end
+      end
+    end
   end
 end

@@ -17,7 +17,7 @@ class Reservation < ActiveRecord::Base
   validates :number_of_people, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates_with DateValidator
+  validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
   belongs_to :user
   belongs_to :hall
