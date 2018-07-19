@@ -27,13 +27,28 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    # @reservation = Reservation.new(reservation_params)
+    reservations = Reservation.all
     @reservation = current_user.reservations.build(reservation_params)
-    if @reservation.save
-      redirect_to reservations_path, notice: 'Reservation was created.'
+    if reservations.empty?
+      @valid = true
     else
-       redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+      reservations.each do |r|
+        if (@reservation.start_date <= r.start_date && @reservation.end_date >= r.start_date)
+          @valid = true
+        else
+          @valid = false
+        end
+      end
+    end
 
+    if @valid == true
+       if @reservation.save
+         redirect_to reservations_path, notice: 'Reservation was created.'
+       else
+         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+       end
+    else
+      redirect_to reservations_path, alert: "Reservation conflict"
     end
   end
 
