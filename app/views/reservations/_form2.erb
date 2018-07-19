@@ -17,5 +17,15 @@
   <%= f.label :hall_id %>
   <%= f.collection_select(:hall_id, Hall.all, :id, :title) %>
   <hr />
+  <p> Choose who do you want to invite: </p>
+  <ul>
+  <% User.all.each do |user| %>
+      <li>
+        <%= check_box_tag 'invited[]', user.id -%>
+        <%= user.fullname -%>
+      </li>
+  <% end %>
+</ul>
+  <hr />
   <%= f.submit 'Save' %>
 <%  end %>

@@ -18,5 +18,5 @@
     <p class="update-value"><%= @hall.updated_at%></p>
   </div>
   <%= link_to 'Back to rooms', halls_path, role: 'button', class:'btn btn-outline-success'%>
-  <%= link_to 'New reservation', new_reservation_path, role: 'button', class:'btn btn-outline-success'%>
+  <%= link_to 'New reservation', new_reservation_path(hall_id: @hall.id), role: 'button', class:'btn btn-outline-success'%>
 </div>
