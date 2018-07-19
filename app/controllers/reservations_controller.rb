@@ -27,19 +27,13 @@ class ReservationsController < ApplicationController
   end
 
   def create
+    # if current_user.is_premium?
+    #   create_premium
+    # else
+    #   create_user
+    # end
 
-    @reservation = current_user.reservations.build(reservation_params)
-    @valid = date_validation
-
-    if @valid == true
-       if @reservation.save
-         redirect_to reservations_path, notice: 'Reservation was created.'
-       else
-         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
-       end
-    else
-      redirect_to reservations_path, alert: "Reservation conflict"
-    end
+    create_user
   end
 
 
@@ -52,22 +46,54 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(
-      :title, :description, :number_of_people, :start_date, :end_date,:hall_id)
-    # ).merge(user_id: current_user.id)
+      :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
+  end
+
+  def create_user
+    @reservation = current_user.reservations.build(reservation_params)
+    date_validation
+    if @conflict.empty?
+       if @reservation.save
+         redirect_to reservations_path, notice: 'Reservation was created.'
+       else
+         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+       end
+    else
+      redirect_to reservations_path, alert: "Reservation conflict with
+      #{
+      @conflict.each do |c|
+        c.title
+      end
+      }"
+    end
+  end
+
+  def create_premium
+    current_user.is_premium?
   end
 
   def date_validation
     reservations = Reservation.all
+    @conflict = []
     if reservations.empty?
-      valid = true
+      @conflict = []
     else
       reservations.each do |r|
-        if (@reservation.start_date <= r.start_date && @reservation.end_date >= r.start_date)
-          valid = true
-        else
-          valid = false
+         if date_check(@reservation.start_date, @reservation.end_date, r.start_date, r.end_date)
+          @conflict.push(r)
         end
       end
     end
   end
+
+  def date_check(start_date, end_date, next_start_date, next_end_date)
+    if (start_date >= next_end_date)
+      true
+    elsif (end_date <= next_start_date)
+      true
+    else
+      false
+    end
+  end
+
 end
