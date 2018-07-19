@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_admin!
 
 	def index
 		@users = User.all
@@ -23,6 +23,7 @@ class AdminsController < ApplicationController
 		end
 	end
 
+
 	def verify
 			@user = User.find(params[:id])
 			if @user.update_attribute(:is_verified, true)
@@ -35,7 +36,7 @@ class AdminsController < ApplicationController
 	private
 
 	def admin_params
-		params.require(:user).permit(:name, :surname, :email, :is_premium, :is_verified)
+		params.require(:user).permit(:name, :surname, :email, :is_premium, :is_verified, :password, :password_confirmation)
 	end
 
 end

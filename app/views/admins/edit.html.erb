@@ -11,6 +11,18 @@
     <%= f.label :email %><br />
     <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
   </div>
+	<div class="field">
+		<%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+		<%= f.password_field :password, autocomplete: "off" %>
+		<% if @minimum_password_length %>
+			<br />
+			<em><%= @minimum_password_length %> characters minimum</em>
+		<% end %>
+	</div>
+	<div class="field">
+		<%= f.label :password_confirmation %><br />
+		<%= f.password_field :password_confirmation, autocomplete: "off" %>
+	</div>
 	<div class="form_group">
 		<%= f.label :is_premium %>
 		<%= f.check_box :is_premium %>
