@@ -8,5 +8,18 @@ class ApplicationController < ActionController::Base
 			devise_parameter_sanitizer.permit :account_update, keys: update_attrs
 		end
 
+	def authenticate_admin!
+		if user_signed_in?
+			if current_user.is_admin
+				
+			else
+				redirect_to root_url
+			end
+		else
+			redirect_to root_url
+			## if you want render 404 page
+			## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+		end
+	end
 
 end
