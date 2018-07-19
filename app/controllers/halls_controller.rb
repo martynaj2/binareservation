@@ -1,6 +1,6 @@
 class HallsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @halls = Hall.all
   end
@@ -36,12 +36,8 @@ class HallsController < ApplicationController
   end
 
   def destroy
-    hall = Hall.find(params[:id])
-    if hall.destroy
-      redirect_to halls_path, notice: 'Post was deleted'
-    else
-      redirect_to halls_path, alert: 'Error'
-    end
+    @hall = Hall.find(params[:id])
+    @hall.destroy
   end
 
   private
