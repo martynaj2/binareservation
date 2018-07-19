@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
-	describe 'atrributes, need to add some after reservation changes that will be made by Artur' do
-		it {expect(subject.attributes).to include('title', 'description', 'number_of_people', 'start_date', 'end_date', 'inviter') }
+	describe 'atrributes' do
+		it {expect(subject.attributes).to include('title', 'description', 'number_of_people', 'start_date', 'end_date', 'user_id', 'hall_id', 'invited') }
 	end
 
 	describe 'validations' do
