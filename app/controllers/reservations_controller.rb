@@ -18,22 +18,35 @@ class ReservationsController < ApplicationController
   end
 
   def update
-    @reservation = Reservation.find(params[:id])
-    if @reservation.update(reservation_params)
-      redirect_to reservations_path, notice: 'Reservation Updated'
+    date_validation('update')
+    if @conflict.empty?
+       if @reservation.update(reservation_params)
+         redirect_to reservations_path, notice: 'Reservation Updated'
+       else
+         render :edit
+       end
     else
-      render :edit
+    redirect_to reservations_path, alert: "Reservation conflict with
+      #{
+      @conflict.each.map(&:title)
+      }"
     end
   end
 
   def create
-    # if current_user.is_premium?
-    #   create_premium
-    # else
-    #   create_user
-    # end
-
-    create_user
+    date_validation('create')
+    if @conflict.empty?
+       if @reservation.save
+         redirect_to reservations_path, notice: 'Reservation was created.'
+       else
+         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+       end
+    else
+      redirect_to reservations_path, alert: "Reservation conflict with
+      #{
+      @conflict.each.map(&:title)
+      }"
+    end
   end
 
 
@@ -49,34 +62,22 @@ class ReservationsController < ApplicationController
       :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
   end
 
-  def create_user
-    @reservation = current_user.reservations.build(reservation_params)
-    date_validation
-    if @conflict.empty?
-       if @reservation.save
-         redirect_to reservations_path, notice: 'Reservation was created.'
-       else
-         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
-       end
-    else
-      redirect_to reservations_path, alert: "Reservation conflict with
-      #{
-      @conflict.each.map(&:title)
-      }"
-    end
-  end
-
-  def create_premium
-    current_user.is_premium?
-  end
-
-  def date_validation
-    reservations = Reservation.where(hall_id: @reservation.hall_id)
+  def date_validation(condition)
     @conflict = []
-    if reservations.empty?
+    @reservation = current_user.reservations.build(reservation_params)
+
+    if condition == 'create'
+      @reservations = Reservation.where(hall_id: @reservation.hall_id)
+    elsif condition=='update'
+      @reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
+    else
+      return false
+    end
+
+    if @reservations.empty?
       @conflict = []
     else
-      reservations.each do |r|
+      @reservations.each do |r|
          if !((@reservation.start_date >= r.end_date) || (@reservation.end_date <= r.start_date))
           @conflict.push(r)
         end
