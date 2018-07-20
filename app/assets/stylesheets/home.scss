@@ -2,14 +2,14 @@
 $binar-violet: #3b0c64;
 $binar-red: #ef3f4a;
 
-.btn-customize {
+.btn.btn-outline-success.btn-customize {
     border-color: #ef3f4a;
     color: #3b0c64;
     background-color: white;
 }
 
-.btn-customize:hover {
-    background-color: #3b0c64;
+.btn:hover.btn-outline-success:hover.btn-customize:hover {
+    background-color: $binar-red;
     color: white;
 }
 
