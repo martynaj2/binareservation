@@ -19,6 +19,11 @@ class Reservation < ActiveRecord::Base
   validates :end_date, presence: true
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
+  scope :ended, ->{where('end_date < ?', Time.now)}
+  scope :during, ->{where('start_date < ?', Time.now)}
+  scope :quarter, ->{where('start_date > ?', Time.now + 15.minutes && 'star_date <?', Time.now + 24.hours)}
+  scope :twenty_four, ->{where('start_date > ?', Time.now - 24.hours)}
+
   belongs_to :user
   belongs_to :hall
 
