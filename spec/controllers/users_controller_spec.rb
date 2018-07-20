@@ -6,15 +6,13 @@ RSpec.describe UsersController, type: :controller do
   before { sign_in(user) }
 
   describe '#index' do
-    it 'should return successful response' do
-        get :index
-        expect(response).to be_successful
+    subject { get :index }
+
+    describe 'successful response' do
+      before { subject }
+      it { expect(response).to be_successful }
+      it { expect(response).to render_template('index') }
     end
-  end
 
-  it 'should render index template' do
-    get :index
-    expect(response).to render_template('index')
   end
-
 end
