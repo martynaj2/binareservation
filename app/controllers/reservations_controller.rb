@@ -52,7 +52,11 @@ class ReservationsController < ApplicationController
 
   def destroy
       @reservation = Reservation.find(params[:id])
-      @reservation.destroy
+      if @reservation.destroy
+        redirect_to reservations_path, notice: "Reservation was deleted"
+      else
+        redirect_to reservations_path, alert: "Something went wrong"
+      end
   end
 
   private
