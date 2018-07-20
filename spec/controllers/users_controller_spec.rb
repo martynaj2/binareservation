@@ -18,7 +18,6 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'users' do
-      
       it 'should return all users' do
         subject
         expect(assigns(:users)).to match_array([user1, user2])
@@ -26,4 +25,5 @@ RSpec.describe UsersController, type: :controller do
     end
 
   end
+
 end
