@@ -10,6 +10,6 @@
 
 <% if current_user %>
   <% if current_user.is_admin? %>
-  <div class="text-center"><%= link_to 'Add new room', new_hall_path, role: 'button', class:'btn btn-outline-success' %></div>
+  <div class="text-center"><%= link_to 'Add new room', new_hall_path, role: 'button', class:'btn btn-outline-success btn-customize' %></div>
   <% end %>
 <% end %>

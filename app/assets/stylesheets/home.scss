@@ -2,16 +2,15 @@
 $binar-violet: #3b0c64;
 $binar-red: #ef3f4a;
 
-.btn-outline-success, .btn-success {
-    border-color: $binar-red;
-    color: $binar-violet;
+.btn-customize {
+    border-color: #ef3f4a;
+    color: #3b0c64;
     background-color: white;
 }
 
-.btn-outline-success:hover, .btn-success:hover {
-    background-color: $binar-red;
+.btn-customize:hover {
+    background-color: #3b0c64;
     color: white;
-    // transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .col-centered {
