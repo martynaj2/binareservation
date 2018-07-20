@@ -1,4 +1,6 @@
 <%= form_for @reservation do |f| %>
+
+  <%= f.hidden_field :id, :value => @reservation.id %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <hr />

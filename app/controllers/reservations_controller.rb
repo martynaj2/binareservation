@@ -18,7 +18,10 @@ class ReservationsController < ApplicationController
   end
 
   def update
-    date_validation('update')
+    @reservation = Reservation.find(params[:id])
+    @reservation_conflict = current_user.reservations.build(reservation_params)
+    reservations = Reservation.where(hall_id: reservation.hall_id).where.not(id: params[:id])
+    date_validation(reservations, @reservation_conflict)
     if @conflict.empty?
        if @reservation.update(reservation_params)
          redirect_to reservations_path, notice: 'Reservation Updated'
@@ -34,7 +37,9 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    date_validation('create')
+    @reservation = current_user.reservations.build(reservation_params)
+    reservations = Reservation.where(hall_id: reservation.hall_id)
+    date_validation(reservations, @reservation)
     if @conflict.empty?
        if @reservation.save
          redirect_to reservations_path, notice: 'Reservation was created.'
@@ -63,26 +68,16 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(
-      :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
+      :id, :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
   end
 
-  def date_validation(condition)
+  def date_validation(reservations, reservation)
     @conflict = []
-    @reservation = current_user.reservations.build(reservation_params)
-
-    if condition == 'create'
-      @reservations = Reservation.where(hall_id: @reservation.hall_id)
-    elsif condition=='update'
-      @reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
-    else
-      return false
-    end
-
-    if @reservations.empty?
+    if reservations.empty?
       @conflict = []
     else
-      @reservations.each do |r|
-         if !((@reservation.start_date >= r.end_date) || (@reservation.end_date <= r.start_date))
+      reservations.each do |r|
+         if !((reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date))
           @conflict.push(r)
         end
       end
