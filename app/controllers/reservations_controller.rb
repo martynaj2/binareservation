@@ -20,7 +20,7 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find(params[:id])
     @reservation_conflict = current_user.reservations.build(reservation_params)
-    reservations = Reservation.where(hall_id: reservation.hall_id).where.not(id: params[:id])
+    reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
     date_validation(reservations, @reservation_conflict)
     if @conflict.empty?
        if @reservation.update(reservation_params)
@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = current_user.reservations.build(reservation_params)
-    reservations = Reservation.where(hall_id: reservation.hall_id)
+    reservations = Reservation.where(hall_id: @reservation.hall_id)
     date_validation(reservations, @reservation)
     if @conflict.empty?
        if @reservation.save
