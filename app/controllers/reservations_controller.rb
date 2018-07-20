@@ -71,7 +71,7 @@ class ReservationsController < ApplicationController
   end
 
   def date_validation
-    reservations = Reservation.all
+    reservations = Reservation.where(hall_id: @reservation.hall_id)
     @conflict = []
     if reservations.empty?
       @conflict = []
