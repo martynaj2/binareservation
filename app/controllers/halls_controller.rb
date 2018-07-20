@@ -20,7 +20,7 @@ class HallsController < ApplicationController
   def update
     @hall = Hall.find(params[:id])
       if @hall.update(hall_params)
-        redirect_to halls_path,  notice: 'Room updated'
+        redirect_to halls_path,  notice: 'Room was updated'
       else
         render :edit
       end
@@ -37,7 +37,11 @@ class HallsController < ApplicationController
 
   def destroy
     @hall = Hall.find(params[:id])
-    @hall.destroy
+    if @hall.destroy
+      redirect_to halls_path, notice: "Room deleted"
+    else
+      redirect_to halls_path, alert: "Something went wrong"
+    end
   end
 
   private

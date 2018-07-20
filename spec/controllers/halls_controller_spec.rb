@@ -102,7 +102,7 @@ RSpec.describe HallsController, type: :controller do
 
   describe '#update' do
     let(:hall) {create(:hall)}
-    let!(:valid_attributes) { { id: hall.id, hall: { title: 'new title' } } }
+    let(:valid_attributes) { { id: hall.id, hall: { title: 'new title' } } }
     let(:invalid_attributes) { { id: hall.id, hall: { title: nil } } }
 
     context 'valid params' do
@@ -117,9 +117,10 @@ RSpec.describe HallsController, type: :controller do
         expect(flash[:notice]).to be_present
       end
 
-      # it 'should change hall title' do
-      #   expect(hall.reload.title).to eq('new title')
-      # end
+      it 'should change hall title' do
+        subject
+        expect(hall.reload.title).to eq( 'new title' )
+      end
     end
 
     context 'invalid params' do
@@ -146,7 +147,7 @@ RSpec.describe HallsController, type: :controller do
 
     it 'should not redirect with notice' do
       subject
-      expect(flash[:notice]).not_to be_present
+      expect(flash[:notice]).to be_present
     end
 
     it 'should destroy hall' do

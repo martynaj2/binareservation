@@ -27,14 +27,13 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    # @reservation = Reservation.new(reservation_params)
-    @reservation = current_user.reservations.build(reservation_params)
-    if @reservation.save
-      redirect_to reservations_path, notice: 'Reservation was created'
-    else
-       redirect_to reservations_path, alert: "Something went wrong"
+    # if current_user.is_premium?
+    #   create_premium
+    # else
+    #   create_user
+    # end
 
-    end
+    create_user
   end
 
 
@@ -48,6 +47,41 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(
       :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
-    # ).merge(user_id: current_user.id)
   end
+
+  def create_user
+    @reservation = current_user.reservations.build(reservation_params)
+    date_validation
+    if @conflict.empty?
+       if @reservation.save
+         redirect_to reservations_path, notice: 'Reservation was created.'
+       else
+         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+       end
+    else
+      redirect_to reservations_path, alert: "Reservation conflict with
+      #{
+      @conflict.each.map(&:title)
+      }"
+    end
+  end
+
+  def create_premium
+    current_user.is_premium?
+  end
+
+  def date_validation
+    reservations = Reservation.where(hall_id: @reservation.hall_id)
+    @conflict = []
+    if reservations.empty?
+      @conflict = []
+    else
+      reservations.each do |r|
+         if !((@reservation.start_date >= r.end_date) || (@reservation.end_date <= r.start_date))
+          @conflict.push(r)
+        end
+      end
+    end
+  end
+
 end
