@@ -20,7 +20,7 @@ class HallsController < ApplicationController
   def update
     @hall = Hall.find(params[:id])
       if @hall.update(hall_params)
-        redirect_to halls_path,  notice: 'Author was updated'
+        redirect_to halls_path,  notice: 'Room was updated'
       else
         render :edit
       end
