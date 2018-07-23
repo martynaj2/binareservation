@@ -10,7 +10,7 @@
  <li class="nav-item dropdown text-center">
     <a class="nav-link dropdown-toggle nav-a" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User panel</a>
     <div class="dropdown-menu text-center">
-      <a class="dropdown-item dropdown-a" href="/reservations#index">My reservations</a>
+      <%= link_to 'My reservations', user_reservations_path(id: current_user.id), class: "nav-link edit-nav"%>
       <a class="dropdown-item dropdown-a" href="/halls#index">All rooms</a>
       <%= link_to 'Edit profile', edit_user_path(id: current_user.id), class: "nav-link edit-nav"%>
       <div class="dropdown-divider"></div>
@@ -18,7 +18,7 @@
     </div>
   </li>
  <li class="nav-item text-center nav-a">
-    <a class="nav-link nav-a" href="/reservations#index">Reservations</a>
+    <a class="nav-link nav-a" href="/reservations#index">All reservations</a>
  </li>
  <li class="nav-item text-center nav-a">
     <a class="nav-link nav-a" href="/halls#index">All rooms</a>

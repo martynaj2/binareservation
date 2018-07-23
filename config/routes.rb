@@ -13,5 +13,6 @@ Rails.application.routes.draw do
       put :verify
     end
 	end
+	get '/my_reservations', to: 'reservations#user_index', as: :user_reservations
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
