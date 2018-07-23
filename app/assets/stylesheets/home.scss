@@ -18,6 +18,12 @@ $binar-red: #ef3f4a;
   margin: 0 auto;
 }
 
+.calendar {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
 
 .form-group {
   padding-bottom: 10px;
@@ -47,10 +53,4 @@ $binar-red: #ef3f4a;
 // remember me checkbox
 label {
   margin-top: 20px;
-}
-
-.calendar {
-  width: 50%;
-  margin: 0 auto;
-  margin-top: 80px;
 }
