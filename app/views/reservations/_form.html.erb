@@ -4,9 +4,6 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
   <hr />
-  <%= f.label :number_of_people %>
-  <%= f.number_field :number_of_people %>
-  <hr />
   <%= f.label :start_date %>
   <%= f.datetime_local_field :start_date %>
   <hr />
@@ -17,14 +14,12 @@
   <%= f.collection_select(:hall_id, Hall.all, :id, :title) %>
   <hr />
   <p> Choose who do you want to invite: </p>
-  <ul>
+  <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names..">
   <% User.all.each do |user| %>
-      <li>
-        <%= check_box_tag 'invited[]', user.id -%>
-        <%= user.fullname -%>
-      </li>
+    <ul id='list'>
+      <li><a href="#"><%= user.fullname %></a></li>
+    </ul>
   <% end %>
-</ul>
   <hr />
   <%= f.submit 'Save' %>
 <%  end %>
