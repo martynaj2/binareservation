@@ -3,10 +3,6 @@
 </h1>
 <div class="info-reservation">
   <div class="reservation-label">
-    Description:
-    <p class="description-value"><%= @reservation.description%></p>
-  </div>
-  <hr />
   <div class="reservation-people">
     Number of people:
     <p class="number_of_people-value"><%= @reservation.number_of_people%></p>
@@ -31,7 +27,7 @@
   </div>
   <hr />
   Invited:
-  <p class="invitor-value"><%= @reservation.invited%></p>
+  <p class="invitor-value"><%= @reservation.invited_ids%></p>
 </div>
 <hr />
   <%= link_to 'Back to reservation', reservations_path, role: 'button', class:"btn btn-outline-success btn-customize"%>

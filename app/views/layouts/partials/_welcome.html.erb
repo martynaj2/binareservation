@@ -7,7 +7,7 @@
   <% if current_user %>
     <h3>Logged</h3>
     Admin:
-      <% if current_user.is_admin? %>
+      <% if current_user.admin? %>
         True
       <% else %>
         False
@@ -16,7 +16,6 @@
 <h5 class="small-header">click "See more" to make reservation </h5>
 
 <div class="row room-card">
-  <!-- <div class="col-md-12 col-centered"> -->
     <% @roomc.each do |f| %>
       <div class="card col-md-2">
         <div class="card-body">
@@ -26,7 +25,6 @@
       </div>
     </div>
     <% end %>
-  <!-- </div> -->
 </div>
 
 <div class="calendar"></div>

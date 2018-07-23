@@ -12,8 +12,15 @@ end
 
 class Reservation < ActiveRecord::Base
 
+<<<<<<< HEAD
+  validates :title, presence: true, length: { minimum: 5}
+  validates :number_of_people, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+=======
   validates :title, length: { minimum: 5}
   validates :end_date, :start_date,:number_of_people, :title, presence: true
+>>>>>>> 79689898ba9752f1ec0314fb91cd4c9f7ea64c78
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
   scope :ended, ->{where('end_date < ?', Time.now)}

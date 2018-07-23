@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :name, :surname, length: { minimum: 2}
 
   has_many :reservations
+  has_many :group_users
+  has_many :group, through: :group_users
 
   def fullname
     "#{name} #{surname}"

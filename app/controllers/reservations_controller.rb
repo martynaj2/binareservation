@@ -66,7 +66,7 @@ class ReservationsController < ApplicationController
   end
 
   def premium_override
-    if current_user.is_premium?
+    if current_user.premium?
       redirect_to reservations_path, alert: "This should be a pop up for prezes
       #{
       @conflicting_reservations.each.map(&:title)
