@@ -66,7 +66,7 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(
-      :id, :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
+      :id, :title, :description, :start_date, :end_date, :hall_id)
   end
 
   def premium_override
