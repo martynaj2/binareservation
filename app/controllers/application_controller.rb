@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
 	def authenticate_admin!
 		if user_signed_in?
-			unless current_user.is_admin?
+			unless current_user.admin?
 				redirect_to root_path
 			end
 		else

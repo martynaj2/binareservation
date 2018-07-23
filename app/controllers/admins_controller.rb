@@ -2,8 +2,8 @@ class AdminsController < ApplicationController
 	before_action :authenticate_admin!
 
 	def index
-		@users = User.where(is_verified: true)
-		@not_verified_users = User.where(is_verified: nil)
+		@users = User.where(verified: true)
+		@not_verified_users = User.where(verified: nil)
 	end
 
 	def destroy
@@ -18,7 +18,7 @@ class AdminsController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update(admin_params)
-			redirect_to '/admins#index', notice: 'User Updated'
+			redirect_to admins_path, notice: 'User Updated'
 		else
 			render :edit
 		end
@@ -27,8 +27,8 @@ class AdminsController < ApplicationController
 
 	def verify
 			@user = User.find(params[:id])
-			if @user.update_attribute(:is_verified, true)
-				redirect_to '/admins#index', notice: 'User Updated'
+			if @user.update_attribute(:verified, true)
+				redirect_to admins_path, notice: 'User Updated'
 			else
 				render :index
 			end
@@ -37,7 +37,7 @@ class AdminsController < ApplicationController
 	private
 
 	def admin_params
-		params.require(:user).permit(:name, :surname, :email, :is_premium, :is_verified, :password, :password_confirmation)
+		params.require(:user).permit(:name, :surname, :email, :premium, :verified, :password, :password_confirmation)
 	end
 
 end
