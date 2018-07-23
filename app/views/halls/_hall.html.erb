@@ -1,12 +1,10 @@
 <div class="row" data-hall-id="<%= hall.id %>">
   <!-- railsowa metoda pomocnicza, co wyswietlone, gdzie przeniesie -->
   <div class="col-sm-12 col-md-9"><%= link_to hall.title, hall_path(id: hall.id) %></div>
-<% if current_user %>
   <div class="col-md-3">
-    <% if current_user.is_admin? %>
+    <% if current_user.admin? %>
       <%= link_to 'Edit', edit_hall_path(id: hall.id),role: 'button', class:'btn btn-primary text-center' %>
       <%= link_to 'Delete', hall_path(id: hall.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center' %>
     <% end %>
-  <% end %>
   </div>
 </div>
