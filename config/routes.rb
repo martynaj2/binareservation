@@ -14,5 +14,7 @@ Rails.application.routes.draw do
     end
 	end
 	get '/my_reservations', to: 'reservations#user_index', as: :user_reservations
+	get '/confirm', to: 'reservations#confirm', as: :confirm_reservation
+	post '/override', to: 'reservations#override', as: :override_reservation
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

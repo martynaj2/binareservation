@@ -62,6 +62,25 @@ class ReservationsController < ApplicationController
       end
   end
 
+  def override
+    @reservation = Reservation.new(session[:reservation_attributes])
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+    @conflicting_reservations.each do |r|
+      r.destroy
+    end
+    if @reservation.save
+      redirect_to reservations_path, notice: 'Reservation was created.'
+    else
+      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+    end
+  end
+
+  def confirm
+    @reservation = Reservation.new(session[:reservation_attributes])
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+    session[:reservation_attributes] = @reservation.attributes
+  end
+
   private
 
   def reservation_params
@@ -71,10 +90,8 @@ class ReservationsController < ApplicationController
 
   def premium_override
     if current_user.premium?
-      redirect_to reservations_path, alert: "This should be a pop up for prezes,
-      #{
-      @conflicting_reservations.each.map(&:title)
-      }"
+      session[:reservation_attributes] = @reservation.attributes
+      redirect_to controller: 'reservations', action: 'confirm'
     else
       redirect_to reservations_path, alert: "Reservation conflict with
       #{
@@ -82,5 +99,6 @@ class ReservationsController < ApplicationController
       }"
     end
   end
+
 
 end
