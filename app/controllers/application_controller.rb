@@ -10,15 +10,11 @@ class ApplicationController < ActionController::Base
 
 	def authenticate_admin!
 		if user_signed_in?
-			if current_user.is_admin
-				
-			else
-				redirect_to root_url
+			unless current_user.is_admin?
+				redirect_to root_path
 			end
 		else
-			redirect_to root_url
-			## if you want render 404 page
-			## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+			redirect_to root_path
 		end
 	end
 

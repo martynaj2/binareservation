@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def update
 		@user = User.find(current_user.id)
     if @user.update(user_params)
-      redirect_to '/users#index', notice: 'User Updated'
+      redirect_to users_path, notice: 'User Updated'
     else
       render :edit
     end
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
 	def user_params
 		params.require(:user).permit(:name, :surname, :email)
-		#params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
 	end
 
 end

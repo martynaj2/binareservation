@@ -1,6 +1,5 @@
 class Hall < ActiveRecord::Base
-  validates :title, presence: true
-  validates :capacity, presence: true
+  validates :title, :capacity, presence: true
 
   scope :large, -> {where('capacity > 10')}
 
