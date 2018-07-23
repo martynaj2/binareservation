@@ -2,7 +2,6 @@
   <h1 class="text-center"> Reservation list </h1>
     <div class="container reservations">
         <% @reservations.each do |reservation| %>
-        <!-- kazdy row ma zawsze 12 kolumn -->
          <%= render 'reservation', reservation: reservation %>
         <% end %>
     </div>
