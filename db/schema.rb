@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_18_132553) do
+ActiveRecord::Schema.define(version: 2018_07_23_085441) do
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "title"
+    t.integer "inviter"
+    t.integer "invited"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "halls", force: :cascade do |t|
     t.string "title"
@@ -19,9 +34,15 @@ ActiveRecord::Schema.define(version: 2018_07_18_132553) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reservation_halls", force: :cascade do |t|
+    t.integer "reservation_id"
+    t.integer "hall_id"
+    t.index ["hall_id"], name: "index_reservation_halls_on_hall_id"
+    t.index ["reservation_id"], name: "index_reservation_halls_on_reservation_id"
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.string "title"
-    t.text "description"
     t.integer "number_of_people"
     t.datetime "start_date"
     t.datetime "end_date"
