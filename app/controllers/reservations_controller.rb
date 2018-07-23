@@ -29,10 +29,17 @@ class ReservationsController < ApplicationController
          render :edit
        end
     else
-    redirect_to reservations_path, alert: "Reservation conflict with
-      #{
-      @conflict.each.map(&:title)
-      }"
+      if current_user.is_premium?
+        redirect_to reservations_path, alert: "This should be a pop up for prezes
+        #{
+        @conflict.each.map(&:title)
+        }"
+      else
+        redirect_to reservations_path, alert: "Reservation conflict with
+        #{
+        @conflict.each.map(&:title)
+        }"
+      end
     end
   end
 
@@ -47,10 +54,17 @@ class ReservationsController < ApplicationController
          redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
        end
     else
-      redirect_to reservations_path, alert: "Reservation conflict with
-      #{
-      @conflict.each.map(&:title)
-      }"
+      if current_user.is_premium?
+        redirect_to reservations_path, alert: "This should be a pop up for prezes
+        #{
+        @conflict.each.map(&:title)
+        }"
+      else
+        redirect_to reservations_path, alert: "Reservation conflict with
+        #{
+        @conflict.each.map(&:title)
+        }"
+      end
     end
   end
 
