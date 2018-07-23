@@ -5,6 +5,10 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.all
   end
 
+  def user_index
+    @reservations = current_user.reservations
+  end
+
   def show
     @reservation = Reservation.find(params[:id])
   end
