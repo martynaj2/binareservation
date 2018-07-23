@@ -8,6 +8,6 @@
     </div>
 </div>
 
-<% if current_user.is_admin? %>
+<% if current_user.admin? %>
   <div class="text-center"><%= link_to 'Add new room', new_hall_path, role: 'button', class: "btn btn-outline-success btn-customize" %></div>
 <% end %>
