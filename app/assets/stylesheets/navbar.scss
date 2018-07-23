@@ -1,6 +1,38 @@
 $binar-violet: #3b0c64;
 $binar-red: #ef3f4a;
 /* The side navigation menu */
+.navbar {
+  width: 100%;
+  margin: 0 auto;
+  background-color: $binar-violet;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
+.navbar-nav {
+    float:none;
+    margin:0 auto;
+    display: block;
+    text-align: center;
+}
+
+.nav-link:active, .nav-link:link, .nav-link:visited {
+  color: white;
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: $binar-red;
+}
+
+.nav-link.admin-label {
+  color: $binar-red;
+  font-weight: bold;
+}
+
+// sidebar
+
 .sidenav {
    height: 100%; /* 100% Full-height */
    width: 0; /* 0 width - change this with JavaScript */

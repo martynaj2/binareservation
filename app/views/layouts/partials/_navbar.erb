@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
-  <%= link_to root_path do %>
+  <!-- <%= link_to root_path do %>
   <img class="navbar-logo" src="https://image.flaticon.com/icons/svg/992/992604.svg" width="50" height="50" alt="App logo">
-  <% end %>
+  <% end %> -->
   <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -27,22 +27,20 @@
       </li>
       <% if current_user %>
       <li class="nav-item">
-          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="/users#index">My Profile</a>
       </li>
         <% if current_user.admin %>
         <li class="nav-item">
           <a class="nav-link" href="/admins">Users</a>
         </li>
+        <li class="nav-item">
+            <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
+        </li>
         <% end %>
       <% end %>
       <% if current_user.admin %>
       <li class="nav-item">
-
-           <a class="nav-link">Logged as admin</a>
-
+           <a class="nav-link admin-label">Logged as admin</a>
       </li>
       <% end %>
     </ul>
