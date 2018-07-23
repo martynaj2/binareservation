@@ -73,12 +73,12 @@ class ReservationsController < ApplicationController
     else
       redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
     end
+    session.delete(:reservation_attributes)
   end
 
   def confirm
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
-    session[:reservation_attributes] = @reservation.attributes
   end
 
   private
