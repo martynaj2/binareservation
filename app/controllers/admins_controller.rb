@@ -2,7 +2,8 @@ class AdminsController < ApplicationController
 	before_action :authenticate_admin!
 
 	def index
-		@users = User.all
+		@users = User.where(is_verified: true)
+		@not_verified_users = User.where(is_verified: nil)
 	end
 
 	def destroy
