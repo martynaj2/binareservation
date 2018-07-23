@@ -1,0 +1,10 @@
+You will destroy these
+
+<div class="container reservations">
+		<% @conflicting_reservations.each do |reservation| %>
+		 <%= reservation.title %>
+		<% end %>
+</div>
+
+Do you wish to continue?
+<%= link_to 'Yes', override_reservation_path, method: :post, role: 'button', class:'btn btn-danger text-center' %>

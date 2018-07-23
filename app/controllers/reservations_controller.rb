@@ -23,9 +23,9 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    @current_reservation = current_user.reservations.build(reservation_params)
+    current_reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
-    date_validation(reservations, @current_reservation)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     if @conflicting_reservations.empty?
        if @reservation.update(reservation_params)
          redirect_to reservations_path, notice: 'Reservation Updated'
@@ -40,7 +40,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id)
-    date_validation(reservations, @reservation)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
        if @reservation.save
          redirect_to reservations_path, notice: 'Reservation was created.'
@@ -62,6 +62,25 @@ class ReservationsController < ApplicationController
       end
   end
 
+  def override
+    @reservation = Reservation.new(session[:reservation_attributes])
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+    @conflicting_reservations.each do |r|
+      r.destroy
+    end
+    if @reservation.save
+      redirect_to reservations_path, notice: 'Reservation was created.'
+    else
+      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+    end
+    session.delete(:reservation_attributes)
+  end
+
+  def confirm
+    @reservation = Reservation.new(session[:reservation_attributes])
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+  end
+
   private
 
   def reservation_params
@@ -71,10 +90,8 @@ class ReservationsController < ApplicationController
 
   def premium_override
     if current_user.premium?
-      redirect_to reservations_path, alert: "This should be a pop up for prezes
-      #{
-      @conflicting_reservations.each.map(&:title)
-      }"
+      session[:reservation_attributes] = @reservation.attributes
+      redirect_to controller: 'reservations', action: 'confirm'
     else
       redirect_to reservations_path, alert: "Reservation conflict with
       #{
@@ -83,15 +100,5 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def date_validation(reservations, reservation)
-    @conflicting_reservations = []
-    unless reservations.empty?
-      reservations.each do |r|
-         if !((reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date))
-          @conflicting_reservations.push(r)
-        end
-      end
-    end
-  end
 
 end

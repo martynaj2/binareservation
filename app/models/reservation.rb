@@ -28,4 +28,18 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :hall
 
+  private
+
+  def self.conflict_validation(reservations, reservation)
+    @conflicting_reservations = []
+    unless reservations.empty?
+      reservations.each do |r|
+         if !((reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date))
+          @conflicting_reservations.push(r)
+        end
+      end
+    end
+    @conflicting_reservations
+  end
+
 end
