@@ -19,27 +19,17 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    @reservation_conflict = current_user.reservations.build(reservation_params)
+    @current_reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
-    date_validation(reservations, @reservation_conflict)
-    if @conflict.empty?
+    date_validation(reservations, @current_reservation)
+    if @conflicting_reservations.empty?
        if @reservation.update(reservation_params)
          redirect_to reservations_path, notice: 'Reservation Updated'
        else
          render :edit
        end
     else
-      if current_user.is_premium?
-        redirect_to reservations_path, alert: "This should be a pop up for prezes
-        #{
-        @conflict.each.map(&:title)
-        }"
-      else
-        redirect_to reservations_path, alert: "Reservation conflict with
-        #{
-        @conflict.each.map(&:title)
-        }"
-      end
+      premium_override
     end
   end
 
@@ -47,24 +37,14 @@ class ReservationsController < ApplicationController
     @reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     date_validation(reservations, @reservation)
-    if @conflict.empty?
+    if @conflicting_reservations.empty?
        if @reservation.save
          redirect_to reservations_path, notice: 'Reservation was created.'
        else
          redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
        end
     else
-      if current_user.is_premium?
-        redirect_to reservations_path, alert: "This should be a pop up for prezes
-        #{
-        @conflict.each.map(&:title)
-        }"
-      else
-        redirect_to reservations_path, alert: "Reservation conflict with
-        #{
-        @conflict.each.map(&:title)
-        }"
-      end
+      premium_override
     end
   end
 
@@ -85,14 +65,26 @@ class ReservationsController < ApplicationController
       :id, :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
   end
 
-  def date_validation(reservations, reservation)
-    @conflict = []
-    if reservations.empty?
-      @conflict = []
+  def premium_override
+    if current_user.is_premium?
+      redirect_to reservations_path, alert: "This should be a pop up for prezes
+      #{
+      @conflicting_reservations.each.map(&:title)
+      }"
     else
+      redirect_to reservations_path, alert: "Reservation conflict with
+      #{
+      @conflicting_reservations.each.map(&:title)
+      }"
+    end
+  end
+
+  def date_validation(reservations, reservation)
+    @conflicting_reservations = []
+    unless reservations.empty?
       reservations.each do |r|
          if !((reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date))
-          @conflict.push(r)
+          @conflicting_reservations.push(r)
         end
       end
     end

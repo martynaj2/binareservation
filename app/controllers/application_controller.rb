@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
 	def authenticate_admin!
 		if user_signed_in?
 			unless current_user.is_admin?
-				redirect_to root_url
+				redirect_to root_path
 			end
 		else
-			redirect_to root_url
+			redirect_to root_path
 		end
 	end
 
