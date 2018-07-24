@@ -24,7 +24,6 @@ class AdminsController < ApplicationController
 		end
 	end
 
-
 	def verify
 			@user = User.find(params[:id])
 			if @user.update_attribute(:verified, true)
