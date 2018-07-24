@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.not_ended
   end
 
   def user_index

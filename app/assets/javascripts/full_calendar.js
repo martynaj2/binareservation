@@ -15,9 +15,9 @@ initialize_calendar = function() {
       editable: true,
       eventLimit: true,
       weekends: false,
+      events: '/home.json',
 
       dayClick: function(date) {
-
         var start_date = date;
         if(!start_date.hasTime()) {
           start_date.time('12:00:00');
@@ -25,6 +25,8 @@ initialize_calendar = function() {
         window.location.href='/reservations/new?start_date=' + start_date.format() + '&end_date=' + start_date.add('hours', 1).format();
         $(this).css('background-color', 'purple');
       },
+
+
 
       select: function( start, end, jsEvent, view) {
 
@@ -43,8 +45,11 @@ initialize_calendar = function() {
           return ! event.block;
         },
 
-
     });
+
   })
+
+
 };
+
 $(document).on('turbolinks:load', initialize_calendar);
