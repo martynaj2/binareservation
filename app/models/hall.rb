@@ -11,12 +11,10 @@ class Hall < ActiveRecord::Base
 
   has_many :reservations
 
-
-
 private
 
   def destroy_reservations
-    self.reservations.destroy_all   
+    self.reservations.destroy_all
   end
 
 end
