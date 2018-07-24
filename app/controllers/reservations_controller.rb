@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
          render :edit
        end
     else
-      premium_override
+      premium_override(true)
     end
   end
 
@@ -48,7 +48,7 @@ class ReservationsController < ApplicationController
          redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
        end
     else
-      premium_override
+      premium_override(false)
     end
   end
 
@@ -62,7 +62,7 @@ class ReservationsController < ApplicationController
       end
   end
 
-  def override
+  def overwrite
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
     @conflicting_reservations.each do |r|
@@ -76,9 +76,32 @@ class ReservationsController < ApplicationController
     session.delete(:reservation_attributes)
   end
 
+  def edit_overwrite
+    @reservation = Reservation.find(session[:reservation_id])
+    current_reservation = current_user.reservations.build(session[:reservation_params])
+    reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
+    @conflicting_reservations.each do |r|
+      r.destroy
+    end
+    if @reservation.update(session[:reservation_params])
+      redirect_to reservations_path, notice: 'Reservation was updated.'
+    else
+      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+    end
+    session.delete(:reservation_params)
+  end
+
   def confirm
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+  end
+
+  def edit_confirm
+    @reservation = Reservation.find(session[:reservation_id])
+    current_reservation = current_user.reservations.build(session[:reservation_params])
+    reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
   end
 
   private
@@ -88,10 +111,16 @@ class ReservationsController < ApplicationController
       :id, :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
   end
 
-  def premium_override
+  def premium_override(edit)
     if current_user.premium?
-      session[:reservation_attributes] = @reservation.attributes
-      redirect_to controller: 'reservations', action: 'confirm'
+      if edit
+        session[:reservation_id] = @reservation.id
+        session[:reservation_params] = reservation_params
+        redirect_to controller: 'reservations', action: 'confirm_update'
+      else
+        session[:reservation_attributes] = @reservation.attributes
+        redirect_to controller: 'reservations', action: 'confirm'
+      end
     else
       redirect_to reservations_path, alert: "Reservation conflict with
       #{
@@ -99,6 +128,5 @@ class ReservationsController < ApplicationController
       }"
     end
   end
-
 
 end
