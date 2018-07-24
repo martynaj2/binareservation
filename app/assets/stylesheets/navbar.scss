@@ -12,27 +12,78 @@ $binar-red: #ef3f4a;
   font-family: "Raleway";
 }
 
-.navbar-nav {
-    display: block;
-    text-align: center;
-}
-
 .custom-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(239, 63, 74, 1.0)' stroke-width='4' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
-.nav-link:active, .nav-link:link, .nav-link:visited {
+.nav-link:active, .nav-link:link, .nav-link:visited, .dropdown-toggle {
   color: white;
   width: 100%;
 }
 
-.nav-link:hover {
+.nav-link:hover, .dropdown-toggle:hover {
   color: $binar-red;
+  text-decoration: none;
 }
 
 .nav-link.admin-label {
   color: $binar-red;
   font-weight: bold;
+}
+
+.dropdown-menu {
+padding: 0px;
+overflow: hidden;
+}
+
+//// panel uzytkownika
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin-top: 20px;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    width: 350px;
+    height: 170px;
+}
+
+.navbar-wrapper .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.navbar-wrapper .navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.navbar-content {
+  width:390px;
+  padding-bottom:0px;
+}
+.navbar-content:before, .navbar-content:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.navbar-nav.navbar-right:last-child {
+  margin-right: 15px !important;
+}
+.navbar-footer {
+    background-color: #38036424;
+    margin-top: 15px;
+}
+.navbar-footer-content {
+  padding:5px 5px 5px 5px;
+}
+
+.dropdown-menu {
+  padding: 0px;
+  overflow: hidden;
 }
 
 // sidebar
