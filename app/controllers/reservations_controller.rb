@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
          render :edit
        end
     else
-      premium_override_update
+      premium_override(true)
     end
   end
 
@@ -48,7 +48,7 @@ class ReservationsController < ApplicationController
          redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
        end
     else
-      premium_override
+      premium_override(false)
     end
   end
 
@@ -71,7 +71,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-      red@reservation.idirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
     end
     session.delete(:reservation_attributes)
   end
@@ -85,7 +85,7 @@ class ReservationsController < ApplicationController
       r.destroy
     end
     if @reservation.update(session[:reservation_params])
-      redirect_to reservations_path, notice: 'Reservation was created.'
+      redirect_to reservations_path, notice: 'Reservation was updated.'
     else
       redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
     end
@@ -111,23 +111,16 @@ class ReservationsController < ApplicationController
       :id, :title, :description, :number_of_people, :start_date, :end_date, :hall_id)
   end
 
-  def premium_override
+  def premium_override(edit)
     if current_user.premium?
-      session[:reservation_attributes] = @reservation.attributes
-      redirect_to controller: 'reservations', action: 'confirm'
-    else
-      redirect_to reservations_path, alert: "Reservation conflict with
-      #{
-      @conflicting_reservations.each.map(&:title)
-      }"
-    end
-  end
-
-  def premium_override_update
-    if current_user.premium?
-      session[:reservation_id] = @reservation.id
-      session[:reservation_params] = reservation_params
-      redirect_to controller: 'reservations', action: 'confirm_update'
+      if edit
+        session[:reservation_id] = @reservation.id
+        session[:reservation_params] = reservation_params
+        redirect_to controller: 'reservations', action: 'confirm_update'
+      else
+        session[:reservation_attributes] = @reservation.attributes
+        redirect_to controller: 'reservations', action: 'confirm'
+      end
     else
       redirect_to reservations_path, alert: "Reservation conflict with
       #{
