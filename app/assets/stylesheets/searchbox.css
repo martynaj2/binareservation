@@ -19,14 +19,22 @@
 #list li a {
     border: 1px solid #ddd; /* Add a border to all links */
     margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6; /* Grey background color */
     padding: 12px; /* Add some padding */
+    background-color: white;
     text-decoration: none; /* Remove default text underline */
     font-size: 18px; /* Increase the font-size */
     color: black; /* Add a black text color */
     display: block; /* Make it into a block element to fill the whole list */
 }
 
+#list li.selected a {
+  background-color: green;
+}
+
 #list li a:hover:not(.header) {
     background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+
+#list li.selected a:hover:not(.header) {
+    background-color: #c8dca4; /* Add a hover effect to all links, except for headers */
 }

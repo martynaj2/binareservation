@@ -12,7 +12,7 @@ end
 
 class Reservation < ActiveRecord::Base
 
-  validates :title, :end_date, :start_date,:number_of_people, :title, presence: true
+  validates :title, :end_date, :start_date, :title, presence: true
   validates :title, length: { minimum: 5}
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
@@ -23,5 +23,19 @@ class Reservation < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :hall
+
+  private
+
+  def self.conflict_validation(reservations, reservation)
+    @conflicting_reservations = []
+    unless reservations.empty?
+      reservations.each do |r|
+         if !((reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date))
+          @conflicting_reservations.push(r)
+        end
+      end
+    end
+    @conflicting_reservations
+  end
 
 end

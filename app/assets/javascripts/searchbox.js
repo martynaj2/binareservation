@@ -1,4 +1,3 @@
-
 function FindUsers() {
 
     var input, filter, ul, li, a, i;
@@ -6,6 +5,8 @@ function FindUsers() {
     filter = input.value.toUpperCase();
     ul = document.getElementById('list');
     li = ul.getElementsByTagName('li');
+
+
 
     for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
