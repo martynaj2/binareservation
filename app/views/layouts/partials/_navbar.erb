@@ -29,12 +29,12 @@
       <li class="nav-item">
         <a class="nav-link" href="/users#index">My Profile</a>
       </li>
+      <li class="nav-item">
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
+      </li>
         <% if current_user.admin %>
         <li class="nav-item">
           <a class="nav-link" href="/admins">Users</a>
-        </li>
-        <li class="nav-item">
-            <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
         </li>
         <% end %>
       <% end %>

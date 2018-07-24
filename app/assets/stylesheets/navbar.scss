@@ -6,14 +6,13 @@ $binar-red: #ef3f4a;
   margin: 0 auto;
   background-color: $binar-violet;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 60px;
   border-bottom: 3px solid $binar-red;
+  font-family: "Raleway";
 }
 
 .navbar-nav {
-    float:none;
-    margin:0 auto;
     display: block;
     text-align: center;
 }
