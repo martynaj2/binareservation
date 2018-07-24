@@ -6,6 +6,10 @@
 	E-mail :
 	<%= current_user.email %>
 
+	<% if current_user.vacation %>
+	You are on vacation
+	<% end %>
+
 	<% unless current_user.avatar.url.present? %>
 		<%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
 	<% else %>
@@ -15,5 +19,6 @@
 	<div class="profile-buttons">
 		<%= link_to 'Edit', edit_user_path(id: current_user.id), class:'btn btn-outline-success btn-customize' %>
 		<%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize' %>
+		<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), method: :put, class:'btn btn-outline-success btn-customize' %>
 	</div>
 </div>
