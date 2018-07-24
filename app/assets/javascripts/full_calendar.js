@@ -8,6 +8,8 @@ initialize_calendar = function() {
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
+      minTime: "07:00:00",
+      maxTime: "18:00:00",
       selectable: true,
       selectHelper: true,
       editable: true,
@@ -34,12 +36,13 @@ initialize_calendar = function() {
         }, ]);
 
         window.location.href='/reservations/new?start_date=' + start.format() + '&end_date=' + end.format();
-        $("#calendar").fullCalendar("unselect");
+        $(".calendar").fullCalendar("unselect");
 
         },
         selectOverlap: function(event) {
           return ! event.block;
         },
+
 
     });
   })
