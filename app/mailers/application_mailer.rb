@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: Rails.application.credentials[:smtp][:address]
+  default from: "meets@binaryapps.com"
   layout 'mailer'
 end
