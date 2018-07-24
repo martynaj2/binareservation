@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   after_commit :remove_avatar!, on: :destroy
-
+  before_destroy :destroy_reservations
   mount_uploader :avatar, AvatarUploader
   serialize :avatars, JSON
 
@@ -19,6 +19,12 @@ class User < ApplicationRecord
 
   def fullname
     "#{name} #{surname}"
+  end
+
+private
+
+  def destroy_reservations
+    self.reservations.destroy_all
   end
 
 end
