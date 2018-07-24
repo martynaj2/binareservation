@@ -62,7 +62,7 @@ class ReservationsController < ApplicationController
       end
   end
 
-  def override
+  def overwrite
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
     @conflicting_reservations.each do |r|
@@ -76,7 +76,7 @@ class ReservationsController < ApplicationController
     session.delete(:reservation_attributes)
   end
 
-  def override_update
+  def edit_overwrite
     @reservation = Reservation.find(session[:reservation_id])
     current_reservation = current_user.reservations.build(session[:reservation_params])
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
@@ -97,7 +97,7 @@ class ReservationsController < ApplicationController
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
   end
 
-  def confirm_update
+  def edit_confirm
     @reservation = Reservation.find(session[:reservation_id])
     current_reservation = current_user.reservations.build(session[:reservation_params])
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
