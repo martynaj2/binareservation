@@ -33,8 +33,6 @@ initialize_calendar = function() {
         }
       },
 
-
-
       select: function( start, end, jsEvent, view) {
         var selectionStart = moment(start);
         var today = moment();
@@ -55,22 +53,11 @@ initialize_calendar = function() {
         $(".calendar").fullCalendar("unselect");
       },
 
-<<<<<<< HEAD
       selectOverlap: function(event) {
         return ! event.block;
       },
-=======
-        },
-        selectOverlap: function(event) {
-          return ! event.block;
-        },
->>>>>>> 0ab651421cf0e971b5c182a93a1476969eda8520
-
     });
-
   })
-
-
 };
 
 $(document).on('turbolinks:load', initialize_calendar);
