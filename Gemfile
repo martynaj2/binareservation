@@ -39,6 +39,8 @@ gem 'momentjs-rails'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails'
 gem 'devise'
+gem 'carrierwave', '~> 1.0'
+gem 'file_validators'
 
 group :production do
   gem 'pg'
