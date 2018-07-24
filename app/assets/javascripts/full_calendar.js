@@ -12,6 +12,7 @@ initialize_calendar = function() {
       selectHelper: true,
       editable: true,
       eventLimit: true,
+      weekends: false,
 
       dayClick: function(date) {
 

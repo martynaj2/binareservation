@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'webpush'
 gem 'fullcalendar-rails'
+gem 'client_side_validations'
 gem 'momentjs-rails'
 #push notifications
 # Reduces boot times through caching; required in config/boot.rb
