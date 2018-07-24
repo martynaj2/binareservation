@@ -14,7 +14,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @reservation = Reservation.new(hall_id: params[:hall_id])
+    @reservation = Reservation.new(hall_id: params[:hall_id], start_date: params[:start_date], end_date: params[:end_date])
   end
 
   def edit
