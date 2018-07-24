@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
          render :edit
        end
     else
-      premium_override
+      premium_override_update
     end
   end
 
@@ -71,14 +71,37 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+      red@reservation.idirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
     end
     session.delete(:reservation_attributes)
+  end
+
+  def override_update
+    @reservation = Reservation.find(session[:reservation_id])
+    current_reservation = current_user.reservations.build(session[:reservation_params])
+    reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
+    @conflicting_reservations.each do |r|
+      r.destroy
+    end
+    if @reservation.update(session[:reservation_params])
+      redirect_to reservations_path, notice: 'Reservation was created.'
+    else
+      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+    end
+    session.delete(:reservation_params)
   end
 
   def confirm
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+  end
+
+  def confirm_update
+    @reservation = Reservation.find(session[:reservation_id])
+    current_reservation = current_user.reservations.build(session[:reservation_params])
+    reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
   end
 
   private
@@ -100,5 +123,17 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def premium_override_update
+    if current_user.premium?
+      session[:reservation_id] = @reservation.id
+      session[:reservation_params] = reservation_params
+      redirect_to controller: 'reservations', action: 'confirm_update'
+    else
+      redirect_to reservations_path, alert: "Reservation conflict with
+      #{
+      @conflicting_reservations.each.map(&:title)
+      }"
+    end
+  end
 
 end
