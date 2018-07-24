@@ -1,10 +1,8 @@
-<%=  form_for @hall do |f| %>
+<%=  form_for @hall, validate: true do |f| %>
   <div class="form-group">
     <%= f.label :title, class: "control-label" %>
     <%= f.text_field :title, class: "form-control col-md-2 text-center", placeholder: "Enter name of room"%>
-    <small id="nameHelpBlock" class="form-text text-muted">
-      Your name must be at least 2 characters long.
-    </small>
+
   </div>
 
 

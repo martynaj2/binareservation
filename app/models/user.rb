@@ -9,7 +9,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, :surname, presence: true
+  validates :name, :surname, :email, presence: true
   validates :name, :surname, length: { minimum: 2}
   validates :avatar, file_size: { less_than: 1.megabytes }
 

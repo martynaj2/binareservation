@@ -1,5 +1,7 @@
 class Hall < ActiveRecord::Base
+
   validates :title, :capacity, presence: true
+  validates :title, length: { minimum: 3 }
 
   scope :small, -> {where('capacity <= 5')}
   scope :medium, -> {where('capacity > 5 AND capacity <= 10')}
