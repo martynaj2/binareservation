@@ -21,5 +21,4 @@ class User < ApplicationRecord
     "#{name} #{surname}"
   end
 
-
 end
