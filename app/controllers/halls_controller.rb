@@ -13,6 +13,18 @@ class HallsController < ApplicationController
     @hall = Hall.new
   end
 
+  def small
+  end
+
+  def medium
+  end
+
+  def large
+  end
+
+  def extra_large
+  end
+
   def edit
     @hall = Hall.find(params[:id])
   end
