@@ -30,7 +30,7 @@ class ReservationsController < ApplicationController
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     if @conflicting_reservations.empty?
        if @reservation.update(reservation_params)
-         mail_helper(@reservation, 2)
+         Reservation.mail_helper(@reservation, 2)
          redirect_to reservations_path, notice: 'Reservation Updated'
        else
          render :edit
@@ -48,7 +48,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
        if @reservation.save
          @reservation.update(invited_ids: inv_ids)
-         mail_helper(@reservation, 0)
+         Reservation.mail_helper(@reservation, 0)
          redirect_to reservations_path, notice: 'Reservation was created.'
        else
          redirect_to reservations_path, alert: "Something went wrong"
@@ -60,8 +60,8 @@ end
 
   def destroy
       @reservation = Reservation.find(params[:id])
-      mail_helper(@reservation, 1)
       if @reservation.destroy
+        Reservation.mail_helper(@reservation, 1)
         redirect_to reservations_path, notice: "Reservation was deleted"
       else
         redirect_to reservations_path, alert: "Something went wrong"
@@ -113,33 +113,6 @@ end
   end
 
   private
-
-  def mail_helper(reservation, option)
-    @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
-    @reservation = reservation
-    @invitor = User.find(reservation.user_id)
-    if @users_id.kind_of?(Array)
-      @users_id.each do |m|
-        @user = User.find(m)
-        mail_case_helper(@user, @reservation, @invitor, option)
-      end
-    elsif @users_id.kind_of?(Integer)
-      @user = User.find(@users_id)
-      mail_case_helper(option)
-    else
-    end
-  end
-
-  def mail_case_helper(user, reservation, invitor, option)
-    case option
-    when 0
-      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
-    when 1
-      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
-    when 2
-      ReservationMailer.update_mail(user, reservation, invitor).deliver_now
-    end
-  end
   def reservation_params
     params.require(:reservation).permit(
       :id, :title, :start_date, :end_date, :hall_id, :invited_ids)
