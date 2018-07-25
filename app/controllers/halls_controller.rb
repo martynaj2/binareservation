@@ -14,15 +14,19 @@ class HallsController < ApplicationController
   end
 
   def small
+    @halls = Hall.small
   end
 
   def medium
+    @halls = Hall.medium
   end
 
   def large
+    @halls = Hall.large
   end
 
   def extra_large
+    @halls = Hall.extra_large
   end
 
   def edit
