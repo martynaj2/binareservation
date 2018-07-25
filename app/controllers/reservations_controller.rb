@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.not_ended
   end
 
   def user_index
@@ -47,15 +47,15 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
        if @reservation.save
          @reservation.update(invited_ids: inv_ids)
+         ReservationMailer.invitation_mail(@reservation).deliver_now
          redirect_to reservations_path, notice: 'Reservation was created.'
        else
          redirect_to reservations_path, alert: "Something went wrong"
        end
-    else
-      premium_override(false)
-    end
-  end
-
+     else
+       premium_override(false)
+     end
+end
 
   def destroy
       @reservation = Reservation.find(params[:id])
@@ -70,6 +70,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
     @conflicting_reservations.each do |r|
+      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
       r.destroy
     end
     if @reservation.save
@@ -86,6 +87,7 @@ class ReservationsController < ApplicationController
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     @conflicting_reservations.each do |r|
+      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
       r.destroy
     end
     if @reservation.update(session[:reservation_params])

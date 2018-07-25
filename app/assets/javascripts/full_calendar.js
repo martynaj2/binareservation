@@ -15,36 +15,49 @@ initialize_calendar = function() {
       editable: true,
       eventLimit: true,
       weekends: false,
+      events: '/home.json',
 
       dayClick: function(date) {
+        var startDate = moment(date);
+        var today = moment();
+        if(!startDate.hasTime()) startDate.time('23:59:59');
 
-        var start_date = date;
-        if(!start_date.hasTime()) {
-          start_date.time('12:00:00');
+        if(startDate < today)
+        {
+          $('.calendar').fullCalendar('unselect');
         }
-        window.location.href='/reservations/new?start_date=' + start_date.format() + '&end_date=' + start_date.add('hours', 1).format();
-        $(this).css('background-color', 'purple');
+        else
+        {
+          window.location.href='/reservations/new?start_date=' + date.format() + '&end_date=' + date.format();
+          $(this).css('background-color', 'purple');
+        }
       },
 
       select: function( start, end, jsEvent, view) {
+        var selectionStart = moment(start);
+        var today = moment();
+        if(!selectionStart.hasTime()) selectionStart.time('23:59:59');
 
-        $(".calendar").fullCalendar('addEventSource', [{
-            start: start,
-            end: end,
-            rendering: 'background',
-            block: true,
-        }, ]);
-
-        window.location.href='/reservations/new?start_date=' + start.format() + '&end_date=' + end.format();
+        if (selectionStart < today) {
+          $('.calendar').fullCalendar('unselect');
+        }
+        else {
+          $(".calendar").fullCalendar('addEventSource', [{
+              start: start,
+              end: end,
+              rendering: 'background',
+              block: true,
+          }, ]);
+          window.location.href='/reservations/new?start_date=' + start.format() + '&end_date=' + end.format();
+        }
         $(".calendar").fullCalendar("unselect");
+      },
 
-        },
-        selectOverlap: function(event) {
-          return ! event.block;
-        },
-
-
+      selectOverlap: function(event) {
+        return ! event.block;
+      },
     });
   })
 };
+
 $(document).on('turbolinks:load', initialize_calendar);

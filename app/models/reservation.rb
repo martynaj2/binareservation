@@ -17,14 +17,23 @@ class Reservation < ActiveRecord::Base
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
   scope :ended, ->{where('end_date < ?', Time.now)}
+  scope :not_ended, ->{where('start_date > ?', Time.now)}
   scope :during, ->{where('start_date < ?', Time.now)}
   scope :quarter, ->{where('start_date > ?', Time.now + 15.minutes && 'star_date <?', Time.now + 24.hours)}
   scope :twenty_four, ->{where('start_date > ?', Time.now - 24.hours)}
 
   belongs_to :user
   belongs_to :hall
-  has_many :groups
-  
+
+  def as_json(options = {})
+      {
+        :id => self.id,
+        :title => self.title,
+        :start => self.start_date,
+        :end => self.end_date,
+       }
+       end
+
   private
 
   def self.conflict_validation(reservations, reservation)
