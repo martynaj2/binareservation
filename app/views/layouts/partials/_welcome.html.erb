@@ -10,18 +10,18 @@
   <h5 class="small-header">click "See more" to make reservation </h5>
 
   <div class="row room-card">
-      <% @roomc.each do |f| %>
+      <% @rooms.each do |f| %>
         <div class="card col-md-2">
           <div class="card-body">
              <h5 class="card-title"><%="#{f.title}"%></h5>
              <p class="card-text"><%="Beautiful, cozy room for #{f.capacity} people"%></p>
              <%= link_to 'See more', hall_path(id: f.id), role: 'button', class:'btn btn-danger text-center btn-customize' %>
-        </div>
-      </div>
+           </div>
+         </div>
       <% end %>
-    </div>
+  </div>
 
-    <div class="calendar"></div>
+  <div class="calendar"></div>
 
   <% else %>
   <%= render 'layouts/partials/login_form' %>
