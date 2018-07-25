@@ -16,20 +16,10 @@ class ReservationMailer < ApplicationMailer
 		mail(to: @user.email, subject: "Your meeting #{reservation.title} was overwritten by #{premium_user.fullname}")
 	end
 
-	def invitation_mail(reservation)
-		@users_id = reservation.invited_ids
+	def invitation_mail(user, reservation, invitor)
+		@user = user
 		@reservation = reservation
-		@invitor = User.find(reservation.user_id)
-		if @users_id.kind_of?(Array)
-			@users_id.each do |m|
-				@user = User.find(@users_id)
-				mail(to: @user.email, subject: "Hello #{@user.fullname}. You were invited to #{reservation.title}, by #{@invitor.fullname}")
-			end
-		elsif @users_id.kind_of?(Integer)
-			@user = User.find(@users_id)
-			mail(to: @user.email, subject: "Hello #{@user.fullname}. You were invited to #{reservation.title}, by #{@invitor.fullname}")
-		else
-
-		end
+		@invitor = invitor
+		mail(to: @user.email, subject: "Hello #{@user.fullname}. You were invited to #{@reservation.title}, by #{@invitor.fullname}")
 	end
 end

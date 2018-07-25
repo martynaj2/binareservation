@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
        if @reservation.save
          @reservation.update(invited_ids: inv_ids)
-         ReservationMailer.invitation_mail(@reservation).deliver_now
+         invitation_helper(@reservation)
          redirect_to reservations_path, notice: 'Reservation was created.'
        else
          redirect_to reservations_path, alert: "Something went wrong"
@@ -111,6 +111,23 @@ end
   end
 
   private
+
+  def invitation_helper(reservation)
+		@users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+		@reservation = reservation
+		@invitor = User.find(reservation.user_id)
+		if @users_id.kind_of?(Array)
+			@users_id.each do |m|
+				@user = User.find(m)
+				ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
+			end
+		elsif @users_id.kind_of?(Integer)
+			@user = User.find(@users_id)
+			ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
+		else
+
+		end
+	end
 
   def reservation_params
     params.require(:reservation).permit(
