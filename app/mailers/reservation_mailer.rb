@@ -1,11 +1,15 @@
 class ReservationMailer < ApplicationMailer
-	def quarter_notification_mail(user)
+	def quarter_notification_mail(user, reservation, invitor)
 		@user = user
+		@reservation = reservation
+		@invitor = invitor
 		mail(to: user.email, subject: "You will have meeting in 15 minutes")
 	end
 
-	def twenty_four_notification_mail(user)
+	def twenty_four_notification_mail(user, reservation, invitor)
 		@user = user
+		@reservation = reservation
+		@invitor = invitor
 		mail(to: user.email, subject: "You will have meeting in 24 hours")
 	end
 
@@ -17,10 +21,12 @@ class ReservationMailer < ApplicationMailer
 	end
 
 	def invitation_mail(user, reservation, invitor)
-		@user = user
-		@reservation = reservation
-		@invitor = invitor
-		mail(to: @user.email, subject: "Hello #{@user.fullname}. You were invited to #{@reservation.title}, by #{@invitor.fullname}")
+		unless user == invitor
+			@user = user
+			@reservation = reservation
+			@invitor = invitor
+			mail(to: @user.email, subject: "Hello #{@user.fullname}. You were invited to #{@reservation.title}, by #{@invitor.fullname}")
+		end
 	end
 
 	def cancelation_mail(user, reservation, invitor)
