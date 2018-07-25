@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_24_091949) do
+ActiveRecord::Schema.define(version: 2018_07_25_092431) do
 
   create_table "group_users", force: :cascade do |t|
     t.integer "user_id"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 2018_07_24_091949) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reservation_halls", force: :cascade do |t|
+    t.integer "reservation_id"
+    t.integer "hall_id"
+    t.index ["hall_id"], name: "index_reservation_halls_on_hall_id"
+    t.index ["reservation_id"], name: "index_reservation_halls_on_reservation_id"
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.string "title"
     t.integer "number_of_people"
@@ -43,7 +50,7 @@ ActiveRecord::Schema.define(version: 2018_07_24_091949) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "hall_id"
-    t.integer "invited_ids"
+    t.string "invited_ids"
   end
 
   create_table "users", force: :cascade do |t|
