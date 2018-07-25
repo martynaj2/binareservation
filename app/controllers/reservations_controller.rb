@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
        if @reservation.save
          @reservation.update(invited_ids: inv_ids)
-         invitation_helper(@reservation)
+         mail_helper(@reservation, 0)
          redirect_to reservations_path, notice: 'Reservation was created.'
        else
          redirect_to reservations_path, alert: "Something went wrong"
@@ -59,7 +59,7 @@ end
 
   def destroy
       @reservation = Reservation.find(params[:id])
-      cancelation_helper(@reservation)
+      mail_helper(@reservation, 1)
       if @reservation.destroy
         redirect_to reservations_path, notice: "Reservation was deleted"
       else
@@ -113,37 +113,29 @@ end
 
   private
 
-  def invitation_helper(reservation)
-		@users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
-		@reservation = reservation
-		@invitor = User.find(reservation.user_id)
-		if @users_id.kind_of?(Array)
-			@users_id.each do |m|
-				@user = User.find(m)
-				ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
-			end
-		elsif @users_id.kind_of?(Integer)
-			@user = User.find(@users_id)
-			ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
-		else
-
-		end
-	end
-
-  def cancelation_helper(reservation)
+  def mail_helper(reservation, option)
     @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
     @reservation = reservation
     @invitor = User.find(reservation.user_id)
     if @users_id.kind_of?(Array)
       @users_id.each do |m|
         @user = User.find(m)
-        ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
+        case option
+        when 0
+          ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
+        when 1
+          ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
+        end
       end
     elsif @users_id.kind_of?(Integer)
       @user = User.find(@users_id)
-      ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
+      case option
+      when 0
+        ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
+      when 1
+        ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
+      end
     else
-
     end
   end
 
