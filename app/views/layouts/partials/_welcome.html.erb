@@ -21,9 +21,18 @@
    </select>
  </div>
 
-<% @roomfilter = @roomm %>
+<!-- <script>
+  function val() {
+      var d = document.getElementById("select-size").options[1];
+      d.value = <% @roomfilter = @roomm %>;
+      d.text = 'inna';
+      alert(d.value);
+
+  }
+</script> -->
+
   <div class="row room-card">
-      <% @rooms.each do |f| %>
+      <% Hall.all.each do |f| %>
         <div class="card col-md-2">
           <div class="card-body">
              <h5 class="card-title"><%="#{f.title}"%></h5>
