@@ -1,28 +1,36 @@
 <%= form_for @reservation do |f| %>
+  <div class="new-reservation text-center">
+    <%= f.hidden_field :id, :value => @reservation.id %>
+    <div class="form-group">
+      <%= f.label :title, class:"control-label" %>
+      <%= f.text_field :title, class: "form-control col-md-3 text-center col-centered", placeholder: "Describe reservation" %>
+    </div>
 
-  <%= f.hidden_field :id, :value => @reservation.id %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <hr />
-  <%= f.label :start_date %>
-  <%= f.datetime_local_field :start_date %>
-  <hr />
-  <%= f.label :end_date %>
-  <%= f.datetime_local_field :end_date %>
-  <hr />
-  <%= f.label :hall_id %>
-  <%= f.collection_select(:hall_id, Hall.all, :id, :title) %>
-  <hr />
+    <div class="form-group">
+      <%= f.label :start_date, class:"control-label" %></br>
+      <%= f.datetime_local_field :start_date %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :end_date, class:"control-label" %></br>
+      <%= f.datetime_local_field :end_date %>
+    </div>
+
+    <div class="form-group col-md-3 col-centered">
+      <%= f.label :hall_id %>
+      <%= f.collection_select(:hall_id, Hall.all, :id, :title, {:include_blank => true}, {:class => 'form-control'}) %>
+    </div>
+
   <p> Choose who do you want to invite: </p>
-  <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names..">
+  <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names.." class="col-md-4">
   <ul id='list'>
   <% User.all.each do |user| %>
-        <li user_id=<%= user.id %>><a><%= user.fullname %></a></li>
+        <li user_id=<%= user.id %>><a class="col-md-4 col-centered"><%= user.fullname %></a></li>
   <% end %>
 </ul>
-  <hr />
+
   <%= f.hidden_field :invited_ids, value: ''%>
-  <%= f.submit 'Save' %>
+  <%= f.submit 'Save', role: 'button', class:"btn btn-outline-success btn-customize save-reservation-btn" %>
 <%  end %>
 
 <script>

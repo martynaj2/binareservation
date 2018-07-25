@@ -1,43 +1,47 @@
-<%= form_for @user, url: {controller: "admins", action: "update"}, validate: true do |f| %>
-	<div class="form-group">
-		<%= f.label :name , autofocus: true%><br />
-		<%= f.text_field :name, class: "form-control" %>
-	</div>
-	<div class="form-group">
-    <%= f.label :surname %><br />
-    <%= f.text_field :surname, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
-  </div>
-	<div class="form_group">
-		<%= f.label :premium %>
-		<%= f.check_box :premium %>
-	</div>
-	<div class="form_group">
-		<%= f.label :verified %>
-		<%= f.check_box :verified %>
-	</div>
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<%= form_for @user, url: {controller: "admins", action: "update"} do |f| %>
-	<div class="field">
-		<%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-		<%= f.password_field :password, autocomplete: "off" %>
-		<% if @minimum_password_length %>
-			<br />
-			<em><%= @minimum_password_length %> characters minimum</em>
-		<% end %>
-	</div>
-	<div class="field">
-		<%= f.label :password_confirmation %><br />
-		<%= f.password_field :password_confirmation, autocomplete: "off" %>
-	</div>
-	<div class="actions">
-		<%= f.submit "Update" %>
-	</div>
+<div class="edit-user-form text-center">
+	<%= form_for @user, url: {controller: "admins", action: "update"}, validate: true do |f| %>
+		<div class="form-group">
+			<%= f.label :name , autofocus: true%>
+			<%= f.text_field :name, class: "form-control col-md-3 col-centered" %>
+		</div>
+		<div class="form-group">
+	    <%= f.label :surname %>
+	    <%= f.text_field :surname, class: "form-control col-md-3 col-centered" %>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label :email %>
+	    <%= f.email_field :email, autocomplete: "email", class: "form-control col-md-3 col-centered" %>
+	  </div>
+		<div class="row checbox-edit-user col-md-12">
+			<div class="form_group">
+				<%= f.label :premium%>
+				<%= f.check_box :premium, class: "is-premium" %>
+			</div>
+			<div class="form_group">
+				<%= f.label :verified %>
+				<%= f.check_box :verified %>
+			</div>
+		</div>
+	  <div class="actions">
+	    <%= f.submit "Update", role: 'button', class:"btn btn-outline-success btn-customize" %>
+	  </div>
 	<% end %>
+
+	<%= form_for @user, url: {controller: "admins", action: "update"} do |f| %>
+		<div class="field">
+			<%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+			<%= f.password_field :password, autocomplete: "off" %>
+			<% if @minimum_password_length %>
+				<br />
+				<em><%= @minimum_password_length %> characters minimum</em>
+			<% end %>
+		</div>
+		<div class="field">
+			<%= f.label :password_confirmation %></br>
+			<%= f.password_field :password_confirmation, autocomplete: "off", class: "pswd-conf" %>
+		</div>
+		<div class="actions">
+			<%= f.submit "Update", role: 'button', class:"btn btn-outline-success btn-customize"%>
+		</div>
+		<% end %>
+</div>
