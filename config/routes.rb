@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 	resources :halls
 	resources :users
 	resources :admins
+	resources :groups
 	resources :admins do
   	member do
       patch :verify

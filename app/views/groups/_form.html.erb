@@ -1,19 +1,8 @@
-<%= form_for @reservation do |f| %>
+<%= form_for @group do |f| %>
 
-  <%= f.hidden_field :id, :value => @reservation.id %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <hr />
-  <%= f.label :start_date %>
-  <%= f.datetime_local_field :start_date %>
-  <hr />
-  <%= f.label :end_date %>
-  <%= f.datetime_local_field :end_date %>
-  <hr />
-  <%= f.label :hall_id %>
-  <%= f.collection_select(:hall_id, Hall.all, :id, :title) %>
-  <hr />
-  <p> Choose who do you want to invite: </p>
   <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names..">
   <ul id='list'>
   <% User.all.each do |user| %>
@@ -23,7 +12,7 @@
   <hr />
   <%= f.hidden_field :invited_ids, value: ''%>
   <%= f.submit 'Save' %>
-<%  end %>
+<% end %>
 
 <script>
   $(document).on('turbolinks:load', function() {
@@ -31,24 +20,23 @@
       $(this).toggleClass('selected');
     });
 
-    $('#new_reservation').on('submit', function( event ){
+    $('#new_group').on('submit', function( event ){
       event.preventDefault();
       var userIds = [];
       $('#list li.selected').each(function() {
         userIds.push($(this).attr('user_id'));
       });
-      $('#reservation_invited_ids').attr('value', userIds)
+      $('#group_invited_ids').attr('value', userIds)
       event.currentTarget.submit();
     });
 
-    // $('#update_reservation').on('submit', function( event ){
+    // $('#edit_group').on('submit', function( event ){
     //   event.preventDefault();
     //   var userIds = [];
     //   $('#list li.selected').each(function() {
-    //     window.test=this;
     //     userIds.push($(this).attr('user_id'));
     //   });
-    //   $('#reservation_invited_ids').attr('value', userIds)
+    //   $('#group_invited_ids').attr('value', userIds)
     //   event.currentTarget.submit();
     // });
   });
