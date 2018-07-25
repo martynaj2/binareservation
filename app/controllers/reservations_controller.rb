@@ -10,9 +10,8 @@ class ReservationsController < ApplicationController
   end
 
   def show
-
-  @reservation = Reservation.find(params[:id])
-  @users = User.where(id: @reservation.invited_ids.split(',').map{ |elem| elem.to_i })
+    @reservation = Reservation.find(params[:id])
+    @users = User.where(id: @reservation.invited_ids.split(',').map{ |elem| elem.to_i })
   end
 
   def new
@@ -55,7 +54,7 @@ class ReservationsController < ApplicationController
      else
        premium_override(false)
      end
-end
+   end
 
   def destroy
       @reservation = Reservation.find(params[:id])
@@ -76,7 +75,7 @@ end
     if @reservation.save
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+      redirect_to reservations_path, alert: 'Something went wrong.'
     end
     session.delete(:reservation_attributes)
   end
@@ -93,7 +92,7 @@ end
     if @reservation.update(session[:reservation_params])
       redirect_to reservations_path, notice: 'Reservation was updated.'
     else
-      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+      redirect_to reservations_path, alert: 'Something went wrong.'
     end
     session.delete(:reservation_params)
   end
