@@ -29,4 +29,11 @@ class ReservationMailer < ApplicationMailer
 		@invitor = invitor
 		mail(to: @user.email, subject: "#{@reservation.title} was canceled")
 	end
+
+	def update_mail(user, reservation, invitor)
+		@user = user
+		@reservation = reservation
+		@invitor = invitor
+		mail(to: @user.email, subject: "#{@reservation.title} was changed")
+	end
 end

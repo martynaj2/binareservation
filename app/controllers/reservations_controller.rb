@@ -30,6 +30,7 @@ class ReservationsController < ApplicationController
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     if @conflicting_reservations.empty?
        if @reservation.update(reservation_params)
+         mail_helper(@reservation, 2)
          redirect_to reservations_path, notice: 'Reservation Updated'
        else
          render :edit
@@ -120,25 +121,25 @@ end
     if @users_id.kind_of?(Array)
       @users_id.each do |m|
         @user = User.find(m)
-        case option
-        when 0
-          ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
-        when 1
-          ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
-        end
+        mail_case_helper(@user, @reservation, @invitor, option)
       end
     elsif @users_id.kind_of?(Integer)
       @user = User.find(@users_id)
-      case option
-      when 0
-        ReservationMailer.invitation_mail(@user, @reservation, @invitor).deliver_now
-      when 1
-        ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
-      end
+      mail_case_helper(option)
     else
     end
   end
 
+  def mail_case_helper(user, reservation, invitor, option)
+    case option
+    when 0
+      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
+    when 1
+      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
+    when 2
+      ReservationMailer.update_mail(user, reservation, invitor).deliver_now
+    end
+  end
   def reservation_params
     params.require(:reservation).permit(
       :id, :title, :start_date, :end_date, :hall_id, :invited_ids)
