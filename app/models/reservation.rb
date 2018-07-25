@@ -48,12 +48,15 @@ class Reservation < ActiveRecord::Base
       if @users_id.kind_of?(Array)
         @users_id.each do |m|
           @user = User.find(m)
-          Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+          unless @user.vacation
+            Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+          end
         end
       elsif @users_id.kind_of?(Integer)
         @user = User.find(@users_id)
-        Reservation.mail_case_helper(option)
-      else
+        unless @user.vacation
+          Reservation.mail_case_helper(option)
+        end
       end
     end
 
