@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $binar-red: #ef3f4a;
+$binar-violet: #3b0c64;
 
 .user-buttons {
   padding-top: 10px;
@@ -26,4 +27,27 @@ $binar-red: #ef3f4a;
 .verify-all-btn {
   justify-content: center;
   margin-top: 30px;
+}
+
+.sign-up-header {
+  margin-top: 30px;
+  font-weight: bold;
+  color: $binar-red;
+}
+
+.sign-up-form {
+  width: 30%;
+  margin: 0 auto;
+  border: 2px solid $binar-red;
+  padding: 10px;
+  box-shadow: 2px 1px 11px 7px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px;
+  border-radius: 40px;
+}
+
+.sign-up-form-group {
+}
+
+.signup-label {
+  margin: 0px;
 }
