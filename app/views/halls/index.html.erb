@@ -1,5 +1,12 @@
 <div class="halls-index">
   <h1 class="text-center"> Rooms list </h1>
+  <div class ="row filter-btn col-md-12 text-center">
+    <%= link_to 'All rooms', halls_path, role: 'button', class:'btn btn-danger btn-customize btn-filter'  %>
+    <%= link_to 'Small', halls_path(:small => true), role: 'button', class:'btn btn-danger btn-customize btn-filter' %>
+    <%= link_to 'Medium', halls_path(:medium => true), role: 'button', class:'btn btn-danger btn-customize btn-filter' %>
+    <%= link_to 'Large', halls_path(:large => true), role: 'button', class:'btn btn-danger btn-customize btn-filter' %>
+    <%= link_to 'Extra large', halls_path(:extra_large => true), role: 'button', class:'btn btn-danger btn-customize btn-filter' %>
+  </div>
     <div class="container autors">
         <% @halls.each do |hall| %>
         <!-- kazdy row ma zawsze 12 kolumn -->

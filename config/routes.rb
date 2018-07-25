@@ -14,10 +14,6 @@ Rails.application.routes.draw do
       put :verify
     end
 	end
-	get '/halls/small', to: 'halls#small', as: :small_hall
-	get '/halls/medium', to: 'halls#medium', as: :medium_hall
-	get '/halls/large', to: 'halls#large', as: :large_hall
-	get '/halls/extra_large', to: 'halls#extra_large', as: :extra_large_hall
 	get '/my_reservations', to: 'reservations#user_index', as: :user_reservations
 	get '/confirm', to: 'reservations#confirm', as: :confirm_reservation
 	post '/overwrite', to: 'reservations#overwrite', as: :overwrite_reservation

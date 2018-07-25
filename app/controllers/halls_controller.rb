@@ -3,30 +3,20 @@ class HallsController < ApplicationController
 
   def index
     @halls = Hall.all
-  end
-
-  def show
-    @hall = Hall.find(params[:id])
-  end
-
-  def new
-    @hall = Hall.new
-  end
-
-  def small
-    @halls = Hall.small
-  end
-
-  def medium
-    @halls = Hall.medium
+    @halls = @halls.small unless params[:small].blank?
+    @halls = @halls.large unless params[:large].blank?
+    @halls = @halls.medium unless params[:medium].blank?
+    @halls = @halls.extra_large unless params[:extra_large].blank?
   end
 
   def large
     @halls = Hall.large
+    render action: :index
   end
 
   def extra_large
     @halls = Hall.extra_large
+    render action: :index
   end
 
   def edit
