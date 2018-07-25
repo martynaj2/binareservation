@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
 	def welcome
-		@roomc = Hall.large
+		@rooml = Hall.large
+		@rooms = Hall.small
 	end
 
 	def index
