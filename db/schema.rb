@@ -34,13 +34,6 @@ ActiveRecord::Schema.define(version: 2018_07_25_092431) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reservation_halls", force: :cascade do |t|
-    t.integer "reservation_id"
-    t.integer "hall_id"
-    t.index ["hall_id"], name: "index_reservation_halls_on_hall_id"
-    t.index ["reservation_id"], name: "index_reservation_halls_on_reservation_id"
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.string "title"
     t.integer "number_of_people"
