@@ -13,7 +13,7 @@ initialize_calendar = function() {
       defaultView: 'agendaWeek',
       selectable: true,
       selectHelper: true,
-      editable: true,
+      editable: false,
       eventLimit: true,
       weekends: false,
       events: '/home.json',
