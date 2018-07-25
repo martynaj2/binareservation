@@ -7,6 +7,7 @@ class HallsController < ApplicationController
 
   def show
     @hall = Hall.find(params[:id])
+    @reservations = Reservation.where(hall_id: @hall.id)
   end
 
   def new
