@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 	post '/overwrite', to: 'reservations#overwrite', as: :overwrite_reservation
 	get '/edit_confirm', to: 'reservations#edit_confirm', as: :edit_confirm_reservation
 	post '/edit_overwrite', to: 'reservations#edit_overwrite', as: :edit_overwrite_reservation
-
+	post '/verify_all', to: 'admins#verify_all', as: :verify_all_admin
 	resources :users do
   	member do
       patch :vacation

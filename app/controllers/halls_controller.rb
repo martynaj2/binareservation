@@ -9,9 +9,9 @@ class HallsController < ApplicationController
     @halls = @halls.extra_large unless params[:extra_large].blank?
   end
 
-  def large
-    @halls = Hall.large
-    render action: :index
+  def show
+    @hall = Hall.find(params[:id])
+    @reservations = Reservation.where(hall_id: @hall.id)
   end
 
   def extra_large

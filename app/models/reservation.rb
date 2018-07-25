@@ -12,12 +12,8 @@ end
 
 class Reservation < ActiveRecord::Base
 
-  validates :title, presence: true, length: { minimum: 5}
-  validates :number_of_people, presence: true
-  validates :start_date, presence: true
-  validates :end_date, presence: true
+  validates :title, :end_date, :start_date, :title, presence: true
   validates :title, length: { minimum: 5}
-  validates :end_date, :start_date,:number_of_people, :title, presence: true
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
   scope :ended, ->{where('end_date < ?', Time.now)}
@@ -39,6 +35,34 @@ class Reservation < ActiveRecord::Base
        end
 
   private
+
+
+    def self.mail_helper(reservation, option)
+      @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+      @reservation = reservation
+      @invitor = User.find(reservation.user_id)
+      if @users_id.kind_of?(Array)
+        @users_id.each do |m|
+          @user = User.find(m)
+          Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+        end
+      elsif @users_id.kind_of?(Integer)
+        @user = User.find(@users_id)
+        Reservation.mail_case_helper(option)
+      else
+      end
+    end
+
+    def self.mail_case_helper(user, reservation, invitor, option)
+      case option
+      when 0
+        ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
+      when 1
+        ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
+      when 2
+        ReservationMailer.update_mail(user, reservation, invitor).deliver_now
+      end
+    end
 
   def self.conflict_validation(reservations, reservation)
     @conflicting_reservations = []

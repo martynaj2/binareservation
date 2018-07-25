@@ -9,8 +9,21 @@
   <h3 class="rooms-header"> Available rooms: </h3>
   <h5 class="small-header">click "See more" to make reservation </h5>
 
+
+<div class="form-group">
+   <label for="exampleFormControlSelect1">Select size</label>
+   <select class="form-control" onchange="val()" id="select-size">
+     <option value=''>Small</option>
+     <option value=''>Medium</option>
+     <option>3</option>
+     <option>4</option>
+     <option>5</option>
+   </select>
+ </div>
+
+<% @roomfilter = @roomm %>
   <div class="row room-card">
-      <% @rooml.each do |f| %>
+      <% @roomfilter.each do |f| %>
         <div class="card col-md-2">
           <div class="card-body">
              <h5 class="card-title"><%="#{f.title}"%></h5>
