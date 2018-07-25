@@ -10,29 +10,19 @@
   <h5 class="small-header">click "See more" to make reservation </h5>
 
 
-<div class="form-group">
+<div class="form-group col-md-2">
    <label for="exampleFormControlSelect1">Select size</label>
-   <select class="form-control" onchange="val()" id="select-size">
-     <option value=''>Small</option>
-     <option value=''>Medium</option>
-     <option>3</option>
-     <option>4</option>
-     <option>5</option>
+   <select class="form-control" onchange="selectSize()" id="select-size">
+     <option value='small'>Small</option>
+     <option value='medium'>Medium</option>
+     <option value='large'>Large</option>
+     <option value='extra-large'>Extra-large</option>
    </select>
  </div>
 
-<!-- <script>
-  function val() {
-      var d = document.getElementById("select-size").options[1];
-      d.value = <% @roomfilter = @roomm %>;
-      d.text = 'inna';
-      alert(d.value);
-
-  }
-</script> -->
 
   <div class="row room-card">
-      <% Hall.all.each do |f| %>
+      <% @rooml.each do |f| %>
         <div class="card col-md-2">
           <div class="card-body">
              <h5 class="card-title"><%="#{f.title}"%></h5>

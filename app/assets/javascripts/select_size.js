@@ -1,11 +1,5 @@
-function val() {
-    var d = document.getElementById("select-size").options[0];
-    d.value = 'proba';
-    d.text = 'inna';
-    alert(d.value);
+function selectSize() {
+    var selectedIdx = document.getElementById("select-size").selectedIndex;
+    var selectedSize = document.getElementById("select-size")[selectedIdx].text;
+    alert(selectedSize);
 }
-// function changeContent(){
-//      var opt= document.getElementById('test').options[0];
-//      opt.value =  'box';
-//      opt.text = 'box';
-// }
