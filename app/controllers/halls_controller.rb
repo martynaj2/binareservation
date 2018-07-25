@@ -14,11 +14,6 @@ class HallsController < ApplicationController
     @reservations = Reservation.where(hall_id: @hall.id)
   end
 
-  def extra_large
-    @halls = Hall.extra_large
-    render action: :index
-  end
-
   def edit
     @hall = Hall.find(params[:id])
   end

@@ -1,5 +1,4 @@
 <h3 class="text-center all-users-admin"> All users </h3>
-		<%= link_to "Verify all", verify_all_admin_path, method: :post, class:'btn btn-outline-success btn-customize' %>
 <div class="container">
 	<div class="users">
 		<% @users.each do |user| %>
@@ -11,8 +10,10 @@
 
 <h3 class="text-center not-verified"> Not Verified: </h3>
 <div class="container">
-
 	<% @not_verified_users.each do |user| %>
 		<%= render 'not_verified', user: user %>
 	<% end %>
+		<div class="row verify-all-btn col-md-12">
+			<%= link_to "Verify all", verify_all_admin_path, method: :post, class:'btn btn-outline-success btn-customize' %>
+		</div>
 </div>
