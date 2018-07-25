@@ -42,6 +42,7 @@ gem 'haml-rails'
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
 gem 'file_validators'
+gem 'whenever', require: false
 
 group :production do
   gem 'pg'
@@ -83,6 +84,7 @@ group :test do
   gem 'timecop'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
+  gem 'whenever-test'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

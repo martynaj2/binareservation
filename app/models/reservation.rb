@@ -32,7 +32,11 @@ class Reservation < ActiveRecord::Base
         :start => self.start_date,
         :end => self.end_date,
        }
-       end
+  end
+
+  def self.delete_ended_reservations
+    Reservation.ended.destroy_all
+  end
 
   private
 
