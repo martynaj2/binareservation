@@ -59,6 +59,7 @@ end
 
   def destroy
       @reservation = Reservation.find(params[:id])
+      cancelation_helper(@reservation)
       if @reservation.destroy
         redirect_to reservations_path, notice: "Reservation was deleted"
       else
@@ -128,6 +129,23 @@ end
 
 		end
 	end
+
+  def cancelation_helper(reservation)
+    @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+    @reservation = reservation
+    @invitor = User.find(reservation.user_id)
+    if @users_id.kind_of?(Array)
+      @users_id.each do |m|
+        @user = User.find(m)
+        ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
+      end
+    elsif @users_id.kind_of?(Integer)
+      @user = User.find(@users_id)
+      ReservationMailer.cancelation_mail(@user, @reservation, @invitor).deliver_now
+    else
+
+    end
+  end
 
   def reservation_params
     params.require(:reservation).permit(
