@@ -42,5 +42,15 @@
       event.currentTarget.submit();
     });
 
+    $('#update_reservation').on('submit', function( event ){
+      event.preventDefault();
+      var userIds = [];
+      $('#list li.selected').each(function() {
+        window.test=this;
+        userIds.push($(this).attr('user_id'));
+      });
+      $('#reservation_invited_ids').attr('value', userIds)
+      event.currentTarget.submit();
+    });
   });
 </script>

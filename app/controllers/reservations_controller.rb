@@ -10,7 +10,9 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = Reservation.find(params[:id])
+
+  @reservation = Reservation.find(params[:id])
+  @users = User.where(id: @reservation.invited_ids.split(',').map{ |elem| elem.to_i })
   end
 
   def new
@@ -33,23 +35,24 @@ class ReservationsController < ApplicationController
          render :edit
        end
     else
-      premium_override
+      premium_override(true)
     end
   end
 
   def create
-    @reservation = (params[:reservation][:invited_ids].split(',').map { |elem| elem.to_i })
+    inv_ids = (params[:reservation][:invited_ids])
     @reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
        if @reservation.save
+         @reservation.update(invited_ids: inv_ids)
          redirect_to reservations_path, notice: 'Reservation was created.'
        else
-         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+         redirect_to reservations_path, alert: "Something went wrong"
        end
     else
-      premium_override
+      premium_override(false)
     end
   end
 
@@ -63,7 +66,7 @@ class ReservationsController < ApplicationController
       end
   end
 
-  def override
+  def overwrite
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
     @conflicting_reservations.each do |r|
@@ -77,22 +80,51 @@ class ReservationsController < ApplicationController
     session.delete(:reservation_attributes)
   end
 
+  def edit_overwrite
+    @reservation = Reservation.find(session[:reservation_id])
+    current_reservation = current_user.reservations.build(session[:reservation_params])
+    reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
+    @conflicting_reservations.each do |r|
+      r.destroy
+    end
+    if @reservation.update(session[:reservation_params])
+      redirect_to reservations_path, notice: 'Reservation was updated.'
+    else
+      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+    end
+    session.delete(:reservation_params)
+  end
+
   def confirm
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+  end
+
+  def edit_confirm
+    @reservation = Reservation.find(session[:reservation_id])
+    current_reservation = current_user.reservations.build(session[:reservation_params])
+    reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
+    @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
   end
 
   private
 
   def reservation_params
     params.require(:reservation).permit(
-      :id, :title, :description, :start_date, :end_date, :hall_id)
+      :id, :title, :start_date, :end_date, :hall_id, :invited_ids)
   end
 
-  def premium_override
+  def premium_override(edit)
     if current_user.premium?
-      session[:reservation_attributes] = @reservation.attributes
-      redirect_to controller: 'reservations', action: 'confirm'
+      if edit
+        session[:reservation_id] = @reservation.id
+        session[:reservation_params] = reservation_params
+        redirect_to controller: 'reservations', action: 'confirm_update'
+      else
+        session[:reservation_attributes] = @reservation.attributes
+        redirect_to controller: 'reservations', action: 'confirm'
+      end
     else
       redirect_to reservations_path, alert: "Reservation conflict with
       #{
@@ -100,6 +132,5 @@ class ReservationsController < ApplicationController
       }"
     end
   end
-
 
 end

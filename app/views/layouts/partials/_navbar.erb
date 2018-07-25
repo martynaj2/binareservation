@@ -25,24 +25,54 @@
       <li class="nav-item">
         <a class="nav-link" href="/reservations#index">Reservations</a>
       </li>
-      <% if current_user %>
-      <li class="nav-item">
-        <a class="nav-link" href="/users#index">My Profile</a>
-      </li>
-      <li class="nav-item">
-          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
-      </li>
         <% if current_user.admin %>
         <li class="nav-item">
           <a class="nav-link" href="/admins">Users</a>
         </li>
+        <li class="nav-item">
+             <a class="nav-link admin-label">Logged as admin</a>
+        </li>
         <% end %>
-      <% end %>
-      <% if current_user.admin %>
-      <li class="nav-item">
-           <a class="nav-link admin-label">Logged as admin</a>
-      </li>
-      <% end %>
+      <ul class="nav navbar-custom">
+        <li class="dropdown nav-link"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+            <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <div class="navbar-content">
+                        <div class="row">
+                            <div class="col-md-5">
+                              <% unless current_user.avatar.url.present? %>
+                                <%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
+                              <% else %>
+                                <%= image_tag current_user.avatar.url, class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar"%>
+                              <% end %>
+                            </div>
+                            <div class="col-md-7">
+                                <span><%=  "#{current_user.fullname}" %></span>
+                                <p class="text-muted small">
+                                    <%= "#{current_user.email}" %></p>
+                                <div class="divider">
+                                </div>
+                                <% if current_user %>
+                                  <a href="/users#index" class="btn btn-primary">View Profile</a>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar-footer">
+                        <div class="navbar-footer-content">
+                            <div class="row">
+                                <div class="text-center">
+                                    <%= link_to "Change your password", edit_user_registration_path, class:'btn btn-primary btn-sm active' %>
+                                </div>
+                                <div class="col-md-3">
+                                    <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'btn btn-primary btn-sm active' %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
     </ul>
   </div>
 </nav>

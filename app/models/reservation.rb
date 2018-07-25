@@ -23,7 +23,8 @@ class Reservation < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :hall
-
+  has_many :groups
+  
   private
 
   def self.conflict_validation(reservations, reservation)

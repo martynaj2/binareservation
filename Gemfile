@@ -33,12 +33,15 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'webpush'
 gem 'fullcalendar-rails'
+gem 'client_side_validations'
 gem 'momentjs-rails'
 #push notifications
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails'
 gem 'devise'
+gem 'carrierwave', '~> 1.0'
+gem 'file_validators'
 
 group :production do
   gem 'pg'

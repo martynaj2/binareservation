@@ -20,6 +20,10 @@
     <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
   </div>
 
+  <%= f.label :avatar do %>
+      <%= f.file_field :avatar %>
+      <%= f.hidden_field :avatar_cache %>
+<% end %>
   <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>

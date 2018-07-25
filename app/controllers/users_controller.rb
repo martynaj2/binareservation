@@ -18,10 +18,20 @@ class UsersController < ApplicationController
     end
   end
 
+	def vacation
+		@user = User.find(params[:id])
+		if @user.vacation == true
+			@user.update_attribute(:vacation, false)
+		else
+			@user.update_attribute(:vacation, true)
+		end
+		redirect_to users_path
+	end
+
 	private
 
 	def user_params
-		params.require(:user).permit(:name, :surname, :email)
+		params.require(:user).permit(:name, :surname, :email, :avatar, :avatar_cache, :remove_avatar, :vacation)
 	end
 
 end
