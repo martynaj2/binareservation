@@ -1,0 +1,9 @@
+<div class="reservations-confirm text-center">
+	<h3 class="conflict-header"> You are trying to overwrite existing reservation:</h3>
+	<% @conflicting_reservations.each do |reservation| %>
+		<%= "title: #{reservation.title}" %>
+	<% end %>
+	<p class="question-confirm"> What do you want to do? </p>
+	<%= link_to 'Overwrite', overwrite_reservation_path, method: :post, role: 'button', class:'btn btn-danger text-center' %>
+	<%= link_to 'Go back', :back, role: 'button', class:'btn btn-outline-danger text-center' %>
+</div>

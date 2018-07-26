@@ -18,6 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -30,14 +31,23 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'webpush'
+gem 'fullcalendar-rails'
+gem 'client_side_validations'
+gem 'filterrific'
+gem 'momentjs-rails'
+#push notifications
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails'
 gem 'devise'
+gem 'carrierwave', '~> 1.0'
+gem 'file_validators'
+gem 'whenever', require: false
 
 group :production do
   gem 'pg'
+  gem 'unicorn'
 end
 
 group :development, :test do
@@ -48,6 +58,8 @@ group :development, :test do
   gem 'faker'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'bundler-audit'
+  gem 'rubocop', require: false
 end
 
 group :development do
@@ -57,6 +69,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'letter_opener'
 end
 
 group :test do
@@ -67,6 +84,8 @@ group :test do
   gem 'chromedriver-helper'
   gem 'timecop'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
+  gem 'whenever-test'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

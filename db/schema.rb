@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_16_135412) do
+ActiveRecord::Schema.define(version: 2018_07_25_092431) do
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "title"
+    t.integer "inviter_ids"
+    t.integer "invited_ids"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "halls", force: :cascade do |t|
     t.string "title"
@@ -21,13 +36,14 @@ ActiveRecord::Schema.define(version: 2018_07_16_135412) do
 
   create_table "reservations", force: :cascade do |t|
     t.string "title"
-    t.text "description"
     t.integer "number_of_people"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string "inviter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "hall_id"
+    t.string "invited_ids"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,8 +51,8 @@ ActiveRecord::Schema.define(version: 2018_07_16_135412) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "surname"
-    t.boolean "is_admin?"
-    t.boolean "is_premium?"
+    t.boolean "admin"
+    t.boolean "premium"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -47,6 +63,9 @@ ActiveRecord::Schema.define(version: 2018_07_16_135412) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.boolean "verified"
+    t.string "avatar"
+    t.boolean "vacation"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

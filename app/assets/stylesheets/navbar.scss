@@ -1,0 +1,86 @@
+$binar-violet: #3b0c64;
+$binar-red: #ef3f4a;
+/* The side navigation menu */
+.navbar {
+  width: 100%;
+  margin: 0 auto;
+  background-color: $binar-violet;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 60px;
+  border-bottom: 3px solid $binar-red;
+  font-family: "Raleway";
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(239, 63, 74, 1.0)' stroke-width='4' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.nav-link:active, .nav-link:link, .nav-link:visited, .dropdown-toggle {
+  color: white;
+  width: 100%;
+}
+
+.nav-link:hover, .dropdown-toggle:hover {
+  color: $binar-red;
+  text-decoration: none;
+}
+
+.nav-link.admin-label {
+  color: $binar-red;
+  font-weight: bold;
+}
+
+.usr-data {
+  padding-left: 40px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.usr-avatar {
+  padding-left: 40px;
+  padding-bottom: 20px;
+}
+//// panel uzytkownika
+
+.usr-panel-row.row {
+  padding: 2px;
+}
+
+.user-fullname {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+}
+
+.navbar-content {
+  width: 370px;
+  height: 130px;
+  padding: 15px;
+  padding-bottom:0px;
+}
+
+.navbar-content:before, .navbar-content:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: 15px !important;
+}
+
+.navbar-footer {
+  border-top: 2px dotted $binar-red;
+  background-color: whitesmoke;
+}
+
+.navbar-footer-content {
+  padding:15px 15px 15px 15px;
+
+ }
+
+.dropdown-menu.show {
+  padding: 0px;
+  overflow: hidden;
+}

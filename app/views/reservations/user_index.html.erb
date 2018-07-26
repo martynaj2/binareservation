@@ -1,0 +1,11 @@
+<div class="reservations-user_index">
+  <h1 class="text-center"> Reservation list </h1>
+    <div class="container reservations">
+        <% @reservations.each do |reservation| %>
+        <!-- kazdy row ma zawsze 12 kolumn -->
+         <%= render 'reservation', controller: 'reservations', action: 'user_index', reservation: reservation %>
+        <% end %>
+    </div>
+</div>
+
+<div class="text-center"><%= link_to 'Add new reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize" %></div>

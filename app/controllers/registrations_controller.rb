@@ -2,19 +2,11 @@ class RegistrationsController < Devise::RegistrationsController
 
 	before_action :configure_permitted_parameters, :only => [:create]
 
-	protected
+	after_action :registration_mail, :only => [:create]
 
-		def configure_permitted_parameters
-			devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :surname, :email, :password, :password_confirmation)}
-		end
-	# private
-	#
-	# def sign_up_params
-	# 	params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
-	# end
-	#
-	# def account_update_params
-	# 	params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation, :current_password)
-	# end
+  def registration_mail
+    UserMailer.registration_mail(current_user).deliver_later
+  end
+
 
 end
