@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   end
 
   def new
-    @group = Group.new(inviter_ids: current_user.id)
+    @group = Group.new(inviter_ids: [current_user.id])
   end
 
   def edit
@@ -21,8 +21,9 @@ class GroupsController < ApplicationController
   def update
     inv_ids = (params[:group][:invited_ids])
     @group = Group.find(params[:id])
-    if @group.update(group_params)
-      @group.update(invited_ids: inv_ids)
+    hash = { invited_ids: inv_ids }
+    hash.merge(group_params)
+    if @group.update(hash)
       redirect_to groups_path, notice: 'Group Updated'
     else
       render :edit
