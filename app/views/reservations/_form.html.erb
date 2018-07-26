@@ -1,4 +1,4 @@
-<%= form_for @reservation do |f| %>
+<%= form_for @reservation, validate: true do |f| %>
   <div class="new-reservation text-center">
     <%= f.hidden_field :id, :value => @reservation.id %>
     <div class="form-group">
