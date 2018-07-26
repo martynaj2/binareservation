@@ -72,7 +72,7 @@ end
     @reservation = Reservation.new(session[:reservation_attributes])
     @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
     @conflicting_reservations.each do |r|
-      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
+      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_later
       r.destroy
     end
     if @reservation.save
@@ -89,7 +89,7 @@ end
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     @conflicting_reservations.each do |r|
-      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
+      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_later
       r.destroy
     end
     if @reservation.update(session[:reservation_params])
