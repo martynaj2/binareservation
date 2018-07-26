@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 	get '/users', to: 'admins#index', as: :administrator
 	get 'user/:id/edit', to: 'admins#edit', as: :edit_administrator
 	get '/my_profile', to: 'users#index', as: :profile
+	get '/my_profile/:id/edit', to: 'users#edit', as: :edit_profile
 	resources :users do
   	member do
       patch :vacation
