@@ -23,7 +23,7 @@
       </li>
         <% if current_user.admin %>
         <li class="nav-item">
-          <a class="nav-link" href="/admins">Users</a>
+          <a class="nav-link" href="/users">Users</a>
         </li>
         <li class="nav-item">
              <a class="nav-link admin-label">Logged as admin</a>
@@ -51,7 +51,7 @@
                                 <div class="divider">
                                 </div>
                                 <% if current_user %>
-                                  <a href="/users#index" class="btn btn-outline-success btn-customize btn-sm">View Profile</a>
+                                  <a href="/my_profile" class="btn btn-outline-success btn-customize btn-sm">View Profile</a>
                                 <% end %>
                             </div>
                         </div>
