@@ -6,9 +6,9 @@ Rails.application.routes.draw do
 	resources :home
 	resources :reservations
 	resources :halls
-	resources :users
-	resources :admins
+
 	resources :groups
+
 	resources :admins do
   	member do
       patch :verify
@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 	get '/edit_confirm', to: 'reservations#edit_confirm', as: :edit_confirm_reservation
 	post '/edit_overwrite', to: 'reservations#edit_overwrite', as: :edit_overwrite_reservation
 	post '/verify_all', to: 'admins#verify_all', as: :verify_all_admin
+	get '/users', to: 'admins#index', as: :administrator
+	get 'user/:id/edit', to: 'admins#edit', as: :edit_administrator
+	get '/my_profile', to: 'users#index', as: :profile
 	resources :users do
   	member do
       patch :vacation

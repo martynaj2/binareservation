@@ -1,10 +1,9 @@
 <div data-user-id="<%= user.id %>" class="row">
 	<div class="col-sm-12 col-md-9">
-		<%= user.fullname %>
-		<%= user.email %>
+		<%= link_to user.fullname, user_path(id: user.id) %>
 	</div>
 	<div class="col-md-3 user-buttons">
-		<%= link_to 'Edit', edit_admin_path(id: user.id), class:'btn btn-outline-success btn-customize'%>
-		<%= link_to "Destroy", admin_path(user), method: :delete, remote: true, data: { confirm: "You sure?" }, class:'btn btn-outline-success btn-customize' %>
+		<%= link_to 'Edit', edit_administrator_path(id: user.id), class:'btn btn-outline-success btn-customize'%>
+		<%= link_to "Destroy", administrator_path(user), method: :delete, remote: true, data: { confirm: "You sure?" }, class:'btn btn-outline-success btn-customize' %>
 	</div>
 </div>
