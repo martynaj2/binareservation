@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 	resources :home
 	resources :reservations
 	resources :halls
-	# resources :users
-	# resources :admins
+
+	resources :groups
+
 	resources :admins do
   	member do
       patch :verify
