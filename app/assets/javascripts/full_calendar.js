@@ -20,7 +20,6 @@ initialize_calendar = function() {
 
       viewRender: function (view, element) {
         localStorage.setItem("fcDefaultView", view.name);
-        console.log(localStorage.getItem("fcDefaultView"));
       },
 
       dayClick: function(date) {
