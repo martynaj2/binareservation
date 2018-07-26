@@ -3,15 +3,19 @@ class HallsController < ApplicationController
 
   def index
     @halls = Hall.all
+    @halls = @halls.small unless params[:small].blank?
+    @halls = @halls.large unless params[:large].blank?
+    @halls = @halls.medium unless params[:medium].blank?
+    @halls = @halls.extra_large unless params[:extra_large].blank?
+  end
+
+  def new
+    @hall = Hall.new
   end
 
   def show
     @hall = Hall.find(params[:id])
     @reservations = Reservation.where(hall_id: @hall.id)
-  end
-
-  def new
-    @hall = Hall.new
   end
 
   def edit

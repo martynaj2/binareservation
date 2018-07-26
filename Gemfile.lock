@@ -124,6 +124,7 @@ GEM
     file_validators (2.3.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
+    filterrific (5.0.1)
     fullcalendar-rails (3.9.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
@@ -370,6 +371,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   file_validators
+  filterrific
   fullcalendar-rails
   haml-rails
   jbuilder (~> 2.5)
