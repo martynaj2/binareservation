@@ -10,7 +10,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :surname, :email, presence: true
-  validates :name, :surname, length: { minimum: 2}
+  validates :name, :surname, length: { minimum: 2, maximum: 15}
   validates :avatar, file_size: { less_than: 1.megabytes }
 
   has_many :reservations
