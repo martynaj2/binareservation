@@ -9,20 +9,8 @@
   <h3 class="rooms-header"> Available rooms: </h3>
   <h5 class="small-header">click "See more" to make reservation </h5>
 
-
-<div class="form-group col-md-2">
-   <label for="exampleFormControlSelect1">Select size</label>
-   <select class="form-control" onchange="selectSize()" id="select-size">
-     <option value='small'>Small</option>
-     <option value='medium'>Medium</option>
-     <option value='large'>Large</option>
-     <option value='extra-large'>Extra-large</option>
-   </select>
- </div>
-
-
   <div class="row room-card">
-      <% @rooml.each do |f| %>
+      <% Hall.all.each do |f| %>
         <div class="card col-md-2">
           <div class="card-body">
              <h5 class="card-title"><%="#{f.title}"%></h5>
