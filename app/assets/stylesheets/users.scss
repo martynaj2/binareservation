@@ -45,11 +45,16 @@ $binar-violet: #3b0c64;
   border-radius: 40px;
 }
 
-.sign-up-form-group {
+.form-group.sign-up-fg{
+  margin-bottom: 0px;
 }
 
 .signup-label {
   margin: 0px;
+}
+
+.sign-in-btn {
+  margin: 10px;
 }
 
 .checbox-edit-user {
@@ -65,6 +70,18 @@ $binar-violet: #3b0c64;
   font-weight: bold;
 }
 
+.remember-box {
+  line-height: 0px;
+  text-align: left;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
 .pswd-conf {
   margin-bottom: 5px;
+}
+
+.no-account {
+  font-size: 15px;
+  margin: 0px;
 }

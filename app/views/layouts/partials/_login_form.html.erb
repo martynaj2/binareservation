@@ -6,13 +6,15 @@
       <div class="form-group">
         <%= f.text_field :email, class: "form-control", placeholder: "Enter email" %>
       </div>
-      <div class="form-group">
+      <div class="form-group sign-up-fg">
         <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
+      </div>
+      <div class="remember-box">
         <%= f.check_box :remember_me %>
         <%= f.label :remember_me %>
       </div>
-        <%= f.submit 'Sign in', class: "btn btn-outline-success btn-customize" %>
-        <%= render "devise/shared/links" %>
+        <%= f.submit 'Sign in', class: "btn btn-outline-success btn-customize col-md-6 sign-in-btn" %>
+        <p class="text-center no-account"><a href="sign_up">Don't have an account?</a></p>
     <% end %>
   </div>
 </div>
