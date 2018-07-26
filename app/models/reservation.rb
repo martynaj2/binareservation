@@ -13,7 +13,7 @@ end
 class Reservation < ActiveRecord::Base
 
   validates :title, :end_date, :start_date, :title, presence: true
-  validates :title, length: { minimum: 5}
+  validates :title, length: { minimum: 2, maximum: 30 }
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
   scope :ended, ->{where('end_date < ?', Time.now)}
