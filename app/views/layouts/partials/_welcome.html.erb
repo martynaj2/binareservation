@@ -10,7 +10,7 @@
   <h5 class="small-header">click "See more" to make reservation </h5>
 
   <div class="row room-card">
-      <% @rooms.each do |f| %>
+      <% Hall.all.each do |f| %>
         <div class="card col-md-2">
           <div class="card-body">
              <h5 class="card-title"><%="#{f.title}"%></h5>

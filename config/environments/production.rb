@@ -93,6 +93,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'meets.binarlab.com' }
   config.action_mailer.smtp_settings = {
     address: Rails.application.credentials[:smtp][:address],
     port: 587,
@@ -101,6 +102,7 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true
   }
+
 
 # w credentials.yml
 # edytujemy poprzez rails credentials:edit

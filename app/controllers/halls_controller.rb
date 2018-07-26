@@ -1,17 +1,34 @@
 class HallsController < ApplicationController
   before_action :authenticate_user!
 
+  def new
+    @hall = Hall.new
+  end
+
   def index
     @halls = Hall.all
+    @halls = @halls.small unless params[:small].blank?
+    @halls = @halls.large unless params[:large].blank?
+    @halls = @halls.medium unless params[:medium].blank?
+    @halls = @halls.extra_large unless params[:extra_large].blank?
+  end
+
+  def new
+    @hall = Hall.new
+  end
+
+  def create
+    @hall = Hall.new(hall_params)
+      if @hall.save
+        redirect_to halls_path, notice: 'Room created'
+      else
+        redirect_to halls_path, alert: 'Something went wrong'
+      end
   end
 
   def show
     @hall = Hall.find(params[:id])
     @reservations = Reservation.where(hall_id: @hall.id)
-  end
-
-  def new
-    @hall = Hall.new
   end
 
   def edit
@@ -50,5 +67,7 @@ class HallsController < ApplicationController
   def hall_params
       params.require(:hall).permit(:title, :capacity)
   end
+
+
 
 end

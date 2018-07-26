@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'webpush'
 gem 'fullcalendar-rails'
 gem 'client_side_validations'
+gem 'filterrific'
 gem 'momentjs-rails'
 #push notifications
 # Reduces boot times through caching; required in config/boot.rb

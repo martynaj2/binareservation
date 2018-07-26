@@ -1,4 +1,4 @@
-<%= form_for @reservation do |f| %>
+<%= form_for @reservation, validate: true do |f| %>
   <div class="new-reservation text-center">
     <%= f.hidden_field :id, :value => @reservation.id %>
     <div class="form-group">
@@ -49,7 +49,11 @@
       event.currentTarget.submit();
     });
 
+<<<<<<< HEAD
     $('.edit_reservation').on('submit', function( event ){
+=======
+    $('#edit_reservation').on('submit', function( event ){
+>>>>>>> 667d3e934f6761fea5dc835cdcca47340d5ee4c4
       event.preventDefault();
       var userIds = [];
       $('#list li.selected').each(function() {

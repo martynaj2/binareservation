@@ -19,7 +19,7 @@
   </div>
   <div>
     <% @reservations.each do |r| %>
-      <%= link_to r.title, reservation_path(id: r.id) %>
+    <%= link_to r.title, reservation_path(id: r.id) %>
     <% end %>
   </div>
   <%= link_to 'Back to rooms', halls_path, role: 'button', class:"btn btn-outline-success btn-customize"%>

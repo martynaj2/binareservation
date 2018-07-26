@@ -13,7 +13,7 @@ end
 class Reservation < ActiveRecord::Base
 
   validates :title, :end_date, :start_date, :title, presence: true
-  validates :title, length: { minimum: 5}
+  validates :title, length: { minimum: 2, maximum: 30 }
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
   scope :ended, ->{where('end_date < ?', Time.now)}
@@ -63,11 +63,11 @@ class Reservation < ActiveRecord::Base
     def self.mail_case_helper(user, reservation, invitor, option)
       case option
       when 0
-        ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
+        ReservationMailer.invitation_mail(user, reservation, invitor).deliver_later
       when 1
-        ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
+        ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
       when 2
-        ReservationMailer.update_mail(user, reservation, invitor).deliver_now
+        ReservationMailer.update_mail(user, reservation, invitor).deliver_later
       end
     end
 
