@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 	post '/edit_overwrite', to: 'reservations#edit_overwrite', as: :edit_overwrite_reservation
 	post '/verify_all', to: 'admins#verify_all', as: :verify_all_admin
 	get '/users', to: 'admins#index', as: :administrator
+	get 'user/:id/edit', to: 'admins#edit', as: :edit_administrator
 	get '/my_profile', to: 'users#index', as: :profile
 	resources :users do
   	member do
