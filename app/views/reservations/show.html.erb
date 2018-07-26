@@ -25,7 +25,7 @@
   <hr />
     Invited:
     <p class="invited-value"><% @users.each do |user|%>
-      <%= user.fullname %>
+      <%= link_to user.fullname, user_path(id: user.id) %>
       <% end %>
     </p>
 </div>

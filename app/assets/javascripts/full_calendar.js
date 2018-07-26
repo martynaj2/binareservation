@@ -10,13 +10,17 @@ initialize_calendar = function() {
       },
       minTime: "07:00:00",
       maxTime: "18:00:00",
-      defaultView: 'agendaWeek',
       selectable: true,
       selectHelper: true,
       editable: false,
       eventLimit: true,
       weekends: false,
       events: '/home.json',
+      defaultView: (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "agendaWeek"),
+
+      viewRender: function (view, element) {
+        localStorage.setItem("fcDefaultView", view.name);
+      },
 
       dayClick: function(date) {
         var startDate = moment(date);
@@ -33,7 +37,6 @@ initialize_calendar = function() {
           $(this).css('background-color', 'purple');
         }
       },
-
 
       select: function( start, end, jsEvent, view) {
         var selectionStart = moment(start);
