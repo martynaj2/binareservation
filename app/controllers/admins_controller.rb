@@ -3,7 +3,7 @@ class AdminsController < ApplicationController
 
 	def index
 		@users = User.where(verified: true)
-		@not_verified_users = User.where(verified: nil)
+		@not_verified_users = User.where(verified: nil).or(User.where(verified: false))
 	end
 
 	def destroy
@@ -27,10 +27,16 @@ class AdminsController < ApplicationController
 	def verify
 			@user = User.find(params[:id])
 			if @user.update_attribute(:verified, true)
-				redirect_to admins_path, notice: 'User Updated'
+				redirect_to admins_path, notice: 'User Verified'
 			else
 				render :index
 			end
+	end
+
+	def verify_all
+			@users_new = User.where(verified: nil).or(User.where(verified: false)).update_all(verified: true)
+
+			redirect_to admins_path, notice: 'Users Verified'
 	end
 
 	private

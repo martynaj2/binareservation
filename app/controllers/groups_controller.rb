@@ -19,11 +19,11 @@ class GroupsController < ApplicationController
   end
 
   def update
-    invited_ids = (params[:group][:invited_ids])
+    inv_ids = (params[:group][:invited_ids])
     @group = Group.find(params[:id])
     if @group.update(group_params)
-      @group.update(invited_ids: invited_ids)
-      redirect_to groups_path, notice: 'Reservation Updated'
+      @group.update(invited_ids: inv_ids)
+      redirect_to groups_path, notice: 'Group Updated'
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     if @group.destroy
-      redirect_to groups_path, notice: "Reservation was deleted"
+      redirect_to groups_path, notice: "Group deleted"
     else
       redirect_to groups_path, alert: "Something went wrong"
     end

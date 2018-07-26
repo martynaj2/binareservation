@@ -23,12 +23,15 @@ class ReservationsController < ApplicationController
   end
 
   def update
+    inv_ids = (params[:reservation][:invited_ids])
     @reservation = Reservation.find(params[:id])
     current_reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     if @conflicting_reservations.empty?
        if @reservation.update(reservation_params)
+         @reservation.update(invited_ids: inv_ids)
+         Reservation.mail_helper(@reservation, 2)
          redirect_to reservations_path, notice: 'Reservation Updated'
        else
          render :edit
@@ -46,7 +49,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
        if @reservation.save
          @reservation.update(invited_ids: inv_ids)
-         ReservationMailer.invitation_mail(@reservation).deliver_now
+         Reservation.mail_helper(@reservation, 0)
          redirect_to reservations_path, notice: 'Reservation was created.'
        else
          redirect_to reservations_path, alert: "Something went wrong"
@@ -59,6 +62,7 @@ class ReservationsController < ApplicationController
   def destroy
       @reservation = Reservation.find(params[:id])
       if @reservation.destroy
+        Reservation.mail_helper(@reservation, 1)
         redirect_to reservations_path, notice: "Reservation was deleted"
       else
         redirect_to reservations_path, alert: "Something went wrong"
@@ -110,7 +114,6 @@ class ReservationsController < ApplicationController
   end
 
   private
-
   def reservation_params
     params.require(:reservation).permit(
       :id, :title, :start_date, :end_date, :hall_id, :invited_ids)

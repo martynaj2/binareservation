@@ -32,9 +32,44 @@ class Reservation < ActiveRecord::Base
         :start => self.start_date,
         :end => self.end_date,
        }
-       end
+  end
+
+  def self.delete_ended_reservations
+    Reservation.ended.destroy_all
+  end
 
   private
+
+
+    def self.mail_helper(reservation, option)
+      @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+      @reservation = reservation
+      @invitor = User.find(reservation.user_id)
+      if @users_id.kind_of?(Array)
+        @users_id.each do |m|
+          @user = User.find(m)
+          unless @user.vacation
+            Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+          end
+        end
+      elsif @users_id.kind_of?(Integer)
+        @user = User.find(@users_id)
+        unless @user.vacation
+          Reservation.mail_case_helper(option)
+        end
+      end
+    end
+
+    def self.mail_case_helper(user, reservation, invitor, option)
+      case option
+      when 0
+        ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
+      when 1
+        ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
+      when 2
+        ReservationMailer.update_mail(user, reservation, invitor).deliver_now
+      end
+    end
 
   def self.conflict_validation(reservations, reservation)
     @conflicting_reservations = []
