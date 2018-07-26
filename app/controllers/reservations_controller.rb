@@ -10,9 +10,8 @@ class ReservationsController < ApplicationController
   end
 
   def show
-
-  @reservation = Reservation.find(params[:id])
-  @users = User.where(id: @reservation.invited_ids.split(',').map{ |elem| elem.to_i })
+    @reservation = Reservation.find(params[:id])
+    @users = User.where(id: @reservation.invited_ids.split(',').map{ |elem| elem.to_i })
   end
 
   def new
@@ -24,12 +23,14 @@ class ReservationsController < ApplicationController
   end
 
   def update
+    inv_ids = (params[:reservation][:invited_ids])
     @reservation = Reservation.find(params[:id])
     current_reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     if @conflicting_reservations.empty?
        if @reservation.update(reservation_params)
+         @reservation.update(invited_ids: inv_ids)
          Reservation.mail_helper(@reservation, 2)
          redirect_to reservations_path, notice: 'Reservation Updated'
        else
@@ -56,7 +57,7 @@ class ReservationsController < ApplicationController
      else
        premium_override(false)
      end
-end
+   end
 
   def destroy
       @reservation = Reservation.find(params[:id])
@@ -78,7 +79,7 @@ end
     if @reservation.save
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+      redirect_to reservations_path, alert: 'Something went wrong.'
     end
     session.delete(:reservation_attributes)
   end
@@ -95,7 +96,7 @@ end
     if @reservation.update(session[:reservation_params])
       redirect_to reservations_path, notice: 'Reservation was updated.'
     else
-      redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
+      redirect_to reservations_path, alert: 'Something went wrong.'
     end
     session.delete(:reservation_params)
   end

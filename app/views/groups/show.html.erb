@@ -1,0 +1,14 @@
+<h1 class="show-reservation text-center">
+  <%= "Group: #{@group.title}" %>
+</h1>
+<div class="info-group">
+  <div class="group-label">
+    <div class="invited-label">
+      Members:
+      <p class="invited-value">
+        <% @users.each do |user|%>
+        <%= user.fullname %>
+        <% end %></p>
+    </div>
+  </div>
+</div>
