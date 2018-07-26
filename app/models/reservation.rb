@@ -31,6 +31,7 @@ class Reservation < ActiveRecord::Base
         :title => self.title,
         :start => self.start_date,
         :end => self.end_date,
+        :description => self.Hall.find(hall_id).title
        }
   end
 

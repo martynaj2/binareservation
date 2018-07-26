@@ -34,6 +34,7 @@ initialize_calendar = function() {
         }
       },
 
+
       select: function( start, end, jsEvent, view) {
         var selectionStart = moment(start);
         var today = moment();

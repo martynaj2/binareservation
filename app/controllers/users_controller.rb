@@ -9,6 +9,10 @@ class UsersController < ApplicationController
 		@user = User.find(current_user.id)
   end
 
+	def show
+		@user = User.find(params[:id])
+	end
+
   def update
 		@user = User.find(current_user.id)
     if @user.update(user_params)
@@ -25,7 +29,7 @@ class UsersController < ApplicationController
 		else
 			@user.update_attribute(:vacation, true)
 		end
-		redirect_to users_path
+		redirect_to profile_path
 	end
 
 	private

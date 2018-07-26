@@ -16,6 +16,10 @@ class AdminsController < ApplicationController
   end
 
 	def update
+		if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+			params[:user].delete(:password)
+			params[:user].delete(:password_confirmation)
+		end
 		@user = User.find(params[:id])
 		if @user.update(admin_params)
 			redirect_to admins_path, notice: 'User Updated'
@@ -42,7 +46,7 @@ class AdminsController < ApplicationController
 	private
 
 	def admin_params
-		params.require(:user).permit(:name, :surname, :email, :premium, :verified, :password, :password_confirmation)
+		params.require(:user).permit(:premium, :verified, :password, :password_confirmation)
 	end
 
 end

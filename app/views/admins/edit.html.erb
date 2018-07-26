@@ -1,17 +1,8 @@
 <div class="edit-user-form text-center">
 	<%= form_for @user, url: {controller: "admins", action: "update"}, validate: true do |f| %>
-		<div class="form-group">
-			<%= f.label :name , autofocus: true%>
-			<%= f.text_field :name, class: "form-control col-md-3 col-centered" %>
-		</div>
-		<div class="form-group">
-	    <%= f.label :surname %>
-	    <%= f.text_field :surname, class: "form-control col-md-3 col-centered" %>
-	  </div>
-	  <div class="form-group">
-	    <%= f.label :email %>
-	    <%= f.email_field :email, autocomplete: "email", class: "form-control col-md-3 col-centered" %>
-	  </div>
+
+		<%= @user.fullname %>
+
 		<div class="row checbox-edit-user col-md-12">
 			<div class="form_group">
 				<%= f.label :premium%>
@@ -22,12 +13,7 @@
 				<%= f.check_box :verified %>
 			</div>
 		</div>
-	  <div class="actions">
-	    <%= f.submit "Update", role: 'button', class:"btn btn-outline-success btn-customize" %>
-	  </div>
-	<% end %>
 
-	<%= form_for @user, url: {controller: "admins", action: "update"} do |f| %>
 		<div class="field">
 			<%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
 			<%= f.password_field :password, autocomplete: "off" %>
