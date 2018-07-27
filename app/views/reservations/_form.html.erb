@@ -29,13 +29,17 @@
   <% end %>
 </ul>
 
-  <%= f.hidden_field :invited_ids, value: ''%>
+  <%= f.hidden_field :invited_ids, value: @reservation.invited_ids%>
   <%= f.submit 'Save', role: 'button', class:"btn btn-outline-success btn-customize save-reservation-btn" %>
 <%  end %>
 
 <script>
   $(document).on('turbolinks:load', function() {
-    $('#list li').on('click',function() {
+    invitedIds = $('#reservation_invited_ids').attr('value').split(",");
+    for (var i = 0; i < invitedIds.length; i++) {
+      $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
+    }
+      $('#list li').on('click',function() {
       $(this).toggleClass('selected');
     });
 
