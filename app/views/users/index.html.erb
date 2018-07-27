@@ -22,6 +22,7 @@
 		<% if current_user.verified == true %>
 			<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), method: :put, class:'btn btn-outline-success btn-customize' %>
 			<%= link_to 'My reservations', user_reservations_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
+			<%= link_to 'My groups', user_groups_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
 		<% end %>
 	</div>
 </div>
