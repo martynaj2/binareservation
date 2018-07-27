@@ -21,25 +21,23 @@
       <%= f.collection_select(:hall_id, Hall.all, :id, :title, {:include_blank => true}, {:class => 'form-control'}) %>
     </div>
 
-  <p> Choose who do you want to invite: </p>
-  <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names.." class="col-md-4">
-  <ul id='list'>
-  <% User.where.not(id: current_user.id).each do |user| %>
-        <li user_id=<%= user.id %>><a class="col-md-4 col-centered"><%= user.fullname %></a></li>
-  <% end %>
+    <div class="invited-picker">
+      <p> Choose who do you want to invite: </p>
+      <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names.." class="col-md-3">
+      <ul id='list'>
+      <% User.all.each do |user| %>
+            <li class="col-md-3 col-centered" user_id=<%= user.id %>><a><%= user.fullname %></a></li>
+      <% end %>
+    </div>
 </ul>
 
-  <%= f.hidden_field :invited_ids, value: @reservation.invited_ids%>
+  <%= f.hidden_field :invited_ids, value: ''%>
   <%= f.submit 'Save', role: 'button', class:"btn btn-outline-success btn-customize save-reservation-btn" %>
 <%  end %>
 
 <script>
   $(document).on('turbolinks:load', function() {
-    invitedIds = $('#reservation_invited_ids').attr('value').split(",");
-    for (var i = 0; i < invitedIds.length; i++) {
-      $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
-    }
-      $('#list li').on('click',function() {
+    $('#list li').on('click',function() {
       $(this).toggleClass('selected');
     });
 
