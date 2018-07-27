@@ -7,7 +7,6 @@
   <% if current_user %>
     <% if current_user.verified == true %>
     <h3 class="rooms-header"> Available rooms: </h3>
-    <h5 class="small-header">click "See more" to make reservation </h5>
 
     <div class="row room-card">
         <% Hall.all.each do |f| %>
@@ -15,7 +14,7 @@
             <div class="card-body">
                <h5 class="card-title"><%="#{f.title}"%></h5>
                <p class="card-text"><%="Beautiful, cozy room for #{f.capacity} people"%></p>
-               <%= link_to 'See more', hall_path(id: f.id), role: 'button', class:'btn btn-danger text-center btn-customize' %>
+               <%= link_to 'Reserve', new_reservation_path(hall_id: f.id), role: 'button', class:'btn btn-danger text-center btn-customize' %>
              </div>
            </div>
       <% end %>
