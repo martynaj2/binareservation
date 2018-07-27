@@ -5,7 +5,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a href="/">
+          <%= image_tag("logo.svg", style:"width:40px; height:40px", :alt => "logo") %>
+        </a>
       </li>
       <% unless current_user %>
           <li class="nav-item">
