@@ -1,28 +1,17 @@
 // Place all the styles related to the Halls controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.row {
-  padding: 2px;
-}
-
-.filter-buttons {
-  justify-content: center;
-}
 
 .btn-filter {
   margin: 5px;
 }
 
-.info-hall {
-
-}
-
-.calendar.cal-room {
-
-}
-
 .capacity-value {
   font-weight: bold;
+}
+
+.filter-buttons {
+  justify-content: center;
 }
 
 .res-details {
@@ -31,4 +20,8 @@
 
 .room-reservations {
   margin-bottom: 20px;
+}
+
+.row {
+  padding: 2px;
 }
