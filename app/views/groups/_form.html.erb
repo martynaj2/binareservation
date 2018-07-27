@@ -5,7 +5,7 @@
   <hr />
   <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names..">
   <ul id='list'>
-  <% User.where(id: current_user.id).each do |user| %>
+  <% User.where.not(id: current_user.id).each do |user| %>
         <li user_id=<%= user.id %>><a><%= user.fullname %></a></li>
   <% end %>
 </ul>
