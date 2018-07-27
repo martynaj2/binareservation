@@ -10,16 +10,13 @@
   <% end %>
 </ul>
   <hr />
-  <%= f.hidden_field :invited_ids, value: @reservation.invited_ids%>
+  <%= f.hidden_field :inviter_ids, value: current_user.id %>
+  <%= f.hidden_field :invited_ids, value: @group.invited_ids%>
   <%= f.submit 'Save' %>
 <% end %>
 
 <script>
   $(document).on('turbolinks:load', function() {
-    invitedIds = $('#reservation_invited_ids').attr('value').split(",");
-    for (var i = 0; i < invitedIds.length; i++) {
-      $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
-    }
     $('#list li').on('click',function() {
       $(this).toggleClass('selected');
     });
@@ -33,7 +30,10 @@
       $('#group_invited_ids').attr('value', userIds)
       event.currentTarget.submit();
     });
-
+    invitedIds = $('#reservation_invited_ids').attr('value').split(",");
+    for (var i = 0; i < invitedIds.length; i++) {
+      $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
+    }
     $('.edit_group').on('submit', function( event ){
       event.preventDefault();
       var userIds = [];

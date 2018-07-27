@@ -5,6 +5,10 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end
 
+  def user_index
+    @groups = Group.where(inviter_ids: current_user.id)
+  end
+
   def show
     @group = Group.find(params[:id])
     @users = User.where(id: @group.invited_ids.split(',').map{ |elem| elem.to_i })

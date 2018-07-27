@@ -43,13 +43,11 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    inv_ids = (params[:reservation][:invited_ids])
-    @reservation = current_user.reservations.build(reservation_params)
+    @reservation = current_user.reservations.build(reservation_params.merge(invited_ids: params[:reservation][:invited_ids]))
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
        if @reservation.save
-         @reservation.update(invited_ids: inv_ids)
          Reservation.mail_helper(@reservation, 0)
          redirect_to reservations_path, notice: 'Reservation was created.'
        else

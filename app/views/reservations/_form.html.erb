@@ -35,14 +35,10 @@
 
 <script>
   $(document).on('turbolinks:load', function() {
-    invitedIds = $('#reservation_invited_ids').attr('value').split(",");
-    for (var i = 0; i < invitedIds.length; i++) {
-      $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
-    }
+
       $('#list li').on('click',function() {
       $(this).toggleClass('selected');
     });
-
     $('#new_reservation').on('submit', function( event ){
       event.preventDefault();
       var userIds = [];
@@ -52,7 +48,10 @@
       $('#reservation_invited_ids').attr('value', userIds)
       event.currentTarget.submit();
     });
-
+    invitedIds = $('#reservation_invited_ids').attr('value').split(',');
+    for (var i = 0; i < invitedIds.length; i++) {
+      $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
+    }
     $('.edit_reservation').on('submit', function( event ){
       event.preventDefault();
       var userIds = [];
