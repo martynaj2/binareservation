@@ -5,17 +5,21 @@
   <hr />
   <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names..">
   <ul id='list'>
-  <% User.all.each do |user| %>
+  <% User.where.not(id: current_user.id).each do |user| %>
         <li user_id=<%= user.id %>><a><%= user.fullname %></a></li>
   <% end %>
 </ul>
   <hr />
-  <%= f.hidden_field :invited_ids, value: ''%>
+  <%= f.hidden_field :invited_ids, value: @reservation.invited_ids%>
   <%= f.submit 'Save' %>
 <% end %>
 
 <script>
   $(document).on('turbolinks:load', function() {
+    invitedIds = $('#reservation_invited_ids').attr('value').split(",");
+    for (var i = 0; i < invitedIds.length; i++) {
+      $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
+    }
     $('#list li').on('click',function() {
       $(this).toggleClass('selected');
     });
@@ -30,15 +34,6 @@
       event.currentTarget.submit();
     });
 
-    $('#edit_group').on('submit', function( event ){
-      event.preventDefault();
-      var userIds = [];
-      $('#list li.selected').each(function() {
-        userIds.push($(this).attr('user_id'));
-      });
-      $('#group_invited_ids').attr('value', userIds)
-      event.currentTarget.submit();
-    });
     $('.edit_group').on('submit', function( event ){
       event.preventDefault();
       var userIds = [];

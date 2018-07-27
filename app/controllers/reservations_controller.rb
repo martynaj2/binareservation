@@ -28,9 +28,10 @@ class ReservationsController < ApplicationController
     current_reservation = current_user.reservations.build(reservation_params)
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
+    hash = { invited_ids: inv_ids }
+    hash.merge(reservation_params)
     if @conflicting_reservations.empty?
-       if @reservation.update(reservation_params)
-         @reservation.update(invited_ids: inv_ids)
+       if @reservation.update(hash)
          Reservation.mail_helper(@reservation, 2)
          redirect_to reservations_path, notice: 'Reservation Updated'
        else
