@@ -7,7 +7,7 @@
     <%= link_to 'Large', halls_path(:large => true), role: 'button', class:'btn btn-danger btn-customize btn-filter' %>
     <%= link_to 'Extra large', halls_path(:extra_large => true), role: 'button', class:'btn btn-danger btn-customize btn-filter' %>
   </div>
-    <div class="container autors">
+    <div class="text-center col-md-12 halls-index-li">
         <% @halls.each do |hall| %>
          <%= render 'hall', hall: hall %>
         <% end %>
