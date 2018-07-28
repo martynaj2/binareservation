@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
 	end
 	get '/my_reservations', to: 'reservations#user_index', as: :user_reservations
+	get '/my_groups', to: 'groups#user_index', as: :user_groups
 	get '/confirm', to: 'reservations#confirm', as: :confirm_reservation
 	post '/overwrite', to: 'reservations#overwrite', as: :overwrite_reservation
 	get '/edit_confirm', to: 'reservations#edit_confirm', as: :edit_confirm_reservation

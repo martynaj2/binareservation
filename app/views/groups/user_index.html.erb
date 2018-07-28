@@ -1,0 +1,10 @@
+<div class="groups-user_index">
+  <h1 class="text-center"> Groups list </h1>
+    <div class="container groups">
+        <% @groups.each do |group| %>
+         <%= render 'group', controller: 'groups', action: 'user_index', group: group %>
+        <% end %>
+    </div>
+</div>
+
+<div class="text-center"><%= link_to 'Add new group', new_group_path, role: 'button', class:"btn btn-outline-success btn-customize" %></div>
