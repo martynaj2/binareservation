@@ -37,6 +37,12 @@ initialize_calendar = function() {
         }
       },
 
+      eventClick: function(event) {
+        if (event.id) {
+          window.location = 'reservations/' + event.id;
+        }
+      },
+
       select: function( start, end, jsEvent, view) {
         var selectionStart = moment(start);
         var today = moment();
