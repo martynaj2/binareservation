@@ -1,9 +1,9 @@
 	<div data-user-id="<%= user.id %>" class="row">
-		 <div class="col-sm-12 col-md-9">
+		 <div class="col-md-6 col-centered">
 				<%= user.fullname %>
 				<%= user.email %>
 			</div>
-			<div class="col-md-3 user-buttons">
+			<div class="col-md-5 col-centered">
 				<%= link_to "Verify", verify_admin_path(id: user.id), method: :put, class:'btn btn-outline-success btn-customize' %>
 				<%= link_to "Destroy", admin_path(user), method: :delete, remote: true, data: { confirm: "You sure?" }, class:'btn btn-outline-success btn-customize' %>
 			</div>

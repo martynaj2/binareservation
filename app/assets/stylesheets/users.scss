@@ -10,6 +10,7 @@ $binar-violet: #3b0c64;
 
 .not-verified {
   color: $binar-red;
+  margin-top: 30px;
 }
 
 .profile-header {
@@ -110,4 +111,13 @@ $binar-violet: #3b0c64;
 
 .pswd-btns {
   margin-top: 20px;
+}
+
+@media only screen and (max-width: 992px) {
+  .all-users-admin {
+    margin-top: 5.0rem;
+  }
+  .not-verified {
+    margin-top: 5.0rem;
+  }
 }

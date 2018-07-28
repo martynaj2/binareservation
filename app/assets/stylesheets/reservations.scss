@@ -24,3 +24,9 @@
 .invited-picker li{
   width: auto;
 }
+
+@media only screen and (max-width: 992px) {
+  .reservations-index {
+    margin-top: 5.0rem;
+  }
+}  
