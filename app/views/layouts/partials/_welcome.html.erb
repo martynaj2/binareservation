@@ -21,11 +21,11 @@
   </div>
 
   <div class="calendar"></div>
-
+  <%= render 'layouts/partials/footer' %>
+    <% else %>
+      <h4>You're not verified</h4>
+    <% end %>
   <% else %>
-    <h4>You're not verified</h4>
-  <% end %>
-  <% else %>
-  <%= render 'layouts/partials/login_form' %>
+    <%= render 'layouts/partials/login_form' %>
   <% end %>
 </div>
