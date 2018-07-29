@@ -11,7 +11,6 @@ $binar-red: #ef3f4a;
   border-bottom: 3px solid $binar-red;
   font-family: "Raleway";
 }
-
 @media only screen and (max-width: 992px) {
   .navbar {
     margin-bottom: 0.2rem;
@@ -22,12 +21,16 @@ $binar-red: #ef3f4a;
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(239, 63, 74, 1.0)' stroke-width='4' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
-.nav-link:active, .nav-link:link, .nav-link:visited, .dropdown-toggle {
+.dropdown-toggle,
+.nav-link:active,
+.nav-link:link,
+.nav-link:visited {
   color: white;
   width: 100%;
 }
 
-.nav-link:hover, .dropdown-toggle:hover {
+.dropdown-toggle:hover,
+.nav-link:hover {
   color: $binar-red;
   text-decoration: none;
 }
@@ -39,7 +42,7 @@ $binar-red: #ef3f4a;
 
 .logo {
   margin-bottom: 20px;
-  padding: 0px;
+  padding: 0;
 }
 
 .usr-data {
@@ -67,11 +70,11 @@ $binar-red: #ef3f4a;
 .navbar-content {
   width: 370px;
   height: 130px;
-  padding: 15px;
-  padding-bottom:0px;
+  padding: 15px 15px 0;
 }
 
-.navbar-content:before, .navbar-content:after {
+.navbar-content:after,
+.navbar-content:before {
   display: table;
   content: "";
   line-height: 0;
@@ -87,12 +90,11 @@ $binar-red: #ef3f4a;
 }
 
 .navbar-footer-content {
-  padding:15px 15px 15px 15px;
-
- }
+  padding: 15px;
+}
 
 .dropdown-menu.show {
-  padding: 0px;
+  padding: 0;
   overflow: hidden;
 }
 

@@ -15,9 +15,7 @@ $binar-violet: #3b0c64;
 
 .profile-header {
   width: 50%;
-  margin: 0 auto;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin: 30px auto 20px;
   border-bottom: 2px solid $binar-red;
 }
 
@@ -38,7 +36,7 @@ $binar-violet: #3b0c64;
 }
 
 .surname-form {
-  padding: 0px;
+  padding: 0;
 }
 
 .sign-up-form {
@@ -51,16 +49,16 @@ $binar-violet: #3b0c64;
   border-radius: 40px;
 }
 
-.form-group.sign-up-fg{
-  margin-bottom: 0px;
+.form-group.sign-up-fg {
+  margin-bottom: 0;
 }
 
 .signup-label {
-  margin: 0px;
+  margin: 0;
 }
 
 .login-label {
-  margin: 0px;
+  margin: 0;
 }
 
 .sign-in-btn {
@@ -80,7 +78,7 @@ $binar-violet: #3b0c64;
 }
 
 .message {
-  margin: 0px;
+  margin: 0;
   font-weight: bold;
 }
 
@@ -88,9 +86,8 @@ $binar-violet: #3b0c64;
   justify-content: center;
 }
 
-
 .remember-box {
-  line-height: 0px;
+  line-height: 0;
   text-align: left;
   margin-bottom: 15px;
   font-size: 14px;
@@ -102,7 +99,7 @@ $binar-violet: #3b0c64;
 
 .no-account {
   font-size: 15px;
-  margin: 0px;
+  margin: 0;
 }
 
 .edit-pswd {
@@ -112,11 +109,11 @@ $binar-violet: #3b0c64;
 .pswd-btns {
   margin-top: 20px;
 }
-
 @media only screen and (max-width: 992px) {
   .all-users-admin {
     margin-top: 5.0rem;
   }
+
   .not-verified {
     margin-top: 5.0rem;
   }

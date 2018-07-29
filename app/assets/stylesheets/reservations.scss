@@ -1,6 +1,7 @@
 // Place all the styles related to the Reservations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .reservations-confirm {
   width: 40%;
   margin: 0 auto;
@@ -21,12 +22,11 @@
   margin-bottom: 10px;
 }
 
-.invited-picker li{
+.invited-picker li {
   width: auto;
 }
-
 @media only screen and (max-width: 992px) {
   .reservations-index {
     margin-top: 5.0rem;
   }
-}  
+}
