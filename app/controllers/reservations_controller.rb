@@ -11,7 +11,7 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:id])
-    @users = User.where(id: @reservation.invited_ids.split(',').map{ |elem| elem.to_i })
+    @users = User.where(id: @reservation.invited_ids.split(',').map(&:to_i))
   end
 
   def new
@@ -31,12 +31,12 @@ class ReservationsController < ApplicationController
     hash = { invited_ids: inv_ids }
     hash.merge(reservation_params)
     if @conflicting_reservations.empty?
-       if @reservation.update(hash)
-         Reservation.mail_helper(@reservation, 2)
-         redirect_to reservations_path, notice: 'Reservation Updated'
-       else
-         render :edit
-       end
+      if @reservation.update(hash)
+        Reservation.mail_helper(@reservation, 2)
+        redirect_to reservations_path, notice: 'Reservation Updated'
+      else
+        render :edit
+      end
     else
       premium_override(true)
     end
@@ -47,25 +47,25 @@ class ReservationsController < ApplicationController
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
-       if @reservation.save
-         Reservation.mail_helper(@reservation, 0)
-         redirect_to reservations_path, notice: 'Reservation was created.'
-       else
-         redirect_to reservations_path, alert: "Something went wrong"
-       end
-     else
-       premium_override(false)
+      if @reservation.save
+        Reservation.mail_helper(@reservation, 0)
+        redirect_to reservations_path, notice: 'Reservation was created.'
+      else
+        redirect_to reservations_path, alert: 'Something went wrong'
+      end
+    else
+      premium_override(false)
      end
    end
 
   def destroy
-      @reservation = Reservation.find(params[:id])
-      if @reservation.destroy
-        Reservation.mail_helper(@reservation, 1)
-        redirect_to reservations_path, notice: "Reservation was deleted"
-      else
-        redirect_to reservations_path, alert: "Something went wrong"
-      end
+    @reservation = Reservation.find(params[:id])
+    if @reservation.destroy
+      Reservation.mail_helper(@reservation, 1)
+      redirect_to reservations_path, notice: 'Reservation was deleted'
+    else
+      redirect_to reservations_path, alert: 'Something went wrong'
+    end
   end
 
   def overwrite
@@ -113,9 +113,11 @@ class ReservationsController < ApplicationController
   end
 
   private
+
   def reservation_params
     params.require(:reservation).permit(
-      :id, :title, :start_date, :end_date, :hall_id, :invited_ids)
+      :id, :title, :start_date, :end_date, :hall_id, :invited_ids
+    )
   end
 
   def premium_override(edit)
@@ -130,10 +132,7 @@ class ReservationsController < ApplicationController
       end
     else
       redirect_to reservations_path, alert: "Reservation conflict with
-      #{
-      @conflicting_reservations.each.map(&:title)
-      }"
+      #{@conflicting_reservations.each.map(&:title)}"
     end
   end
-
 end
