@@ -28,7 +28,7 @@
         <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names.." class="col-md-3">
         <ul id='list'>
           <% User.all.each do |user| %>
-            <li class="col-md-3 col-centered" user_id=<%=u ser.id %>>
+            <li class="col-md-3 col-centered" user_id=<%=user.id %>>
               <a>
                 <%= user.fullname %>
               </a>
