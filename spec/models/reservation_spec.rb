@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
 	describe 'atrributes' do
-		it {expect(subject.attributes).to include('title', 'number_of_people', 'start_date', 'end_date', 'user_id', 'hall_id', 'invited') }
+		it {expect(subject.attributes).to include('title', 'number_of_people', 'start_date', 'end_date', 'user_id', 'hall_id', 'invited_ids') }
 	end
 
 	describe 'validations' do

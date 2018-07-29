@@ -8,8 +8,10 @@ class DateValidator < ActiveModel::Validator
   end
 end
 
-class Reservation < ApplicationRecord
-  validates :title, :end_date, :start_date, presence: true
+
+class Reservation < ActiveRecord::Base
+
+  validates :title, :end_date, :start_date, :number_of_people, :title, presence: true
   validates :title, length: { minimum: 2, maximum: 30 }
   validates_with DateValidator, if: proc { |f| f.start_date && f.end_date }
 
