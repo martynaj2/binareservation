@@ -7,29 +7,38 @@
     <div class="row justify-content-around">
       <div class="start-date-label">
         Start date:
-        <p class="start-date-value"><%= @reservation.start_date%></p>
+        <p class="start-date-value">
+          <%= @reservation.start_date%>
+        </p>
       </div>
 
       <div class="end-date-label">
         End date:
-        <p class="end-date-value"><%= @reservation.end_date%></p>
+        <p class="end-date-value">
+          <%= @reservation.end_date%>
+        </p>
       </div>
     </div>
 
     <div class="invitor-label">
       Invitor:
-      <p class="invitor-value"><%= @reservation.user.fullname%></p>
+      <p class="invitor-value">
+        <%= @reservation.user.fullname%>
+      </p>
     </div>
 
     <div class="hall-label">
       Hall:
-      <p class="hall-value"><%= @reservation.hall.title%></p>
+      <p class="hall-value">
+        <%= @reservation.hall.title%>
+      </p>
     </div>
 
     Invited:
-    <p class="invited-value"><% @users.each do |user|%>
-      <%= link_to user.fullname, user_path(id: user.id) %>
-      <% end %>
+    <p class="invited-value">
+      <% @users.each do |user|%>
+        <%= link_to user.fullname, user_path(id: user.id) %>
+          <% end %>
     </p>
   </div>
 
@@ -37,6 +46,6 @@
 
   <div class="reservation-buttons text-center">
     <%= link_to 'Back to reservations', reservations_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
-    <%= link_to 'New reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
+      <%= link_to 'New reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
   </div>
 </div>

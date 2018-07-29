@@ -1,28 +1,26 @@
 <div class="user-data text-center">
-	<h3 class="profile-header"> My profile </h3>
-	Name :
+	<h3 class="profile-header"> My profile </h3> Name :
 	<%= current_user.fullname %>
-	<br>
-	E-mail :
-	<%= current_user.email %>
+		<br> E-mail :
+		<%= current_user.email %>
 
-	<% if current_user.vacation %>
-	You are on vacation
-	<% end %>
+			<% if current_user.vacation %>
+				You are on vacation
+				<% end %>
 
-	<% unless current_user.avatar.url.present? %>
-		<%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
-	<% else %>
-		<%= image_tag current_user.avatar.url, class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar"%>
-	<% end %>
+					<% unless current_user.avatar.url.present? %>
+						<%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
+							<% else %>
+								<%= image_tag current_user.avatar.url, class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar"%>
+									<% end %>
 
-	<div class="profile-buttons">
-		<%= link_to 'Edit', edit_profile_path(id: current_user.id), class:'btn btn-outline-success btn-customize' %>
-		<%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize' %>
-		<% if current_user.verified == true %>
-			<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), method: :put, class:'btn btn-outline-success btn-customize' %>
-			<%= link_to 'My reservations', user_reservations_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
-			<%= link_to 'My groups', user_groups_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
-		<% end %>
-	</div>
+										<div class="profile-buttons">
+											<%= link_to 'Edit', edit_profile_path(id: current_user.id), class:'btn btn-outline-success btn-customize' %>
+												<%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize' %>
+													<% if current_user.verified == true %>
+														<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), method: :put, class:'btn btn-outline-success btn-customize' %>
+															<%= link_to 'My reservations', user_reservations_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
+																<%= link_to 'My groups', user_groups_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
+																	<% end %>
+										</div>
 </div>
