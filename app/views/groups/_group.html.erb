@@ -1,7 +1,9 @@
 <div class="row" data-reservation-id="<%= group.id %>">
-  <div class="col-sm-12 col-md-9"><%= link_to group.title, group_path(id: group.id) %></div>
+  <div class="col-sm-12 col-md-9">
+    <%= link_to group.title, group_path(id: group.id) %>
+  </div>
   <div class="col-md-3">
-      <%= link_to 'Edit', edit_group_path(id: group.id),role: 'button', class:'btn btn-outline-success btn-customize' %>
+    <%= link_to 'Edit', edit_group_path(id: group.id),role: 'button', class:'btn btn-outline-success btn-customize' %>
       <%= link_to 'Delete', group_path(id: group.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center btn-customize' %>
   </div>
 </div>

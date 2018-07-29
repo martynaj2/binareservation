@@ -1,27 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand" href="/">
+    <%= image_tag("logo.svg", style:"width:40px; height:40px", :alt => "logo") %>
+  </a>
   <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<span class="navbar-toggler-icon"></span>
+</button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
       <% unless current_user %>
-          <li class="nav-item">
-            <a class="nav-link" href="/my/users/sign_up">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/my/users/sign_in">Sign in</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/my/users/sign_up">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/my/users/sign_in">Sign in</a>
+        </li>
         <% end %>
-        <% if current_user.verified == true %>
-          <li class="nav-item">
-            <a class="nav-link" href="/halls#index">Rooms</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/reservations#index">Reservations</a>
-          </li>
+          <% if current_user.verified == true %>
+            <li class="nav-item">
+              <a class="nav-link" href="/halls">Rooms</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/reservations">Reservations</a>
+            </li>
             <% if current_user.admin %>
               <li class="nav-item">
                 <a class="nav-link" href="/users">Users</a>
@@ -29,48 +29,51 @@
               <li class="nav-item">
                 <a class="nav-link admin-label">Logged as admin</a>
               </li>
-            <% end %>
-        <% end %>
-      </ul>
-      <ul class="nav navbar-custom navbar-right">
-        <li class="dropdown nav-link"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+              <% end %>
+                <% end %>
+    </ul>
+    <ul class="nav navbar-custom navbar-right">
+      <li class="dropdown nav-link">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <%= current_user.email %>
             <b class="caret"></b></a>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                    <div class="navbar-content">
-                        <div class="usr-panel-row row">
-                            <div class="usr-avatar">
-                              <% unless current_user.avatar.url.present? %>
-                                <%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
-                              <% else %>
-                                <%= image_tag current_user.avatar.url, class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar"%>
-                              <% end %>
-                            </div>
-                            <div class="usr-data">
-                                <span class="user-fullname"><%=  "#{current_user.fullname}" %></span>
-                                <p class="text-muted small">
-                                    <%= "#{current_user.email}" %></p>
-                                <div class="divider">
-                                </div>
-                                <% if current_user %>
-                                  <a href="/my_profile" class="btn btn-outline-success btn-customize btn-sm">View Profile</a>
-                                <% end %>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="navbar-footer">
-                        <div class="navbar-footer-content">
-                            <div class="usr-button-row row">
-                                <div class="text-center">
-                                    <%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize btn-sm' %>
-                                </div>
-                                <div class="col-md-3">
-                                    <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'btn btn-danger btn-customize btn-sm' %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-          </div>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <div class="navbar-content">
+              <div class="usr-panel-row row">
+                <div class="usr-avatar">
+                  <% unless current_user.avatar.url.present? %>
+                    <%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
+                      <% else %>
+                        <%= image_tag current_user.avatar.url, class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar"%>
+                          <% end %>
+                </div>
+                <div class="usr-data">
+                  <span class="user-fullname"><%=  "#{current_user.fullname}" %></span>
+                  <p class="text-muted small">
+                    <%= "#{current_user.email}" %>
+                  </p>
+                  <div class="divider">
+                  </div>
+                  <% if current_user %>
+                    <a href="/my_profile" class="btn btn-outline-success btn-customize btn-sm">View Profile</a>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="navbar-footer">
+              <div class="navbar-footer-content">
+                <div class="usr-button-row row">
+                  <div class="text-center">
+                    <%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize btn-sm' %>
+                  </div>
+                  <div class="col-md-3">
+                    <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'btn btn-danger btn-customize btn-sm' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+  </div>
 </nav>

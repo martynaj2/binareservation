@@ -1,10 +1,12 @@
 <div class="reservations-index">
   <h1 class="text-center"> Reservation list </h1>
-    <div class="container reservations">
-        <% @reservations.each do |reservation| %>
-         <%= render 'reservation', reservation: reservation %>
+  <div class="reservations-index-li text-center col-md-12">
+    <% @reservations.each do |reservation| %>
+      <%= render 'reservation', reservation: reservation %>
         <% end %>
-    </div>
+  </div>
 </div>
 
-<div class="text-center"><%= link_to 'Add new reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize" %></div>
+<div class="text-center">
+  <%= link_to 'Add new reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize" %>
+</div>

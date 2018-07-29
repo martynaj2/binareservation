@@ -4,24 +4,23 @@
 
 <div class="info-hall col-md-6 col-centered text-center">
   <div class="hall-label">
-    Capacity:
-    <p class="capacity-value"><%= @hall.capacity%></p>
+    <h3> Room type: </h3>
+    <h5 class="capacity-value"><%= capacity_label(@hall) %></h5>
   </div>
-  <div class="date-label">
-    Created at:
-    <p class="date-value"><%= @hall.created_at%></p>
+
+  <div class="room-reservations">
+    <% if @hall.reservations.count == 0 %>
+      <p class="text-center res-details"> No reservations connected with this room </p>
+      <% else %>
+        <p class="text-center res-details"> Reservations connected with this room: </p>
+        <% @reservations.each do |r| %>
+          <%= link_to r.title, reservation_path(id: r.id) %>
+            <% end %>
+              <% end %>
   </div>
-  <div class="update-label">
-    Updated at:
-    <p class="update-value"><%= @hall.updated_at%></p>
-  </div>
-  <div>
-    <% @reservations.each do |r| %>
-    <%= link_to r.title, reservation_path(id: r.id) %>
-    <% end %>
-  </div>
+
   <%= link_to 'Back to rooms', halls_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
-  <%= link_to 'New reservation', new_reservation_path(hall_id: @hall.id), role: 'button', class:"btn btn-outline-success btn-customize"%>
+    <%= link_to 'New reservation', new_reservation_path(hall_id: @hall.id), role: 'button', class:"btn btn-outline-success btn-customize"%>
 </div>
 
 <div class="calendar cal-room"></div>

@@ -6,27 +6,28 @@
   <h2 class="welcome-header"> Welcome to Binar::Meeting</h2>
   <% if current_user %>
     <% if current_user.verified == true %>
-    <h3 class="rooms-header"> Available rooms: </h3>
-    <h5 class="small-header">click "See more" to make reservation </h5>
+      <h3 class="rooms-header"> Available rooms: </h3>
 
-    <div class="row room-card">
+      <div class="row room-card">
         <% Hall.all.each do |f| %>
-          <div class="card col-md-2">
+          <div class="card col-md-3">
             <div class="card-body">
-               <h5 class="card-title"><%="#{f.title}"%></h5>
-               <p class="card-text"><%="Beautiful, cozy room for #{f.capacity} people"%></p>
-               <%= link_to 'See more', hall_path(id: f.id), role: 'button', class:'btn btn-danger text-center btn-customize' %>
-             </div>
-           </div>
-      <% end %>
-  </div>
+              <h5 class="card-title"><%="#{f.title}"%></h5>
+              <p class="card-text">
+                <%="Beautiful, cozy room for #{f.capacity} people"%>
+              </p>
+              <%= link_to 'Reserve', new_reservation_path(hall_id: f.id), role: 'button', class:'btn btn-danger text-center btn-customize' %>
+            </div>
+          </div>
+          <% end %>
+      </div>
 
-  <div class="calendar"></div>
-
-  <% else %>
-    <h4>You're not verified</h4>
-  <% end %>
-  <% else %>
-  <%= render 'layouts/partials/login_form' %>
-  <% end %>
+      <div class="calendar"></div>
+      <%= render 'layouts/partials/footer' %>
+        <% else %>
+          <h4>You're not verified</h4>
+          <% end %>
+            <% else %>
+              <%= render 'layouts/partials/login_form' %>
+                <% end %>
 </div>

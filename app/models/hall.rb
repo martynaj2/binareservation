@@ -1,8 +1,7 @@
-class Hall < ActiveRecord::Base
-
+class Hall < ApplicationRecord
   before_destroy :destroy_reservations
   validates :title, :capacity, presence: true
-  validates :title, length: { minimum: 1, maximum: 10}
+  validates :title, length: { minimum: 1, maximum: 15 }
 
   scope :small, -> { where('capacity <= 5') }
   scope :medium, -> { where('capacity > 5 AND capacity <= 10') }
@@ -11,10 +10,9 @@ class Hall < ActiveRecord::Base
 
   has_many :reservations
 
-private
+  private
 
   def destroy_reservations
-    self.reservations.destroy_all
+    reservations.destroy_all
   end
-
 end

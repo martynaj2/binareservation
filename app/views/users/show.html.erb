@@ -1,15 +1,14 @@
 <div class="container">
 	<% unless @user.avatar.url.present? %>
 		<%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
-	<% else %>
-		<%= image_tag @user.avatar.url, class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar"%>
-	<% end %>
-  <p class="text">
-    Name:
-    <%= @user.fullname %> <br>
-    Email:
-    <%= @user.email %>
-  </p>
+			<% else %>
+				<%= image_tag @user.avatar.url, class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar"%>
+					<% end %>
+						<p class="text">
+							Name:
+							<%= @user.fullname %> <br> Email:
+								<%= @user.email %>
+						</p>
 
-  <%= link_to 'Back', :back, class: 'btn btn-primary'%>
+						<%= link_to 'Back', :back, class: 'btn btn-primary'%>
 </div>
