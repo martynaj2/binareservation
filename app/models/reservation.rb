@@ -9,7 +9,7 @@ class DateValidator < ActiveModel::Validator
 end
 
 class Reservation < ApplicationRecord
-  validates :title, :end_date, :start_date, :title, presence: true
+  validates :title, :end_date, :start_date, presence: true
   validates :title, length: { minimum: 2, maximum: 30 }
   validates_with DateValidator, if: proc { |f| f.start_date && f.end_date }
 
