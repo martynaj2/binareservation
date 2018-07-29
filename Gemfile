@@ -66,6 +66,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'brakeman'
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
