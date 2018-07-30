@@ -11,11 +11,12 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:id])
-    @users = User.where(id: @reservation.invited_ids.split(',').map{ |elem| elem.to_i })
+    @users = User.where(id: @reservation.invited_ids.split(',').map(&:to_i))
   end
 
   def new
-    @reservation = Reservation.new(hall_id: params[:hall_id], start_date: params[:start_date], end_date: params[:end_date])
+    @reservation = Reservation.new(hall_id: params[:hall_id], start_date: params[:start_date],
+                                   end_date: params[:end_date])
   end
 
   def edit
@@ -31,46 +32,50 @@ class ReservationsController < ApplicationController
     hash = { invited_ids: inv_ids }
     hash.merge(reservation_params)
     if @conflicting_reservations.empty?
-       if @reservation.update(hash)
-         Reservation.mail_helper(@reservation, 2)
-         redirect_to reservations_path, notice: 'Reservation Updated'
-       else
-         render :edit
-       end
+      if @reservation.update(hash)
+        Reservation.mail_helper(@reservation, 2)
+        redirect_to reservations_path, notice: 'Reservation Updated'
+      else
+        render :edit
+      end
     else
       premium_override(true)
     end
   end
 
   def create
-    @reservation = current_user.reservations.build(reservation_params.merge(invited_ids: params[:reservation][:invited_ids]))
+    @reservation = current_user.reservations.build(reservation_params.merge(
+                                                     invited_ids: params[:reservation][:invited_ids]
+                                                   ))
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
-       if @reservation.save
-         Reservation.mail_helper(@reservation, 0)
-         redirect_to reservations_path, notice: 'Reservation was created.'
-       else
-         redirect_to reservations_path, alert: "Something went wrong"
-       end
-     else
-       premium_override(false)
-     end
-   end
+      if @reservation.save
+        Reservation.mail_helper(@reservation, 0)
+        redirect_to reservations_path, notice: 'Reservation was created.'
+      else
+        redirect_to reservations_path, alert: 'Something went wrong'
+      end
+    else
+      premium_override(false)
+    end
+  end
 
   def destroy
-      @reservation = Reservation.find(params[:id])
-      if @reservation.destroy
-        Reservation.mail_helper(@reservation, 1)
-        redirect_to reservations_path, notice: "Reservation was deleted"
-      else
-        redirect_to reservations_path, alert: "Something went wrong"
-      end
+    @reservation = Reservation.find(params[:id])
+    if @reservation.destroy
+      Reservation.mail_helper(@reservation, 1)
+      redirect_to reservations_path, notice: 'Reservation was deleted'
+    else
+      redirect_to reservations_path, alert: 'Something went wrong'
+    end
   end
 
   def overwrite
     @reservation = Reservation.new(session[:reservation_attributes])
-    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(
+                                                                  hall_id: @reservation.hall_id
+                                                                ), @reservation)
     @conflicting_reservations.each do |r|
       ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
       r.destroy
@@ -102,7 +107,9 @@ class ReservationsController < ApplicationController
 
   def confirm
     @reservation = Reservation.new(session[:reservation_attributes])
-    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(
+                                                                  hall_id: @reservation.hall_id
+                                                                ), @reservation)
   end
 
   def edit_confirm
@@ -113,9 +120,11 @@ class ReservationsController < ApplicationController
   end
 
   private
+
   def reservation_params
     params.require(:reservation).permit(
-      :id, :title, :start_date, :end_date, :hall_id, :invited_ids)
+      :id, :title, :start_date, :end_date, :hall_id, :invited_ids
+    )
   end
 
   def premium_override(edit)
@@ -130,10 +139,7 @@ class ReservationsController < ApplicationController
       end
     else
       redirect_to reservations_path, alert: "Reservation conflict with
-      #{
-      @conflicting_reservations.each.map(&:title)
-      }"
+      #{@conflicting_reservations.each.map(&:title)}"
     end
   end
-
 end

@@ -85,6 +85,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', require: false
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'timecop'
   gem 'whenever-test'

@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @users = User.where(id: @group.invited_ids.split(',').map{ |elem| elem.to_i })
+    @users = User.where(id: @group.invited_ids.split(',').map(&:to_i)
   end
 
   def new
@@ -41,16 +41,16 @@ class GroupsController < ApplicationController
       @group.update(invited_ids: inv_ids)
       redirect_to groups_path, notice: 'Group created.'
     else
-      redirect_to groups_path, alert: "Something went wrong."
+      redirect_to groups_path, alert: 'Something went wrong.'
     end
   end
 
   def destroy
     @group = Group.find(params[:id])
     if @group.destroy
-      redirect_to groups_path, notice: "Group deleted"
+      redirect_to groups_path, notice: 'Group deleted'
     else
-      redirect_to groups_path, alert: "Something went wrong"
+      redirect_to groups_path, alert: 'Something went wrong'
     end
   end
 
