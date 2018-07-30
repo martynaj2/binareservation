@@ -8,16 +8,15 @@ class DateValidator < ActiveModel::Validator
 end
 
 class Reservation < ActiveRecord::Base
-
   validates :title, :end_date, :start_date, :title, presence: true
   validates :title, length: { minimum: 2, maximum: 30 }
   validates_with DateValidator, if: proc { |f| f.start_date && f.end_date }
 
-  scope :ended, ->{where('end_date < ?', Time.now)}
-  scope :not_ended, ->{where('start_date > ?', Time.now)}
-  scope :during, ->{where('start_date < ?', Time.now)}
-  scope :quarter, ->{where('start_date < ?', Time.now + 15.minutes)}
-  scope :twenty_four, ->{where('start_date > ?', Time.now - 24.hours)}
+  scope :ended, -> { where('end_date < ?', Time.zone.now) }
+  scope :not_ended, -> { where('start_date > ?', Time.zone.now) }
+  scope :during, -> { where('start_date < ?', Time.zone.now) }
+  scope :quarter, -> { where('start_date < ?', Time.zone.now + 15.minutes) }
+  scope :twenty_four, -> { where('start_date > ?', Time.zone.now - 24.hours) }
 
   belongs_to :user
   belongs_to :hall
@@ -42,7 +41,7 @@ class Reservation < ActiveRecord::Base
       reservations.each do |r|
         unless (reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date)
           @conflicting_reservations.push(r)
-       end
+        end
       end
     end
     @conflicting_reservations
@@ -51,21 +50,17 @@ class Reservation < ActiveRecord::Base
   private
 
   def self.mail_helper(reservation, option)
-    @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+    @users_id = reservation.invited_ids.split(',').map(&:to_i)
     @reservation = reservation
     @invitor = User.find(reservation.user_id)
-    if @users_id.kind_of?(Array)
+    if @users_id.is_a?(Array)
       @users_id.each do |m|
         @user = User.find(m)
-        unless @user.vacation
-          Reservation.mail_case_helper(@user, @reservation, @invitor, option)
-        end
+        Reservation.mail_case_helper(@user, @reservation, @invitor, option) unless @user.vacation
       end
-    elsif @users_id.kind_of?(Integer)
+    elsif @users_id.is_a?(Integer)
       @user = User.find(@users_id)
-      unless @user.vacation
-        Reservation.mail_case_helper(@user, @reservation, @invitor, option)
-      end
+      Reservation.mail_case_helper(@user, @reservation, @invitor, option) unless @user.vacation
     end
   end
 
@@ -79,5 +74,4 @@ class Reservation < ActiveRecord::Base
       ReservationMailer.update_mail(user, reservation, invitor).deliver_later
     end
   end
-
 end
