@@ -1,12 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand" href="/">
+    <%= image_tag("logo.svg", style:"width:40px; height:40px", :alt => "logo") %>
+  </a>
   <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
+
+
+
       <% unless current_user %>
           <li class="nav-item">
             <a class="nav-link" href="/my/users/sign_up">Register</a>
@@ -17,10 +20,10 @@
         <% end %>
         <% if current_user.verified == true %>
           <li class="nav-item">
-            <a class="nav-link" href="/halls#index">Rooms</a>
+            <a class="nav-link" href="/halls">Rooms</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/reservations#index">Reservations</a>
+            <a class="nav-link" href="/reservations">Reservations</a>
           </li>
             <% if current_user.admin %>
               <li class="nav-item">
@@ -33,7 +36,7 @@
         <% end %>
       </ul>
       <ul class="nav navbar-custom navbar-right">
-        <li class="dropdown nav-link"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+        <li class="dropdown nav-link"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %>
             <b class="caret"></b></a>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li>

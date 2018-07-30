@@ -1,35 +1,42 @@
 <h1 class="show-reservation text-center">
  <%= "Reservation: #{@reservation.title}" %>
 </h1>
-<div class="info-reservation">
-  <div class="reservation-label">
-    <div class="start-date-label">
-      Start date:
-      <p class="start-date-value"><%= @reservation.start_date%></p>
+
+<div class="info-reservation col-md-6 col-centered">
+  <div class="reservation-label text-center">
+    <div class="row justify-content-around">
+      <div class="start-date-label">
+        Start date:
+        <p class="start-date-value"><%= @reservation.start_date%></p>
+      </div>
+
+      <div class="end-date-label">
+        End date:
+        <p class="end-date-value"><%= @reservation.end_date%></p>
+      </div>
     </div>
-  <hr />
-    <div class="end-date-label">
-      End date:
-      <p class="end-date-value"><%= @reservation.end_date%></p>
-    </div>
-  <hr />
+
     <div class="invitor-label">
       Invitor:
       <p class="invitor-value"><%= @reservation.user.fullname%></p>
     </div>
-  <hr />
+
     <div class="hall-label">
       Hall:
       <p class="hall-value"><%= @reservation.hall.title%></p>
     </div>
-  <hr />
+
     Invited:
     <p class="invited-value"><% @users.each do |user|%>
       <%= link_to user.fullname, user_path(id: user.id) %>
       <% end %>
     </p>
-</div>
+  </div>
+
   <hr />
-  <%= link_to 'Back to reservation', reservations_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
-  <%= link_to 'New reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
+
+  <div class="reservation-buttons text-center">
+    <%= link_to 'Back to reservations', reservations_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
+    <%= link_to 'New reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
+  </div>
 </div>

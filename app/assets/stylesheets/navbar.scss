@@ -12,6 +12,12 @@ $binar-red: #ef3f4a;
   font-family: "Raleway";
 }
 
+@media only screen and (max-width: 992px) {
+  .navbar {
+    margin-bottom: 0.2rem;
+  }
+}
+
 .custom-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(239, 63, 74, 1.0)' stroke-width='4' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
@@ -29,6 +35,11 @@ $binar-red: #ef3f4a;
 .nav-link.admin-label {
   color: $binar-red;
   font-weight: bold;
+}
+
+.logo {
+  margin-bottom: 20px;
+  padding: 0px;
 }
 
 .usr-data {
@@ -54,7 +65,7 @@ $binar-red: #ef3f4a;
 }
 
 .navbar-content {
-  width: 370px;
+  width: 390px;
   height: 130px;
   padding: 15px;
   padding-bottom:0px;
@@ -83,4 +94,8 @@ $binar-red: #ef3f4a;
 .dropdown-menu.show {
   padding: 0px;
   overflow: hidden;
+}
+
+.nav-item {
+  padding-right: 10px;
 }
