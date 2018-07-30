@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/binarintern/RoR/binareservation/spec/controllers/halls_controller_spec.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/controllers/halls_controller_spec.rb": [
         1,
         null,
         1,
@@ -161,7 +161,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/rails_helper.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -229,14 +229,14 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/environment.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/home/binarintern/RoR/binareservation/config/application.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/application.rb": [
         1,
         null,
         1,
@@ -257,13 +257,13 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/boot.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/boot.rb": [
         1,
         null,
         1,
         1
       ],
-      "/home/binarintern/RoR/binareservation/config/environments/test.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/environments/test.rb": [
         1,
         null,
         null,
@@ -311,7 +311,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/application_controller_renderer.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -321,7 +321,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/assets.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -339,7 +339,7 @@
         1,
         1
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/backtrace_silencers.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -348,7 +348,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/client_side_validations.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/client_side_validations.rb": [
         null,
         null,
         null,
@@ -371,7 +371,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/content_security_policy.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/content_security_policy.rb": [
         null,
         null,
         null,
@@ -398,14 +398,14 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/cookies_serializer.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/devise.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/devise.rb": [
         null,
         null,
         null,
@@ -690,13 +690,13 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/filter_parameter_logging.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/inflections.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -714,13 +714,13 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/mime_types.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/initializers/wrap_parameters.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -736,7 +736,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/factories/halls.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/factories/halls.rb": [
         1,
         1,
         22,
@@ -744,7 +744,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/factories/reservations.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/factories/reservations.rb": [
         1,
         1,
         1,
@@ -756,7 +756,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/factories/users.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/factories/users.rb": [
         1,
         1,
         33,
@@ -766,7 +766,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/config/routes.rb": [
+      "/home/mr_arthurr/intern/binareservation/config/routes.rb": [
         1,
         null,
         1,
@@ -804,7 +804,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/models/user.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/models/user.rb": [
         1,
         null,
         null,
@@ -838,12 +838,12 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/models/application_record.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/uploaders/avatar_uploader.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/uploaders/avatar_uploader.rb": [
         1,
         null,
         null,
@@ -892,7 +892,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/helpers/users_helper.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/helpers/users_helper.rb": [
         1,
         1,
         0,
@@ -911,7 +911,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/controllers/halls_controller.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/controllers/halls_controller.rb": [
         1,
         1,
         null,
@@ -986,7 +986,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/controllers/application_controller.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/controllers/application_controller.rb": [
         1,
         1,
         null,
@@ -1010,14 +1010,14 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/controllers/reservations_controller_spec.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/controllers/reservations_controller_spec.rb": [
         1,
         null,
         1,
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/controllers/reservations_controller.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/controllers/reservations_controller.rb": [
         1,
         1,
         null,
@@ -1158,7 +1158,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/controllers/users_controller_spec.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/controllers/users_controller_spec.rb": [
         1,
         null,
         1,
@@ -1189,7 +1189,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/controllers/users_controller.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/controllers/users_controller.rb": [
         1,
         1,
         null,
@@ -1232,7 +1232,34 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/models/hall_spec.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/models/group_spec.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/home/mr_arthurr/intern/binareservation/app/models/group.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/home/mr_arthurr/intern/binareservation/spec/models/hall_spec.rb": [
         1,
         null,
         1,
@@ -1261,7 +1288,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/models/hall.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/models/hall.rb": [
         1,
         null,
         1,
@@ -1283,7 +1310,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/models/reservation_spec.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/models/reservation_spec.rb": [
         1,
         null,
         1,
@@ -1305,7 +1332,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/app/models/reservation.rb": [
+      "/home/mr_arthurr/intern/binareservation/app/models/reservation.rb": [
         1,
         1,
         0,
@@ -1394,7 +1421,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/models/user_spec.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/models/user_spec.rb": [
         1,
         null,
         1,
@@ -1425,7 +1452,7 @@
         null,
         null
       ],
-      "/home/binarintern/RoR/binareservation/spec/whenever_spec.rb": [
+      "/home/mr_arthurr/intern/binareservation/spec/whenever_spec.rb": [
         1,
         1,
         1,
@@ -1446,8 +1473,14 @@
         null,
         null,
         null
+      ],
+      "/home/mr_arthurr/intern/binareservation/app/models/group_user.rb": [
+        1,
+        1,
+        1,
+        null
       ]
     },
-    "timestamp": 1532940162
+    "timestamp": 1532941324
   }
 }
