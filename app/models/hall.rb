@@ -1,4 +1,4 @@
-class Hall < ApplicationRecord
+class Hall < ActiveRecord::Base
   before_destroy :destroy_reservations
   validates :title, :capacity, presence: true
   validates :title, length: { minimum: 1, maximum: 10 }
