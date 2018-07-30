@@ -1,11 +1,8 @@
 class DateValidator < ActiveModel::Validator
   def validate(reservation)
-    if reservation.start_date < Time.now
-      reservation.errors[:base] << "start_date > Time.now"
-    else
-      if reservation.start_date >= reservation.end_date
-        reservation.errors[:base] << "start_date > end_date"
-      end
+    if reservation.start_date < Time.zone.now
+      reservation.errors[:base] << 'start_date > Time.zone.now'
+    elsif reservation.start_date >= reservation.end_date
     end
   end
 end
@@ -14,7 +11,7 @@ class Reservation < ActiveRecord::Base
 
   validates :title, :end_date, :start_date, :title, presence: true
   validates :title, length: { minimum: 2, maximum: 30 }
-  validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
+  validates_with DateValidator, if: proc { |f| f.start_date && f.end_date }
 
   scope :ended, ->{where('end_date < ?', Time.now)}
   scope :not_ended, ->{where('start_date > ?', Time.now)}
@@ -25,14 +22,14 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :hall
 
-  def as_json(options = {})
-      {
-        :id => self.id,
-        :title => self.title,
-        :start => self.start_date,
-        :end => self.end_date,
-        :description => self.Hall.find(hall_id).title
-       }
+  def as_json(_options = {})
+    {
+      id: id,
+      title: title,
+      start: start_date,
+      end: end_date,
+      description: self.Hall.find(hall_id).title
+    }
   end
 
   def self.delete_ended_reservations
@@ -43,9 +40,9 @@ class Reservation < ActiveRecord::Base
     @conflicting_reservations = []
     unless reservations.empty?
       reservations.each do |r|
-         if !((reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date))
+        unless (reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date)
           @conflicting_reservations.push(r)
-        end
+       end
       end
     end
     @conflicting_reservations
