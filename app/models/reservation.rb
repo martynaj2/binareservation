@@ -56,7 +56,7 @@ class Reservation < ActiveRecord::Base
       elsif @users_id.kind_of?(Integer)
         @user = User.find(@users_id)
         unless @user.vacation
-          Reservation.mail_case_helper(option)
+          Reservation.mail_case_helper(@user, @reservation, @invitor, option)
         end
       end
     end
