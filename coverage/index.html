@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2018-07-30T13:41:10+02:00">2018-07-30T13:41:10+02:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2018-07-30T13:55:08+02:00">2018-07-30T13:55:08+02:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">84.59%</span></span>
+    (<span class="covered_percent"><span class="yellow">86.43%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.44
+         2.59
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>42</b> files in total.
-    <b>740</b> relevant lines. 
-    <span class="green"><b>626</b> lines covered</span> and
-    <span class="red"><b>114</b> lines missed </span>
+    <b>774</b> relevant lines. 
+    <span class="green"><b>669</b> lines covered</span> and
+    <span class="red"><b>105</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -92,12 +92,12 @@
       
       <tr>
         <td class="strong"><a href="#3964ab98ec41dc7663de1cf3144a6253dddcdbc2" class="src_link" title="app/controllers/users_controller.rb">app/controllers/users_controller.rb</a></td>
-        <td class="red strong">54.55 %</td>
+        <td class="green strong">95.45 %</td>
         <td>40</td>
         <td>22</td>
-        <td>12</td>
-        <td>10</td>
-        <td>0.8</td>
+        <td>21</td>
+        <td>1</td>
+        <td>2.1</td>
       </tr>
       
       <tr>
@@ -363,11 +363,11 @@
       <tr>
         <td class="strong"><a href="#e75327ee3bb7c9ee916011d61db12f079a3c8b4c" class="src_link" title="spec/controllers/users_controller_spec.rb">spec/controllers/users_controller_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>55</td>
-        <td>30</td>
-        <td>30</td>
+        <td>111</td>
+        <td>64</td>
+        <td>64</td>
         <td>0</td>
-        <td>2.8</td>
+        <td>2.7</td>
       </tr>
       
       <tr>
@@ -407,7 +407,7 @@
         <td>6</td>
         <td>6</td>
         <td>0</td>
-        <td>65.7</td>
+        <td>79.7</td>
       </tr>
       
       <tr>
@@ -2287,11 +2287,11 @@
         <div class="source_table" id="3964ab98ec41dc7663de1cf3144a6253dddcdbc2">
   <div class="header">
     <h3>app/controllers/users_controller.rb</h3>
-    <h4><span class="red">54.55 %</span> covered</h4>
+    <h4><span class="green">95.45 %</span> covered</h4>
     <div>
       <b>22</b> relevant lines. 
-      <span class="green"><b>12</b> lines covered</span> and
-      <span class="red"><b>10</b> lines missed.</span>
+      <span class="green"><b>21</b> lines covered</span> and
+      <span class="red"><b>1</b> lines missed.</span>
     </div>
   </div>
   
@@ -2394,20 +2394,20 @@
           <code class="ruby">  def update</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="17">
-          
+        <li class="covered" data-hits="5" data-linenumber="17">
+          <span class="hits">5</span>
           
           <code class="ruby">    @user = User.find(current_user.id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="18">
-          
+        <li class="covered" data-hits="5" data-linenumber="18">
+          <span class="hits">5</span>
           
           <code class="ruby">    if @user.update(user_params)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="19">
-          
+        <li class="covered" data-hits="3" data-linenumber="19">
+          <span class="hits">3</span>
           
           <code class="ruby">      redirect_to profile_path, notice: &#39;User Updated&#39;</code>
         </li>
@@ -2418,8 +2418,8 @@
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="21">
-          
+        <li class="covered" data-hits="2" data-linenumber="21">
+          <span class="hits">2</span>
           
           <code class="ruby">      render :edit</code>
         </li>
@@ -2448,14 +2448,14 @@
           <code class="ruby">  def vacation</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="26">
-          
+        <li class="covered" data-hits="2" data-linenumber="26">
+          <span class="hits">2</span>
           
           <code class="ruby">    @user = User.find(params[:id])</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="27">
-          
+        <li class="covered" data-hits="2" data-linenumber="27">
+          <span class="hits">2</span>
           
           <code class="ruby">    if @user.vacation == true</code>
         </li>
@@ -2472,8 +2472,8 @@
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="30">
-          
+        <li class="covered" data-hits="2" data-linenumber="30">
+          <span class="hits">2</span>
           
           <code class="ruby">      @user.update_attribute(:vacation, true)</code>
         </li>
@@ -2484,8 +2484,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="32">
-          
+        <li class="covered" data-hits="2" data-linenumber="32">
+          <span class="hits">2</span>
           
           <code class="ruby">    redirect_to profile_path</code>
         </li>
@@ -2520,8 +2520,8 @@
           <code class="ruby">  def user_params</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="38">
-          
+        <li class="covered" data-hits="5" data-linenumber="38">
+          <span class="hits">5</span>
           
           <code class="ruby">    params.require(:user).permit(:name, :surname, :email, :avatar, :avatar_cache, :remove_avatar, :vacation)</code>
         </li>
@@ -9234,8 +9234,8 @@
     <h3>spec/controllers/users_controller_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>30</b> relevant lines. 
-      <span class="green"><b>30</b> lines covered</span> and
+      <b>64</b> relevant lines. 
+      <span class="green"><b>64</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -9267,14 +9267,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="5">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="17" data-linenumber="5">
+          <span class="hits">17</span>
           
           <code class="ruby">   let(:user1) { create(:user) }</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="6">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="17" data-linenumber="6">
+          <span class="hits">17</span>
           
           <code class="ruby">   before { sign_in(user1) }</code>
         </li>
@@ -9285,14 +9285,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="8">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="17" data-linenumber="8">
+          <span class="hits">17</span>
           
           <code class="ruby">   let(:user2) { create(:user) }</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="9">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="17" data-linenumber="9">
+          <span class="hits">17</span>
           
           <code class="ruby">   before { sign_in(user2) }</code>
         </li>
@@ -9561,13 +9561,349 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="covered" data-hits="1" data-linenumber="54">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  </code>
+          <code class="ruby">  describe &#39;#update&#39; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="covered" data-hits="6" data-linenumber="55">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    let(:user) {create(:user)}</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="56">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    before { sign_in(user) }</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="57">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    let(:valid_attributes) { { id: user.id, user: { name: &#39;Name&#39;, surname: &#39;Surname&#39; } } }</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="58">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    let(:invalid_attributes) { { id: user.id, user: { name: nil, surname: nil } } }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="59">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="60">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    context &#39;valid params&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="61">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      subject { patch :update, params: valid_attributes }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="63">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &#39;should redirect to user index&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="64">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(subject).to redirect_to(profile_path)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="65">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="66">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &#39;should redirect with notice&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="68">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        subject</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(flash[:notice]).to be_present</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="72">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &#39;should change user Name and Surname&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        subject</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(user.reload.name).to eq( &#39;Name&#39; )</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(user.reload.surname).to eq( &#39;Surname&#39; )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="79">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    context &#39;invalid params&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="80">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      subject { patch :update, params: invalid_attributes }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="81">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="82">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &#39;should render edit&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="83">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(subject).to render_template(&#39;edit&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="84">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="85">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="86">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &#39;should not change title&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="87">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        subject</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="88">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(user.reload.name).not_to eq(&#39;Name&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="89">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(user.reload.surname).not_to eq( &#39;Surname&#39; )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="90">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="91">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="92">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="93">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="94">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &#39;#vacation&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="95">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    let(:user) {create(:user)}</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="96">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    before { sign_in(user) }</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="97">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    before { put :vacation, params: { id: user.id } }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="98">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="99">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    context &#39;valid params&#39; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="100">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="101">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &#39;should redirect to user index&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="102">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(subject).to redirect_to(profile_path)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="103">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="104">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="105">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &#39;should change user vacation status&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="106">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        subject</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="107">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(user.reload.vacation).to eq( true )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="108">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="110">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="111">
           
           
           <code class="ruby">end</code>
@@ -9793,26 +10129,26 @@
           <code class="ruby">  factory :user do</code>
         </li>
       
-        <li class="covered" data-hits="98" data-linenumber="3">
-          <span class="hits">98</span>
+        <li class="covered" data-hits="119" data-linenumber="3">
+          <span class="hits">119</span>
           
           <code class="ruby">    name         { Faker::Name.first_name }</code>
         </li>
       
-        <li class="covered" data-hits="98" data-linenumber="4">
-          <span class="hits">98</span>
+        <li class="covered" data-hits="119" data-linenumber="4">
+          <span class="hits">119</span>
           
           <code class="ruby">    surname      { Faker::Name.last_name }</code>
         </li>
       
-        <li class="covered" data-hits="98" data-linenumber="5">
-          <span class="hits">98</span>
+        <li class="covered" data-hits="119" data-linenumber="5">
+          <span class="hits">119</span>
           
           <code class="ruby">    email        { Faker::Internet.email }</code>
         </li>
       
-        <li class="covered" data-hits="98" data-linenumber="6">
-          <span class="hits">98</span>
+        <li class="covered" data-hits="119" data-linenumber="6">
+          <span class="hits">119</span>
           
           <code class="ruby">    password     { Faker::Internet.password(8) }</code>
         </li>
