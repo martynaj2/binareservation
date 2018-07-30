@@ -17,9 +17,6 @@
 !/log/.keep
 !/tmp/.keep
 
-# Ignore all simplecov files
-/coverage/*
-
 # Ignore uploaded files in development
 /storage/*
 
@@ -31,3 +28,5 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/coverage/*
+/coverage/
