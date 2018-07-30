@@ -9,7 +9,7 @@
   </div>
 
   <div class="room-reservations">
-    <% if @hall.reservations.count == 0 %>
+    <% if @hall.reservations.empty? %>
       <p class="text-center res-details"> No reservations connected with this room </p>
     <% else %>
       <p class="text-center res-details"> Reservations connected with this room: </p>
