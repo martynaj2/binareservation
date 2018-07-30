@@ -74,7 +74,7 @@ RSpec.describe GroupsController, type: :controller do
       subject { post :create, params: valid_attributes }
 
       it 'should redirect to group index' do
-        expect(subject).to redirect_to(groups_path)
+        expect(subject).to redirect_to(user_groups_path)
       end
 
       it 'should redirect with notice' do
@@ -91,7 +91,7 @@ RSpec.describe GroupsController, type: :controller do
       subject { post :create, params: invalid_attributes }
 
       it 'should render create form' do
-        expect(subject).to redirect_to(groups_path)
+        expect(subject).to redirect_to(user_groups_path)
       end
 
       it 'should not create new group' do
@@ -109,7 +109,7 @@ RSpec.describe GroupsController, type: :controller do
       subject { patch :update, params: valid_attributes }
 
       it 'should redirect to group index' do
-        expect(subject).to redirect_to(groups_path)
+        expect(subject).to redirect_to(user_groups_path)
       end
 
       it 'should redirect with notice' do
@@ -142,7 +142,7 @@ RSpec.describe GroupsController, type: :controller do
     subject {delete :destroy, params: { id: group.id }}
 
     it 'should redirect to group index' do
-      expect(subject).to redirect_to(groups_path)
+      expect(subject).to redirect_to(user_groups_path)
     end
 
     it 'should redirect with notice' do
