@@ -12,7 +12,7 @@ end
 
 class Reservation < ActiveRecord::Base
 
-  validates :title, :end_date, :start_date, :number_of_people, :title, presence: true
+  validates :title, :end_date, :start_date, :title, presence: true
   validates :title, length: { minimum: 2, maximum: 30 }
   validates_with DateValidator, if: Proc.new {|f| f.start_date && f.end_date}
 
@@ -39,39 +39,6 @@ class Reservation < ActiveRecord::Base
     Reservation.ended.destroy_all
   end
 
-  private
-
-
-    def self.mail_helper(reservation, option)
-      @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
-      @reservation = reservation
-      @invitor = User.find(reservation.user_id)
-      if @users_id.kind_of?(Array)
-        @users_id.each do |m|
-          @user = User.find(m)
-          unless @user.vacation
-            Reservation.mail_case_helper(@user, @reservation, @invitor, option)
-          end
-        end
-      elsif @users_id.kind_of?(Integer)
-        @user = User.find(@users_id)
-        unless @user.vacation
-          Reservation.mail_case_helper(@user, @reservation, @invitor, option)
-        end
-      end
-    end
-
-    def self.mail_case_helper(user, reservation, invitor, option)
-      case option
-      when 0
-        ReservationMailer.invitation_mail(user, reservation, invitor).deliver_later
-      when 1
-        ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
-      when 2
-        ReservationMailer.update_mail(user, reservation, invitor).deliver_later
-      end
-    end
-
   def self.conflict_validation(reservations, reservation)
     @conflicting_reservations = []
     unless reservations.empty?
@@ -82,6 +49,38 @@ class Reservation < ActiveRecord::Base
       end
     end
     @conflicting_reservations
+  end
+
+  private
+
+  def self.mail_helper(reservation, option)
+    @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+    @reservation = reservation
+    @invitor = User.find(reservation.user_id)
+    if @users_id.kind_of?(Array)
+      @users_id.each do |m|
+        @user = User.find(m)
+        unless @user.vacation
+          Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+        end
+      end
+    elsif @users_id.kind_of?(Integer)
+      @user = User.find(@users_id)
+      unless @user.vacation
+        Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+      end
+    end
+  end
+
+  def self.mail_case_helper(user, reservation, invitor, option)
+    case option
+    when 0
+      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_later
+    when 1
+      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
+    when 2
+      ReservationMailer.update_mail(user, reservation, invitor).deliver_later
+    end
   end
 
 end
