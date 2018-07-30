@@ -24,14 +24,14 @@ RSpec.describe User, type: :model do
     let(:user1) { create(:user, verified: true) }
     let(:user2) { create(:user, verified: false) }
 
-    it 'should have not verified scope' do
+    it 'should have not_verified scope' do
       expect(User.not_verified).to include(user2)
       expect(User.not_verified).not_to include(user1)
     end
   end
 
   describe '#fullname' do
-      let(:user) { create(:user) }
+    let(:user) { create(:user) }
     it 'should have working #fullname method' do
       expect(user.fullname).to eq("#{user.name} #{user.surname}")
     end
