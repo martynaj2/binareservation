@@ -3,7 +3,7 @@ class AdminsController < ApplicationController
 
 	def index
 		@users = User.where(verified: true)
-		@not_verified_users = User.where(verified: nil).or(User.where(verified: false))
+		@not_verified_users = User.where(verified: false)
 	end
 
 	def destroy
