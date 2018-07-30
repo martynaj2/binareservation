@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @users = User.where(id: @group.invited_ids.split(',').map(&:to_i)
+    @users = User.where(id: @group.invited_ids.split(',').map(&:to_i))
   end
 
   def new
