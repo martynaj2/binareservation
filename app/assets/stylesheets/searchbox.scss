@@ -28,7 +28,8 @@
 }
 
 #list li.selected a {
-  background-color: green;
+  background-color: #3b0c64;
+  color: white;
 }
 
 #list li a:hover:not(.header) {
@@ -36,5 +37,7 @@
 }
 
 #list li.selected a:hover:not(.header) {
-    background-color: #c8dca4; /* Add a hover effect to all links, except for headers */
+    background-color: #3b0c64;
+    color: white;
+    font-weight: bold;
 }

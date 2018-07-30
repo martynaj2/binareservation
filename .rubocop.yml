@@ -1,11 +1,12 @@
-inherit_from: .rubocop_todo.yml
 AllCops:
-  Include:
+  Exclude:
+    Include:
     - '**/Rakefile'
     - '**/config.ru'
     - '**/*.rake'
     - '**/Gemfile'
     - '**/Capfile'
+    - '**/*.rb'
   Exclude:
     - 'vendor/**/*'
     - 'bin/**/*'
@@ -14,7 +15,7 @@ AllCops:
     - 'script/**/*'
     - 'spec/**/*'
     - 'node_modules/**/*'
-  TargetRubyVersion:                   2.4
+  TargetRubyVersion:                   2.5.1
 Metrics/LineLength:
   Max:                                 120
 Metrics/MethodLength:
@@ -44,4 +45,6 @@ Style/CharacterLiteral:
 Style/ClassAndModuleChildren:
   Enabled:                             false
 Style/FrozenStringLiteralComment:
+  Enabled:                             false
+Rails/ApplicationRecord:
   Enabled:                             false
