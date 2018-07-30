@@ -2,7 +2,6 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   after_commit :remove_avatar!, on: :destroy
-  before_destroy :destroy_reservations
   mount_uploader :avatar, AvatarUploader
   serialize :avatars, JSON
 
@@ -15,7 +14,7 @@ class User < ApplicationRecord
   validates :email, length: { minimum: 2, maximum: 50 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
   has_many :group_users
   has_many :group, through: :group_users
 
@@ -24,12 +23,6 @@ class User < ApplicationRecord
 
   def fullname
     "#{name} #{surname}"
-  end
-
-private
-
-  def destroy_reservations
-    self.reservations.destroy_all
   end
 
 end
