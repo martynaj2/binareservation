@@ -71,6 +71,12 @@ $binar-red: #ef3f4a;
   padding-bottom:0px;
 }
 
+.nav-link.navbar-mail {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
 .navbar-content:before, .navbar-content:after {
   display: table;
   content: "";
@@ -84,6 +90,10 @@ $binar-red: #ef3f4a;
 .navbar-footer {
   border-top: 2px dotted $binar-red;
   background-color: whitesmoke;
+}
+
+.usr-button-row {
+  justify-content: center;
 }
 
 .navbar-footer-content {
