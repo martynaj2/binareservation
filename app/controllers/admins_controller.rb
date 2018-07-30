@@ -1,15 +1,15 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!
 
-  def index
-    @users = User.where(verified: true)
-    @not_verified_users = User.where(verified: nil).or(User.where(verified: false))
-  end
+	def index
+		@users = User.where(verified: true)
+		@not_verified_users = User.not_verified
+	end
 
-  def destroy
+	def destroy
     @user = User.find(params[:id])
     @user.destroy
-  end
+	end
 
   def edit
     @user = User.find(params[:id])
@@ -38,8 +38,7 @@ class AdminsController < ApplicationController
   end
 
   def verify_all
-    @users_new = User.where(verified: nil).or(User.where(verified: false)).update_all(verified: true)
-
+    @users_new = User.not_verified.update_all(verified: true)
     redirect_to administrator_path, notice: 'Users Verified'
   end
 
