@@ -19,6 +19,9 @@ class User < ApplicationRecord
   has_many :group_users
   has_many :group, through: :group_users
 
+  scope :not_verified, ->{where(verified: false)}
+
+
   def fullname
     "#{name} #{surname}"
   end

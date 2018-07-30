@@ -30,16 +30,11 @@ class AdminsController < ApplicationController
 
 	def verify
 			@user = User.find(params[:id])
-			if @user.update_attribute(:verified, true)
-				redirect_to administrator_path, notice: 'User Verified'
-			else
-				render :index
-			end
+			@user.update_attribute(:verified, true)
 	end
 
 	def verify_all
-			@users_new = User.where(verified: nil).or(User.where(verified: false)).update_all(verified: true)
-
+			@users_new = User.where(verified: false).update_all(verified: true)
 			redirect_to administrator_path, notice: 'Users Verified'
 	end
 
