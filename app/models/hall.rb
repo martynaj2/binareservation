@@ -1,5 +1,5 @@
 class Hall < ActiveRecord::Base
-  before_destroy :destroy_reservations
+
   validates :title, :capacity, presence: true
   validates :title, length: { minimum: 1, maximum: 10 }
 
@@ -8,11 +8,6 @@ class Hall < ActiveRecord::Base
   scope :large, -> { where('capacity > 10 AND capacity <= 20') }
   scope :extra_large, -> { where('capacity > 20') }
 
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
 
-  private
-
-  def destroy_reservations
-    reservations.destroy_all
-  end
 end
