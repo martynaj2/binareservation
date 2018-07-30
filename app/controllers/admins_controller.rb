@@ -3,7 +3,7 @@ class AdminsController < ApplicationController
 
 	def index
 		@users = User.where(verified: true)
-		@not_verified_users = User.where(verified: false)
+		@not_verified_users = User.not_verified
 	end
 
 	def destroy
@@ -34,7 +34,7 @@ class AdminsController < ApplicationController
 	end
 
 	def verify_all
-			@users_new = User.where(verified: false).update_all(verified: true)
+			@users_new = User.not_verified.update_all(verified: true)
 			redirect_to administrator_path, notice: 'Users Verified'
 	end
 
