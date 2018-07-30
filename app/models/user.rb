@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :surname, :email, presence: true
-  validates :name, :surname, length: { minimum: 2, maximum: 15}
+  validates :name, :surname, length: { minimum: 2, maximum: 15 }
   validates :avatar, file_size: { less_than: 1.megabytes }
   validates :email, length: { minimum: 2, maximum: 50 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -28,5 +28,4 @@ private
   def destroy_reservations
     self.reservations.destroy_all
   end
-
 end
