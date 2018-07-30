@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   serialize :avatars, JSON
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :surname, :email, presence: true
   validates :name, :surname, length: { minimum: 2, maximum: 15 }
@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
   has_many :group_users
   has_many :group, through: :group_users
 
-  scope :not_verified, ->{where(verified: false)}
-
+  scope :not_verified, -> { where(verified: false) }
 
   def fullname
     "#{name} #{surname}"
