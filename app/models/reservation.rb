@@ -66,6 +66,15 @@ class Reservation < ActiveRecord::Base
       end
   end
 
+  def self.delete_notification(reservation)
+    queue = Sidekiq::ScheduledSet.new
+    queue.each do |job|
+      if reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2,2].to_i
+        job.delete
+      end
+    end
+  end
+
   def self.notify_mail_helper(reservation)
     if reservation.start_date > Time.zone.now + 15.minutes
       NotifyQuarter.set(

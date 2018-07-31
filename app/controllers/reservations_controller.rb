@@ -33,6 +33,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
       if @reservation.update(hash)
         Reservation.mail_helper(@reservation, 2)
+        Reservation.delete_notification(@reservation)
         Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation Updated'
       else
@@ -64,14 +65,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     if @reservation.destroy
       Reservation.mail_helper(@reservation, 1)
-
-      queue = Sidekiq::ScheduledSet.new
-      queue.each do |job|
-        if @reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2,2].to_i
-          job.delete
-        end
-      end
-
+      Reservation.delete_notification(@reservation)
       redirect_to reservations_path, notice: 'Reservation was deleted'
     else
       redirect_to reservations_path, alert: 'Something went wrong'
@@ -85,12 +79,13 @@ class ReservationsController < ApplicationController
       @conflicting_reservations.each do |r|
         ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
         r.destroy
+        Reservation.delete_notification(r)
       end
       Reservation.mail_helper(@reservation, 0)
       Reservation.notify_mail_helper(@reservation)
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-      redirect_to reservations_path, alert: 'Something went wrong.'
+      redirect_to reservations_path, alert: "Something went wrong. #{@reservation.errors.full_messages}"
     end
     session.delete(:reservation_attributes)
   end
@@ -104,12 +99,13 @@ class ReservationsController < ApplicationController
       @conflicting_reservations.each do |r|
         ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
         r.destroy
+        Reservation.delete_notification(r)
       end
       Reservation.mail_helper(@reservation, 2)
       Reservation.notify_mail_helper(@reservation)
       redirect_to reservations_path, notice: 'Reservation was updated.'
     else
-      redirect_to reservations_path, alert: 'Something went wrong.'
+      redirect_to reservations_path, alert: "Something went wrong. #{@reservation.errors.full_messages}"
     end
     session.delete(:reservation_params)
   end
@@ -139,7 +135,7 @@ class ReservationsController < ApplicationController
       if edit
         session[:reservation_id] = @reservation.id
         session[:reservation_params] = reservation_params
-        redirect_to controller: 'reservations', action: 'confirm_update'
+        redirect_to controller: 'reservations', action: 'edit_confirm'
       else
         session[:reservation_attributes] = @reservation.attributes
         redirect_to controller: 'reservations', action: 'confirm'

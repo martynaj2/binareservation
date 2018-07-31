@@ -4,6 +4,6 @@
 		<%= "title: #{reservation.title}" %>
 	<% end %>
 	<p class="question-confirm"> What do you want to do? </p>
-	<%= link_to 'Overwrite', overwrite_reservation_path, method: :post, role: 'button', class:'btn btn-danger text-center' %>
+	<%= link_to 'Overwrite', edit_overwrite_reservation_path, method: :post, role: 'button', class:'btn btn-danger text-center' %>
 	<%= link_to 'Go back', :back, role: 'button', class:'btn btn-outline-danger text-center' %>
 </div>
