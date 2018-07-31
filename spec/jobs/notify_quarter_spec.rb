@@ -4,12 +4,12 @@
 # RSpec.describe NotifyQuarter, type: :job do
 # 	Sidekiq::Testing.inline!
 #
-# 	let!(:reservation) { create(:reservation) }
+# 	describe 'quarter notify' do
+# 		let!(:reservation) { create(:reservation, start_date: Time.zone.now + 30.minutes) }
 #
-# 	describe 'old reservation' do
-# 		before {NotifyQuarter.perform_now }
-# 		reservation.update_attribute(:start_date, Time.now - 15.minutes)
-# 		reservation.update_attribute(:end_date, Time.now - 5.minutes)
-# 		it { expect(Reservation.count).to eq(0) }
+# 		it 'should check if mail is sent to queue' do
+# 			# byebug
+# 		  expect(NotifyQuarter.perform_later(reservation)).to change{Sidekiq::ScheduledSet.new.size}.by(1)
+# 	 end
 # 	end
 # end
