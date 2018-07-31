@@ -29,7 +29,6 @@ class ReservationsController < ApplicationController
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     hash = { invited_ids: inv_ids }
-    # hash.merge(reservation_params)
     reservation_params.merge(hash)
     if @conflicting_reservations.empty?
       if @reservation.update(reservation_params)
