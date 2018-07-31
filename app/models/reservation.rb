@@ -48,26 +48,21 @@ class Reservation < ActiveRecord::Base
     @conflicting_reservations
   end
 
-  private
-
   def self.mail_helper(reservation, option)
-    @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
-    @reservation = reservation
-    @invitor = User.find(reservation.user_id)
-    if @users_id.kind_of?(Array)
-      @users_id.each do |m|
-        @user = User.find(m)
-        unless @user.vacation
-          Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+    unless (reservation.invited_ids == nil)
+      @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+      @reservation = reservation
+      @invitor = User.find(reservation.user_id)
+        @users_id.each do |m|
+          @user = User.find(m)
+          unless @user.vacation
+            Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+          end
         end
-      end
-    elsif @users_id.kind_of?(Integer)
-      @user = User.find(@users_id)
-      unless @user.vacation
-        Reservation.mail_case_helper(@user, @reservation, @invitor, option)
-      end
     end
   end
+
+  private
 
   def self.mail_case_helper(user, reservation, invitor, option)
     case option
@@ -77,6 +72,8 @@ class Reservation < ActiveRecord::Base
       ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
     when 2
       ReservationMailer.update_mail(user, reservation, invitor).deliver_later
+    when 3
+      ReservationMailer.quarter_notification_mail(user, reservation, invitor).deliver
     end
   end
 

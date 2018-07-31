@@ -18,7 +18,7 @@
 !/tmp/.keep
 
 # Ignore all simplecov files
-coverage
+/coverage/*
 
 # Ignore uploaded files in development
 /storage/*

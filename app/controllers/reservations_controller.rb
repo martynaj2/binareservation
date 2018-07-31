@@ -11,7 +11,9 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:id])
-    @users = User.where(id: @reservation.invited_ids.split(',').map(&:to_i))
+    unless @reservation.invited_ids == nil
+      @users = User.where(id: @reservation.invited_ids.split(',').map(&:to_i))
+    end
   end
 
   def new
@@ -44,9 +46,7 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = current_user.reservations.build(reservation_params.merge(
-                                                     invited_ids: params[:reservation][:invited_ids]
-                                                   ))
+    @reservation = current_user.reservations.build(reservation_params.merge(invited_ids: params[:reservation][:invited_ids]))
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
@@ -73,9 +73,7 @@ class ReservationsController < ApplicationController
 
   def overwrite
     @reservation = Reservation.new(session[:reservation_attributes])
-    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(
-                                                                  hall_id: @reservation.hall_id
-                                                                ), @reservation)
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
     @conflicting_reservations.each do |r|
       ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
       r.destroy

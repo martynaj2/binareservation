@@ -1,7 +1,7 @@
 class ReservationMailer < ApplicationMailer
   def quarter_notification_mail(user, reservation, invitor)
     @user = user
-    @reservation = reservation
+    @reservation = reservation\
     @invitor = invitor
     mail(to: user.email, subject: 'You will have meeting in 15 minutes')
   end
