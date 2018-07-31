@@ -39,18 +39,18 @@ RSpec.describe GroupsController, type: :controller do
   end
 
   describe '#new' do
-      before { get :new }
+    before { get :new }
 
-      describe 'successful response' do
-        it { expect(response).to be_successful }
-        it { expect(response).to render_template('new') }
-      end
-
-      context 'group' do
-        it { expect(assigns(:group)).to be_a(Group) }
-        it { expect(assigns(:group).persisted?).to eq(false) }
-      end
+    describe 'successful response' do
+      it { expect(response).to be_successful }
+      it { expect(response).to render_template('new') }
     end
+
+    context 'group' do
+      it { expect(assigns(:group)).to be_a(Group) }
+      it { expect(assigns(:group).persisted?).to eq(false) }
+    end
+  end
 
   describe '#edit' do
     let(:group) { create(:group) }
@@ -83,7 +83,7 @@ RSpec.describe GroupsController, type: :controller do
       end
 
       it 'should create new group' do
-        expect{ subject }.to change{ Group.count }.by(1)
+        expect { subject }.to change { Group.count }.by(1)
       end
     end
 
@@ -95,7 +95,7 @@ RSpec.describe GroupsController, type: :controller do
       end
 
       it 'should not create new group' do
-        expect{ subject }.not_to change{ Group.count }
+        expect { subject }.not_to change { Group.count }
       end
     end
   end
@@ -127,7 +127,7 @@ RSpec.describe GroupsController, type: :controller do
       subject { patch :update, params: invalid_attributes }
 
       it 'should render edit' do
-        expect(subject).to render_template()
+        expect(subject).to render_template
       end
 
       it 'should not change title' do
@@ -139,7 +139,7 @@ RSpec.describe GroupsController, type: :controller do
 
   describe '#destroy' do
     let(:group) { create(:group) }
-    subject {delete :destroy, params: { id: group.id }}
+    subject { delete :destroy, params: { id: group.id } }
 
     it 'should redirect to group index' do
       expect(subject).to redirect_to(user_groups_path)
@@ -152,8 +152,7 @@ RSpec.describe GroupsController, type: :controller do
 
     it 'should destroy group' do
       group_id = group.id
-      expect{ delete :destroy, params: { id: group_id } }.to change{ Group.count }.by(-1)
+      expect { delete :destroy, params: { id: group_id } }.to change { Group.count }.by(-1)
     end
   end
-
 end
