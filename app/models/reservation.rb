@@ -49,17 +49,19 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.mail_helper(reservation, option)
-    unless (reservation.invited_ids == nil)
+    unless reservation.invited_ids == nil
       @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+    end
       @reservation = reservation
       @invitor = User.find(reservation.user_id)
+      if @users_id.count >= 1
         @users_id.each do |m|
           @user = User.find(m)
           unless @user.vacation
             Reservation.mail_case_helper(@user, @reservation, @invitor, option)
           end
         end
-    end
+      end
   end
 
   private
@@ -67,11 +69,11 @@ class Reservation < ActiveRecord::Base
   def self.mail_case_helper(user, reservation, invitor, option)
     case option
     when 0
-      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_later
+      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
     when 1
-      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
+      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
     when 2
-      ReservationMailer.update_mail(user, reservation, invitor).deliver_later
+      ReservationMailer.update_mail(user, reservation, invitor).deliver_now
     when 3
       ReservationMailer.quarter_notification_mail(user, reservation, invitor).deliver
     end
