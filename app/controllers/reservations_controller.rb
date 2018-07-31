@@ -11,12 +11,11 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:id])
-    @users = User.where(id: @reservation.invited_ids.split(',').map(&:to_i))
+    @users = User.where(id: @reservation.invited_ids.split(',').map(&:to_i)) unless @reservation.invited_ids.nil?
   end
 
   def new
-    @reservation = Reservation.new(hall_id: params[:hall_id], start_date: params[:start_date],
-                                   end_date: params[:end_date])
+    @reservation = Reservation.new(hall_id: params[:hall_id], start_date: params[:start_date], end_date: params[:end_date])
   end
 
   def edit
@@ -30,10 +29,12 @@ class ReservationsController < ApplicationController
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     hash = { invited_ids: inv_ids }
-    hash.merge(reservation_params)
+    reservation_params.merge(hash)
     if @conflicting_reservations.empty?
-      if @reservation.update(hash)
+      if @reservation.update(reservation_params)
         Reservation.mail_helper(@reservation, 2)
+        Reservation.delete_notification(@reservation)
+        Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation Updated'
       else
         render :edit
@@ -44,17 +45,16 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = current_user.reservations.build(reservation_params.merge(
-                                                     invited_ids: params[:reservation][:invited_ids]
-                                                   ))
+    @reservation = current_user.reservations.build(reservation_params.merge(invited_ids: params[:reservation][:invited_ids]))
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
       if @reservation.save
         Reservation.mail_helper(@reservation, 0)
+        Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation was created.'
       else
-        redirect_to reservations_path, alert: 'Something went wrong'
+        redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
       end
     else
       premium_override(false)
@@ -65,6 +65,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     if @reservation.destroy
       Reservation.mail_helper(@reservation, 1)
+      Reservation.delete_notification(@reservation)
       redirect_to reservations_path, notice: 'Reservation was deleted'
     else
       redirect_to reservations_path, alert: 'Something went wrong'
@@ -73,17 +74,19 @@ class ReservationsController < ApplicationController
 
   def overwrite
     @reservation = Reservation.new(session[:reservation_attributes])
-    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(
-                                                                  hall_id: @reservation.hall_id
-                                                                ), @reservation)
-    @conflicting_reservations.each do |r|
-      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
-      r.destroy
-    end
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
     if @reservation.save
+      @conflicting_reservations.each do |r|
+        ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
+        r.destroy
+        Reservation.mail_helper(r, 1)
+        Reservation.delete_notification(r)
+      end
+      Reservation.mail_helper(@reservation, 0)
+      Reservation.notify_mail_helper(@reservation)
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
-      redirect_to reservations_path, alert: 'Something went wrong.'
+      redirect_to reservations_path, alert: "Something went wrong. #{@reservation.errors.full_messages}"
     end
     session.delete(:reservation_attributes)
   end
@@ -93,23 +96,25 @@ class ReservationsController < ApplicationController
     current_reservation = current_user.reservations.build(session[:reservation_params])
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: @reservation.id)
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
-    @conflicting_reservations.each do |r|
-      ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
-      r.destroy
-    end
     if @reservation.update(session[:reservation_params])
+      @conflicting_reservations.each do |r|
+        ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
+        r.destroy
+        Reservation.mail_helper(r, 1)
+        Reservation.delete_notification(r)
+      end
+      Reservation.mail_helper(@reservation, 2)
+      Reservation.notify_mail_helper(@reservation)
       redirect_to reservations_path, notice: 'Reservation was updated.'
     else
-      redirect_to reservations_path, alert: 'Something went wrong.'
+      redirect_to reservations_path, alert: "Something went wrong. #{@reservation.errors.full_messages}"
     end
     session.delete(:reservation_params)
   end
 
   def confirm
     @reservation = Reservation.new(session[:reservation_attributes])
-    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(
-                                                                  hall_id: @reservation.hall_id
-                                                                ), @reservation)
+    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
   end
 
   def edit_confirm
@@ -132,7 +137,7 @@ class ReservationsController < ApplicationController
       if edit
         session[:reservation_id] = @reservation.id
         session[:reservation_params] = reservation_params
-        redirect_to controller: 'reservations', action: 'confirm_update'
+        redirect_to controller: 'reservations', action: 'edit_confirm'
       else
         session[:reservation_attributes] = @reservation.attributes
         redirect_to controller: 'reservations', action: 'confirm'
