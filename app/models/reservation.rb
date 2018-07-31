@@ -47,31 +47,61 @@ class Reservation < ActiveRecord::Base
     @conflicting_reservations
   end
 
-  private
-
   def self.mail_helper(reservation, option)
-    @users_id = reservation.invited_ids.split(',').map(&:to_i)
-    @reservation = reservation
-    @invitor = User.find(reservation.user_id)
-    if @users_id.is_a?(Array)
-      @users_id.each do |m|
-        @user = User.find(m)
-        Reservation.mail_case_helper(@user, @reservation, @invitor, option) unless @user.vacation
+    unless reservation.invited_ids.nil?
+      @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+      @reservation = reservation
+      @invitor = User.find(reservation.user_id)
+      if @users_id.count >= 1
+        @users_id.each do |m|
+          @user = User.find(m)
+          unless @user.vacation
+            Reservation.mail_case_helper(@user, @reservation, @invitor, option)
+          end
+        end
       end
-    elsif @users_id.is_a?(Integer)
-      @user = User.find(@users_id)
-      Reservation.mail_case_helper(@user, @reservation, @invitor, option) unless @user.vacation
+    end
+    if option == 3 || option == 4
+      Reservation.mail_case_helper(@invitor, @reservation, @invitor, option)
     end
   end
+
+  def self.delete_notification(reservation)
+    queue = Sidekiq::ScheduledSet.new
+    queue.each do |job|
+      if reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2,2].to_i
+        job.delete
+      end
+    end
+  end
+
+  def self.notify_mail_helper(reservation)
+    if reservation.start_date > Time.zone.now + 15.minutes
+      NotifyQuarter.set(
+        wait_until: reservation.start_date - 15.minutes
+      ).perform_later(reservation)
+    end
+    if reservation.start_date > Time.zone.now + 24.hours
+      NotifyTwentyFour.set(
+        wait_until: reservation.start_date - 24.hours
+      ).perform_later(reservation)
+    end
+  end
+
+  private
 
   def self.mail_case_helper(user, reservation, invitor, option)
     case option
     when 0
-      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_later
+      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
     when 1
-      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
+      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
     when 2
-      ReservationMailer.update_mail(user, reservation, invitor).deliver_later
+      ReservationMailer.update_mail(user, reservation, invitor).deliver_now
+    when 3
+      ReservationMailer.quarter_notification_mail(user, reservation, invitor).deliver
+    when 4
+      ReservationMailer.twenty_four_notification_mail(user, reservation, invitor).deliver
     end
   end
 end
