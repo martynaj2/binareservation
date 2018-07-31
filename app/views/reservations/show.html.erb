@@ -28,7 +28,8 @@
 
     Invited:
     <p class="invited-value"><% @users.each do |user|%>
-      <%= link_to user.fullname, user_path(id: user.id) %>
+      <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="blablabla">
+        <%= user.fullname %> </button>
       <% end %>
     </p>
   </div>
