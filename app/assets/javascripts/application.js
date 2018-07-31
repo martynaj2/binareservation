@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require moment
-//= require tempusdominus-bootstrap-4.js
 //= require fullcalendar
 //= require rails-ujs
 //= require activestorage

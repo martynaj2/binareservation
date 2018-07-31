@@ -18,6 +18,7 @@ initialize_calendar = function() {
       events: '/home.json',
       defaultView: (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "agendaWeek"),
 
+
       viewRender: function (view, element) {
         localStorage.setItem("fcDefaultView", view.name);
       },
@@ -39,8 +40,20 @@ initialize_calendar = function() {
 
       eventClick: function(event) {
         if (event.id) {
+          alert(event.description);
+
           window.location = 'reservations/' + event.id;
         }
+      },
+
+
+      eventRender: function(event, element) {
+          if(event.description == "Średni") {
+            element.css('background-color', 'pink')
+          }
+          else if(event.description == "Super duży") {
+            element.css('background-color', 'yellow');
+          }
       },
 
       select: function( start, end, jsEvent, view) {

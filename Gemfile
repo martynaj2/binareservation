@@ -39,6 +39,7 @@ gem 'filterrific'
 gem 'momentjs-rails'
 # push notifications
 # Reduces boot times through caching; required in config/boot.rb
+gem 'bootstrap'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap4-datetime-picker-rails'
 gem 'carrierwave', '~> 1.0'
