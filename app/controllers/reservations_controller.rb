@@ -29,9 +29,10 @@ class ReservationsController < ApplicationController
     reservations = Reservation.where(hall_id: @reservation.hall_id).where.not(id: params[:id])
     @conflicting_reservations = Reservation.conflict_validation(reservations, current_reservation)
     hash = { invited_ids: inv_ids }
-    hash.merge(reservation_params)
+    # hash.merge(reservation_params)
+    reservation_params.merge(hash)
     if @conflicting_reservations.empty?
-      if @reservation.update(hash)
+      if @reservation.update(reservation_params)
         Reservation.mail_helper(@reservation, 2)
         Reservation.delete_notification(@reservation)
         Reservation.notify_mail_helper(@reservation)
@@ -79,6 +80,7 @@ class ReservationsController < ApplicationController
       @conflicting_reservations.each do |r|
         ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
         r.destroy
+        Reservation.mail_helper(r, 1)
         Reservation.delete_notification(r)
       end
       Reservation.mail_helper(@reservation, 0)
@@ -99,6 +101,7 @@ class ReservationsController < ApplicationController
       @conflicting_reservations.each do |r|
         ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
         r.destroy
+        Reservation.mail_helper(r, 1)
         Reservation.delete_notification(r)
       end
       Reservation.mail_helper(@reservation, 2)
