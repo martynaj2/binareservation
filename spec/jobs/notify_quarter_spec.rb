@@ -6,8 +6,6 @@
 #
 # 	let!(:reservation) { create(:reservation) }
 #
-#
-#
 # 	describe 'old reservation' do
 # 		before {NotifyQuarter.perform_now }
 # 		reservation.update_attribute(:start_date, Time.now - 15.minutes)
