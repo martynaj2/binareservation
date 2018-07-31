@@ -54,11 +54,7 @@ class ReservationsController < ApplicationController
         Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation was created.'
       else
-<<<<<<< HEAD
         redirect_to reservations_path, alert: "Something went wrong #{ @reservation.errors.full_messages }"
-=======
-        redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
->>>>>>> f9704f9fb7f0f94105a56a91f8850ec9ce67932b
       end
     else
       premium_override(false)
