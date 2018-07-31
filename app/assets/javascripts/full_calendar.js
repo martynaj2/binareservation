@@ -34,7 +34,12 @@ initialize_calendar = function() {
         else
         {
           window.location.href='/reservations/new?start_date=' + date.format() + '&end_date=' + date.format();
-          $(this).css('background-color', 'purple');
+        }
+      },
+
+      eventClick: function(event) {
+        if (event.id) {
+          window.location = 'reservations/' + event.id;
         }
       },
 

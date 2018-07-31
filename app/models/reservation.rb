@@ -8,16 +8,15 @@ class DateValidator < ActiveModel::Validator
 end
 
 class Reservation < ActiveRecord::Base
-
   validates :title, :end_date, :start_date, :title, presence: true
   validates :title, length: { minimum: 2, maximum: 30 }
   validates_with DateValidator, if: proc { |f| f.start_date && f.end_date }
 
-  scope :ended, ->{where('end_date < ?', Time.now)}
-  scope :not_ended, ->{where('start_date > ?', Time.now)}
-  scope :during, ->{where('start_date < ?', Time.now)}
-  scope :quarter, ->{where('start_date < ?', Time.now + 15.minutes)}
-  scope :twenty_four, ->{where('start_date > ?', Time.now - 24.hours)}
+  scope :ended, -> { where('end_date < ?', Time.zone.now) }
+  scope :not_ended, -> { where('start_date > ?', Time.zone.now) }
+  scope :during, -> { where('start_date < ?', Time.zone.now) }
+  scope :quarter, -> { where('start_date < ?', Time.zone.now + 15.minutes) }
+  scope :twenty_four, -> { where('start_date > ?', Time.zone.now - 24.hours) }
 
   belongs_to :user
   belongs_to :hall
@@ -42,7 +41,7 @@ class Reservation < ActiveRecord::Base
       reservations.each do |r|
         unless (reservation.start_date >= r.end_date) || (reservation.end_date <= r.start_date)
           @conflicting_reservations.push(r)
-       end
+        end
       end
     end
     @conflicting_reservations
@@ -62,6 +61,22 @@ class Reservation < ActiveRecord::Base
           end
         end
       end
+      if option == 3 || option == 4
+        Reservation.mail_case_helper(@invitor, @reservation, @invitor, option)
+      end
+  end
+
+  def self.notify_mail_helper(reservation)
+    if reservation.start_date > Time.zone.now + 15.minutes
+      NotifyQuarter.set(
+        wait_until: reservation.start_date - 15.minutes
+      ).perform_later(reservation)
+    end
+    if reservation.start_date > Time.zone.now + 24.hours
+      NotifyTwentyFour.set(
+        wait_until: reservation.start_date - 24.hours
+      ).perform_later(reservation)
+    end
   end
 
   private
@@ -76,7 +91,8 @@ class Reservation < ActiveRecord::Base
       ReservationMailer.update_mail(user, reservation, invitor).deliver_now
     when 3
       ReservationMailer.quarter_notification_mail(user, reservation, invitor).deliver
+    when 4
+      ReservationMailer.twenty_four_notification_mail(user, reservation, invitor).deliver
     end
   end
-
 end

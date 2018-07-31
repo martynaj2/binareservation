@@ -1,0 +1,95 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+$binar-violet: #3b0c64;
+$binar-red: #ef3f4a;
+
+section {
+    padding: 10px 0;
+}
+
+section .section-title {
+  text-align: center;
+  color: $binar-violet;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+#footer {
+    margin-top: 60px;
+    border-top: 1px solid $binar-red;
+}
+
+#footer h5{
+	padding-left: 10px;
+  border-left: 3px solid #eeeeee;
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+  color: $binar-violet;
+}
+
+#footer a {
+  color: $binar-violet;
+  text-decoration: none !important;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+#footer ul.social li{
+	padding: 3px 0;
+}
+
+#footer p {
+  color: $binar-violet;
+}
+
+#footer .links {
+  margin-top: 0.5rem;
+}
+
+#footer ul.social li a i {
+  margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+
+#footer ul.social li a,
+#footer ul.quick-links li a{
+  color: $binar-violet;
+}
+
+#footer ul.social li a:hover{
+    color: $binar-violet;
+}
+
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}

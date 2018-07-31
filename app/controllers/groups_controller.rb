@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
     hash = { invited_ids: inv_ids }
     hash.merge(group_params)
     if @group.update(hash)
-      redirect_to groups_path, notice: 'Group Updated'
+      redirect_to user_groups_path, notice: 'Group Updated'
     else
       render :edit
     end
@@ -39,18 +39,18 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     if @group.save
       @group.update(invited_ids: inv_ids)
-      redirect_to groups_path, notice: 'Group created.'
+      redirect_to user_groups_path, notice: 'Group created.'
     else
-      redirect_to groups_path, alert: 'Something went wrong.'
+      redirect_to user_groups_path, alert: 'Something went wrong.'
     end
   end
 
   def destroy
     @group = Group.find(params[:id])
     if @group.destroy
-      redirect_to groups_path, notice: 'Group deleted'
+      redirect_to user_groups_path, notice: 'Group deleted'
     else
-      redirect_to groups_path, alert: 'Something went wrong'
+      redirect_to user_groups_path, alert: 'Something went wrong'
     end
   end
 

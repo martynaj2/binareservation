@@ -33,6 +33,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
       if @reservation.update(hash)
         Reservation.mail_helper(@reservation, 2)
+        Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation Updated'
       else
         render :edit
@@ -49,7 +50,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
       if @reservation.save
         Reservation.mail_helper(@reservation, 0)
-        NotifyQuarter.perform_in(1.minutes, @reservation)
+        Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation was created.'
       else
         redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
@@ -78,6 +79,7 @@ class ReservationsController < ApplicationController
         r.destroy
       end
       Reservation.mail_helper(@reservation, 0)
+      Reservation.notify_mail_helper(@reservation)
       redirect_to reservations_path, notice: 'Reservation was created.'
     else
       redirect_to reservations_path, alert: 'Something went wrong.'
@@ -96,6 +98,7 @@ class ReservationsController < ApplicationController
         r.destroy
       end
       Reservation.mail_helper(@reservation, 2)
+      Reservation.notify_mail_helper(@reservation)
       redirect_to reservations_path, notice: 'Reservation was updated.'
     else
       redirect_to reservations_path, alert: 'Something went wrong.'

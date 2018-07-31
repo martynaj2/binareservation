@@ -1,5 +1,4 @@
 class Hall < ActiveRecord::Base
-
   validates :title, :capacity, presence: true
   validates :title, length: { minimum: 1, maximum: 10 }
 
@@ -9,5 +8,4 @@ class Hall < ActiveRecord::Base
   scope :extra_large, -> { where('capacity > 20') }
 
   has_many :reservations, dependent: :destroy
-
 end
