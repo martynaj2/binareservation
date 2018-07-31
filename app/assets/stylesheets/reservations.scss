@@ -1,6 +1,9 @@
 // Place all the styles related to the Reservations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "tempusdominus-bootstrap-4.css";
+
 .reservations-confirm {
   width: 40%;
   margin: 0 auto;
@@ -29,4 +32,4 @@
   .reservations-index {
     margin-top: 5.0rem;
   }
-}  
+}
