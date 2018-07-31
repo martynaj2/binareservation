@@ -15,6 +15,7 @@ initialize_calendar = function() {
       editable: false,
       eventLimit: true,
       weekends: false,
+      eventColor: 'lightblue',
       events: '/home.json',
       defaultView: (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "agendaWeek"),
 
@@ -39,7 +40,7 @@ initialize_calendar = function() {
 
       eventClick: function(event) {
         if (event.id) {
-          window.location = 'reservations/' + event.id;
+          window.location = '/reservations/' + event.id;
         }
       },
 
