@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   has_many :reservations, dependent: :destroy
-  has_many :group_users
-  has_many :group, through: :group_users
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
 
   scope :not_verified, -> { where(verified: false) }
 
