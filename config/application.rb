@@ -1,5 +1,5 @@
 require_relative 'boot'
-
+require 'sidekiq/api'
 require 'rails/all'
 require 'carrierwave'
 # Require the gems listed in Gemfile, including any gems

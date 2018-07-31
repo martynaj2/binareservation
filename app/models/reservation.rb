@@ -48,9 +48,8 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.mail_helper(reservation, option)
-    unless reservation.invited_ids == nil
+    unless reservation.invited_ids.nil?
       @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
-    end
       @reservation = reservation
       @invitor = User.find(reservation.user_id)
       if @users_id.count >= 1
@@ -61,9 +60,10 @@ class Reservation < ActiveRecord::Base
           end
         end
       end
-      if option == 3 || option == 4
-        Reservation.mail_case_helper(@invitor, @reservation, @invitor, option)
-      end
+    end
+    if option == 3 || option == 4
+      Reservation.mail_case_helper(@invitor, @reservation, @invitor, option)
+    end
   end
 
   def self.delete_notification(reservation)

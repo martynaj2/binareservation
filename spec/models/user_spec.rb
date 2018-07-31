@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
 
   describe 'associations' do
     it { should have_many(:reservations) }
-    it { should have_many(:group).through(:group_users) }
+    it { should have_many(:groups).through(:group_users) }
     let(:user) { create(:user) }
     it { expect(user).to have_many(:reservations).dependent(:destroy) }
   end
