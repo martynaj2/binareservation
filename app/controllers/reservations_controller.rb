@@ -64,6 +64,14 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     if @reservation.destroy
       Reservation.mail_helper(@reservation, 1)
+
+      queue = Sidekiq::ScheduledSet.new
+      queue.each do |job|
+        if @reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2,2].to_i
+          job.delete
+        end
+      end
+
       redirect_to reservations_path, notice: 'Reservation was deleted'
     else
       redirect_to reservations_path, alert: 'Something went wrong'
