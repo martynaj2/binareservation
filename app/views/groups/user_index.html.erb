@@ -7,4 +7,8 @@
     </div>
 </div>
 
+<div class="text-center">
+  <%= will_paginate @articles, :previous_label => '<i class="fa fa-arrow-circle-left"></i>', :next_label => '<i class="fa fa-arrow-circle-right"></i>'%>
+</div>
+
 <div class="text-center"><%= link_to 'Add new group', new_group_path, role: 'button', class:"btn btn-outline-success btn-customize" %></div>
