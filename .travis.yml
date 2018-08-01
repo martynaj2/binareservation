@@ -1,5 +1,7 @@
 language:   ruby
 cache:      bundler
+services:
+  - redis
 script:
   - "bundle exec rspec spec"
   - "bundle exec bundle-audit check --update"
