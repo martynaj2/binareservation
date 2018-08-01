@@ -16,9 +16,33 @@
   margin-bottom: 20px;
 }
 
+a.reservation-a:active,
+a.reservation-a:link,
+a.reservation-a:visited {
+  font-size: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+.borderless td, .borderless th {
+  border: none;
+}
+
+.table.borderless td {
+  border: none;
+}
+
+a.reservation-a:hover {
+  font-weight: bold;
+}
+
 .save-reservation-btn {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+tr:hover {
+  background-color: #3803642b;
 }
 
 .invited-picker li{
