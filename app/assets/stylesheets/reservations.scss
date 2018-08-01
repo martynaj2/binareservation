@@ -11,9 +11,13 @@
   margin-top: 80px;
 }
 
-.reservations-index-li {
-  margin-top: 20px;
+.reservations-index {
+  margin-top: 30px;
   margin-bottom: 20px;
+}
+
+.form-control[readonly].flatpickr-input {
+  background-color: white;
 }
 
 a.reservation-a:active,
@@ -41,7 +45,7 @@ a.reservation-a:hover {
   margin-bottom: 10px;
 }
 
-tr:hover {
+tr.row-for-tables:hover {
   background-color: #3803642b;
 }
 
