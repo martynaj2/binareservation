@@ -7,13 +7,13 @@
     </div>
 
       <div class='form-group col-md-3 text-center col-centered'>
-       <%= f.label :start_date, 'Start Date and Time', class: 'control-label' %><br>
-       <%= f.text_field :start_date, class: 'flatpickr-input' %><br>
+       <%= f.label :start_date, 'Start Date and Time', class: 'control-label' %>
+       <%= f.text_field :start_date, class: 'flatpickr-input', validate: true %>
      </div>
 
      <div class='form-group col-md-3 text-center col-centered'>
-      <%= f.label :end_date, 'Start Date and Time', class: 'control-label' %><br>
-      <%= f.text_field :end_date, class: 'flatpickr-input' %><br>
+      <%= f.label :end_date, 'End Date and Time', class: 'control-label' %>
+      <%= f.text_field :end_date, class: 'flatpickr-input' %>
     </div>
 
     <script type="text/javascript">
@@ -55,6 +55,7 @@
 
   <%= f.hidden_field :invited_ids, value: @reservation.invited_ids%>
   <%= f.submit 'Save', role: 'button', class:"btn btn-outline-success btn-customize save-reservation-btn" %>
+  <%= link_to 'Go back', :back, role: 'button', class: 'btn btn-outline-success btn-customize' %>
 <%  end %>
 
 <script>

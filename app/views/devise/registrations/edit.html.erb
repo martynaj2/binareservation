@@ -1,4 +1,4 @@
-<h2 class="text-center">Edit <%= resource_name.to_s.humanize %></h2>
+<h2 class="text-center">Change password</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f| %>
   <%= devise_error_messages! %>
@@ -28,7 +28,7 @@
 
     <div class="pswd-btns">
       <%= f.submit 'Update', role: 'button', class:"btn btn-outline-success btn-customize"%>
-      <%= link_to "Back", :back, role: 'button', class:"btn btn-outline-success btn-customize" %>
+      <%= link_to "Go back", :back, role: 'button', class:"btn btn-outline-success btn-customize" %>
     </div>
   </div>
 <% end %>

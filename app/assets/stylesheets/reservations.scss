@@ -16,6 +16,10 @@
   margin-bottom: 20px;
 }
 
+.form-control[readonly].flatpickr-input {
+  background-color: white;
+}
+
 a.reservation-a:active,
 a.reservation-a:link,
 a.reservation-a:visited {
