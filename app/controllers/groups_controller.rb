@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   end
 
   def user_index
-    @groups = Group.where(inviter_ids: current_user.id)
+    @groups = Group.where(inviter_ids: current_user.id).paginate(page: params[:page], per_page: 5)
   end
 
   def show

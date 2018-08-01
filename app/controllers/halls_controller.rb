@@ -6,7 +6,7 @@ class HallsController < ApplicationController
   end
 
   def index
-    @halls = Hall.all
+    @halls = Hall.all.paginate(page: params[:page], per_page: 5)
     @halls = @halls.small if params[:small].present?
     @halls = @halls.large if params[:large].present?
     @halls = @halls.medium if params[:medium].present?
