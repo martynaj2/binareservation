@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = current_user.reservations.build(reservation_params.merge(invited_ids: params[:reservation][:invited_ids]))
     reservations = Reservation.where(hall_id: @reservation.hall_id)
-# byebug
+    # byebug
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
     if @conflicting_reservations.empty?
       if @reservation.save
@@ -55,7 +55,7 @@ class ReservationsController < ApplicationController
         Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation was created.'
       else
-        redirect_to reservations_path, alert: "Something went wrong #{ @reservation.errors.full_messages }"
+        redirect_to reservations_path, alert: "Something went wrong #{@reservation.errors.full_messages}"
       end
     else
       premium_override(false)

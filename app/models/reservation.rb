@@ -1,6 +1,7 @@
 class DateValidator < ActiveModel::Validator
   def validate(reservation)
     if reservation.start_date < Time.zone.now
+
       reservation.errors[:base] << 'start_date > Time.zone.now'
     elsif reservation.start_date >= reservation.end_date
     end
