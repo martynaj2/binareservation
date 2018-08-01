@@ -17,4 +17,5 @@
 //= require activestorage
 //= require turbolinks
 //= require rails.validations
+//= require flatpickr
 //= require_tree .

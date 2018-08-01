@@ -1,5 +1,4 @@
 $('#datetimepicker1').datetimepicker({
-  format: 'MMMM D, YYYY h:mm A',
   stepping: 15,
   minDate: Date(),
   maxDate: new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)),

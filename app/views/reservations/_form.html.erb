@@ -11,27 +11,23 @@
 
       <div class='form-group col-md-3 text-center col-centered'>
        <%= f.label :start_date, 'Start Date and Time', class: 'control-label' %><br>
-         <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-           <%= f.text_field(:start_date,
-             value: f.object.start_date ? f.object.start_date.strftime('%B %d, %Y %I:%M %p') : nil,
-             class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"}) %>
-           <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-           </div>
-         </div>
+       <%= f.text_field :start_date, class: 'flatpickr-input' %><br>
      </div>
 
      <div class='form-group col-md-3 text-center col-centered'>
-      <%= f.label :end_date, 'End Date and Time', class: 'control-label' %><br>
-        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-          <%= f.text_field(:end_date,
-            value: f.object.end_date ? f.object.end_date.strftime('%B %d, %Y %I:%M %p') : nil,
-            class: "form-control datetimepicker-input", data: {target:"#datetimepicker2"}) %>
-          <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-          </div>
-        </div>
+      <%= f.label :end_date, 'Start Date and Time', class: 'control-label' %><br>
+      <%= f.text_field :end_date, class: 'flatpickr-input' %><br>
     </div>
+
+    <script type="text/javascript">
+     $(document).ready(function(){
+       $('.flatpickr-input').flatpickr({
+         enableTime: true,
+         dateFormat: "Y-m-d H:i",
+       });
+
+     });
+   </script>
 
     <div class="form-group col-md-3 col-centered">
       <%= f.label :hall_id %>
