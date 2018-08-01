@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'fullcalendar-rails'
 gem 'webpush'
+gem 'will_paginate'
 
 gem 'client_side_validations'
 gem 'filterrific'

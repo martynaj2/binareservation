@@ -1,6 +1,6 @@
 <h3 class="text-center all-users-admin"> All users </h3>
 <div class="users-index col-md-12 text-center">
-	<% @users.each do |user| %>
+	<% @users.where(admin: false).each do |user| %>
 		<%= render 'users', user: user %>
 	<%end%>
 </div>

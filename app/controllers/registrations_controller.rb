@@ -3,6 +3,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   after_action :registration_mail, only: [:create]
 
+  def create
+    super
+  end
+
   def registration_mail
     UserMailer.registration_mail(current_user).deliver_later
   end

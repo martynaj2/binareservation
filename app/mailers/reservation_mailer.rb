@@ -21,13 +21,12 @@ class ReservationMailer < ApplicationMailer
   end
 
   def invitation_mail(user, reservation, invitor)
-    unless user == invitor
-      @user = user
-      @reservation = reservation
-      @invitor = invitor
-      mail(to: @user.email,
-           subject: "Hello #{@user.fullname}. You were invited to #{@reservation.title},	by #{@invitor.fullname}")
-    end
+    return if user == invitor
+    @user = user
+    @reservation = reservation
+    @invitor = invitor
+    mail(to: @user.email,
+         subject: "Hello #{@user.fullname}. You were invited to #{@reservation.title},	by #{@invitor.fullname}")
   end
 
   def cancelation_mail(user, reservation, invitor)

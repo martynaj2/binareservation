@@ -15,11 +15,10 @@ RSpec.describe ReservationsController, type: :controller do
 
     context 'reservation' do
       let!(:reservation1) { create(:reservation) }
-      let!(:reservation2) { create(:reservation) }
 
       it 'should return all reservations' do
         subject
-        expect(assigns(:reservations)).to match_array([reservation1, reservation2])
+        expect(assigns(:reservations)).to match_array([reservation1])
       end
     end
   end
