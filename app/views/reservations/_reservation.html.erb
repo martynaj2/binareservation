@@ -1,9 +1,17 @@
 <div class="row" data-reservation-id="<%= reservation.id %>">
-  <div class="col-md-4 col-centered"><%= link_to reservation.title, reservation_path(id: reservation.id) %></div>
-  <div class="col-md-5 col-centered">
-    <% if current_user.id == reservation.user_id %>
-      <%= link_to 'Edit', edit_reservation_path(id: reservation.id),role: 'button', class:'btn btn-outline-success btn-customize' %>
-      <%= link_to 'Delete', reservation_path(id: reservation.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center btn-customize' %>
-    <% end %>
-  </div>
+  <table class="table text-center borderless">
+    <tbody>
+      <tr>
+        <td style="width: 50%"><%= link_to reservation.title, reservation_path(id: reservation.id), class: 'reservation-a' %></td>
+        <td style="width: 40%">
+          <% if current_user.id == reservation.user_id %>
+            <%= link_to 'Edit', edit_reservation_path(id: reservation.id),role: 'button', class:'btn btn-outline-success btn-customize' %>
+            <%= link_to 'Delete', reservation_path(id: reservation.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center btn-customize' %>
+          <% else %>
+            <button type="button" class="btn btn-outline-dark">You can't edit other's reservations</button>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
