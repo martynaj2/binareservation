@@ -22,7 +22,12 @@
 
   <%= link_to 'See all rooms', halls_path, role: 'button', class:'btn btn-danger text-center btn-customize see-all-btn' %>
 
-  <div class="calendar"></div>
+  <% if current_user.vacation == true %>
+    <h3> What are you doing here? Go get some vacay! </h3>
+    <%else%>
+    <div class="calendar"></div>
+  <%end%>
+
   <%= render 'layouts/partials/footer' %>
     <% else %>
       <h4>You're not verified</h4>

@@ -4,8 +4,21 @@
 $binar-red: #ef3f4a;
 $binar-violet: #3b0c64;
 
+
+.edit-user-view {
+  padding: 40px;
+}
+
 .user-buttons {
   padding-top: 10px;
+}
+
+img.rounded-circle {
+  box-shadow: 0px 0px 20px 1px #380364;
+}
+
+img.show-avatar {
+  margin-left: 10px;
 }
 
 .not-verified {
@@ -19,6 +32,7 @@ $binar-violet: #3b0c64;
   margin-top: 30px;
   margin-bottom: 20px;
   border-bottom: 2px solid $binar-red;
+  padding-bottom: 1.0rem;
 }
 
 .profile-buttons {
@@ -120,4 +134,10 @@ $binar-violet: #3b0c64;
   .not-verified {
     margin-top: 5.0rem;
   }
+}
+
+.vacation {
+  font-size: 25px;
+  color: #ef3d48d9;
+  font-weight: bold;
 }
