@@ -16,7 +16,7 @@ initialize_calendar = function() {
       eventLimit: true,
       weekends: false,
       eventColor: 'lightblue',
-      events: '/home.json',
+      events: window.location + '.json',
       defaultView: (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "agendaWeek"),
 
 
