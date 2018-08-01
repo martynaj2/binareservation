@@ -15,7 +15,8 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @reservation = Reservation.new(hall_id: params[:hall_id], start_date: params[:start_date], end_date: params[:end_date])
+    @reservation = Reservation.new(hall_id: params[:hall_id], start_date: params[:start_date],
+                                   end_date: params[:end_date])
   end
 
   def edit
@@ -45,7 +46,9 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = current_user.reservations.build(reservation_params.merge(invited_ids: params[:reservation][:invited_ids]))
+    @reservation = current_user.reservations.build(
+      reservation_params.merge(invited_ids: params[:reservation][:invited_ids])
+    )
     reservations = Reservation.where(hall_id: @reservation.hall_id)
     # byebug
     @conflicting_reservations = Reservation.conflict_validation(reservations, @reservation)
@@ -75,7 +78,9 @@ class ReservationsController < ApplicationController
 
   def overwrite
     @reservation = Reservation.new(session[:reservation_attributes])
-    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+    @conflicting_reservations = Reservation.conflict_validation(
+      Reservation.where(hall_id: @reservation.hall_id), @reservation
+    )
     if @reservation.save
       @conflicting_reservations.each do |r|
         ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
@@ -115,7 +120,9 @@ class ReservationsController < ApplicationController
 
   def confirm
     @reservation = Reservation.new(session[:reservation_attributes])
-    @conflicting_reservations = Reservation.conflict_validation(Reservation.where(hall_id: @reservation.hall_id), @reservation)
+    @conflicting_reservations = Reservation.conflict_validation(
+      Reservation.where(hall_id: @reservation.hall_id), @reservation
+    )
   end
 
   def edit_confirm

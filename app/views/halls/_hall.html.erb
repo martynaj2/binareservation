@@ -1,9 +1,17 @@
 <div class="row" data-hall-id="<%= hall.id %>">
-  <div class="col-md-4 col-centered"><%= link_to hall.title, hall_path(id: hall.id) %></div>
-  <div class="col-md-6 col-centered">
-    <% if current_user.admin? %>
-      <%= link_to 'Edit', edit_hall_path(id: hall.id),role: 'button', class:'btn btn-outline-success btn-customize'%>
-      <%= link_to 'Delete', hall_path(id: hall.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center btn-customize' %>
-    <% end %>
-  </div>
+  <table class="table text-center borderless">
+    <tbody>
+      <tr>
+        <td style="width: 50%"><%= link_to hall.title, hall_path(id: hall.id), class: 'reservation-a' %></td>
+        <td style="width: 40%">
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_hall_path(id: hall.id),role: 'button', class:'btn btn-outline-success btn-customize'%>
+            <%= link_to 'Delete', hall_path(id: hall.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center btn-customize' %>
+          <% else %>
+            <button type="button" class="btn btn-outline-dark">You can't edit rooms</button>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -50,7 +50,7 @@ class Reservation < ActiveRecord::Base
 
   def self.mail_helper(reservation, option)
     unless reservation.invited_ids.nil?
-      @users_id = reservation.invited_ids.split(',').map{ |elem| elem.to_i }
+      @users_id = reservation.invited_ids.split(',').map(&:to_i)
       @reservation = reservation
       @invitor = User.find(reservation.user_id)
       if @users_id.count >= 1
@@ -70,7 +70,7 @@ class Reservation < ActiveRecord::Base
   def self.delete_notification(reservation)
     queue = Sidekiq::ScheduledSet.new
     queue.each do |job|
-      if reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2,2].to_i
+      if reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2, 2].to_i
         job.delete
       end
     end
