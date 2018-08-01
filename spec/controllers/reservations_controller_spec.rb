@@ -15,11 +15,10 @@ RSpec.describe ReservationsController, type: :controller do
 
     context 'reservation' do
       let!(:reservation1) { create(:reservation) }
-      let!(:reservation2) { create(:reservation, start_date: reservation1.start_date + 24.hours, end_date: reservation1.end_date + 24.hours) }
 
       it 'should return all reservations' do
         subject
-        expect(assigns(:reservations)).to match_array([reservation1, reservation2])
+        expect(assigns(:reservations)).to match_array([reservation1])
       end
     end
   end
