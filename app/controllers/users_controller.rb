@@ -25,9 +25,9 @@ class UsersController < ApplicationController
   def vacation
     @user = User.find(params[:id])
     if @user.vacation == true
-      @user.update_attribute(:vacation, false)
+      @user.update(vacation: false)
     else
-      @user.update_attribute(:vacation, true)
+      @user.update(vacation: true)
     end
     redirect_to profile_path
   end
