@@ -12,6 +12,13 @@
         Capacity of the room
       </small>
     </div>
+
+    <div class="form-group">
+      <%= f.label :hall_color, class: "control-label" %>
+      <%= f.text_field :hall_color, class: "form-control col-md-2 text-center col-centered", placeholder: "Enter color"%>
+    </div>
+
     <%= f.submit 'save', role: 'button', class:"btn btn-outline-success btn-customize" %>
+    <%= link_to 'Go back', :back, role: 'button', class: 'btn btn-outline-success btn-customize' %>
   </div>
 <% end %>

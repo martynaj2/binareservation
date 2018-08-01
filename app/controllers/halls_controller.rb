@@ -52,6 +52,6 @@ class HallsController < ApplicationController
   private
 
   def hall_params
-    params.require(:hall).permit(:title, :capacity)
+    params.require(:hall).permit(:title, :capacity, :hall_color)
   end
 end
