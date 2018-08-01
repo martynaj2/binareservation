@@ -42,10 +42,14 @@
       <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names.." class="col-md-3">
       <ul id='list'>
       <% User.where.not(id: current_user.id).each do |user| %>
-            <li class="col-md-3 col-centered" user_id=<%= user.id %>><a><%= user.fullname %></a></li>
+        <li class="col-md-3 col-centered user-group-list-elem" user_id=<%= user.id %>><a><%= user.fullname %></a></li>
       <% end %>
-    </div>
-</ul>
+      <% Group.all.each do |group| %>
+        <li class="col-md-3 col-centered user-group-list-elem" group_id=<%= group.id %>><a><%= group.title %></a></li>
+      <% end %>
+        <div id='empty-message'></div>
+      </ul>
+</div>
 
   <%= f.hidden_field :invited_ids, value: @reservation.invited_ids%>
   <%= f.submit 'Save', role: 'button', class:"btn btn-outline-success btn-customize save-reservation-btn" %>
