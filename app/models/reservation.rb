@@ -55,23 +55,17 @@ class Reservation < ActiveRecord::Base
       if @users_id.count >= 1
         @users_id.each do |m|
           @user = User.find(m)
-          unless @user.vacation
-            Reservation.mail_case_helper(@user, @reservation, @invitor, option)
-          end
+          Reservation.mail_case_helper(@user, @reservation, @invitor, option) unless @user.vacation
         end
       end
     end
-    if option == 3 || option == 4
-      Reservation.mail_case_helper(@invitor, @reservation, @invitor, option)
-    end
+    Reservation.mail_case_helper(@invitor, @reservation, @invitor, option) if [3, 4].include?(option)
   end
 
   def self.delete_notification(reservation)
     queue = Sidekiq::ScheduledSet.new
     queue.each do |job|
-      if reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2, 2].to_i
-        job.delete
-      end
+      job.delete if reservation.id == job.args[0]['arguments'][0]['_aj_globalid'][-2, 2].to_i
     end
   end
 
@@ -81,14 +75,11 @@ class Reservation < ActiveRecord::Base
         wait_until: reservation.start_date - 15.minutes
       ).perform_later(reservation)
     end
-    if reservation.start_date > Time.zone.now + 24.hours
-      NotifyTwentyFour.set(
-        wait_until: reservation.start_date - 24.hours
-      ).perform_later(reservation)
-    end
+    return if reservation.start_date < Time.zone.now + 24.hours
+    NotifyTwentyFour.set(
+      wait_until: reservation.start_date - 24.hours
+    ).perform_later(reservation)
   end
-
-  private
 
   def self.mail_case_helper(user, reservation, invitor, option)
     case option

@@ -30,7 +30,7 @@ class AdminsController < ApplicationController
 
   def verify
     @user = User.find(params[:id])
-    if @user.update_attribute(:verified, true)
+    if @user.update(verified: true)
       redirect_to administrator_path, notice: 'User Verified'
     else
       render :index
@@ -38,7 +38,7 @@ class AdminsController < ApplicationController
   end
 
   def verify_all
-    @users_new = User.not_verified.update_all(verified: true)
+    @users_new = User.not_verified.update(verified: true)
     redirect_to administrator_path, notice: 'Users Verified'
   end
 
