@@ -54,3 +54,19 @@ tr:hover {
     margin-top: 5.0rem;
   }
 }
+
+.pagination.pagination {
+  font-size: 28px;
+  width: 50%;
+  margin: 0 auto;
+  text-align: right;
+  display: block;
+}
+
+.pagination a {
+  color: #bd2130;
+}
+
+.current, .previous_page {
+
+}

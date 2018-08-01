@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reservations = Reservation.not_ended
+    @reservations = Reservation.not_ended.paginate(page: params[:page], per_page: 1)
   end
 
   def user_index
