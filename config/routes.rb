@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	root 'home#welcome'
+	root 'home#index'
 
 	devise_for :users, :path_prefix => 'my', controllers: { registrations: "registrations" }
 	resources :home
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       put :verify
     end
 	end
+	get '/.json', to: 'home#index'
 	get '/my_reservations', to: 'reservations#user_index', as: :user_reservations
 	get '/my_groups', to: 'groups#user_index', as: :user_groups
 	get '/confirm', to: 'reservations#confirm', as: :confirm_reservation

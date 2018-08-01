@@ -13,7 +13,7 @@
       <p class="text-center res-details"> No reservations connected with this room </p>
     <% else %>
       <p class="text-center res-details"> Reservations connected with this room: </p>
-      <% @reservations.each do |r| %>
+      <% @reservations.not_ended.each do |r| %>
         <%= link_to r.title, reservation_path(id: r.id) %>
       <% end %>
     <% end %>

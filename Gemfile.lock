@@ -137,6 +137,8 @@ GEM
       activemodel (>= 3.2)
       mime-types (>= 1.0)
     filterrific (5.0.1)
+    flatpickr_rails (1.1.0)
+      railties (>= 3.0)
     fullcalendar-rails (3.9.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
@@ -402,6 +404,7 @@ DEPENDENCIES
   faker
   file_validators
   filterrific
+  flatpickr_rails
   fullcalendar-rails
   haml-rails
   jbuilder (~> 2.5)
