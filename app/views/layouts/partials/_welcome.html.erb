@@ -9,7 +9,7 @@
     <h3 class="rooms-header"> Available rooms: </h3>
 
     <div class="row room-card">
-        <% Hall.all.each do |f| %>
+        <% Hall.order("RANDOM()").limit(4).each do |f| %>
           <div class="card col-md-3 col-sm-5">
             <div class="card-body">
                <h5 class="card-title"><%="#{f.title}"%></h5>
@@ -19,6 +19,8 @@
            </div>
       <% end %>
   </div>
+
+  <%= link_to 'See all rooms', halls_path, role: 'button', class:'btn btn-danger text-center btn-customize see-all-btn' %>
 
   <div class="calendar"></div>
   <%= render 'layouts/partials/footer' %>
