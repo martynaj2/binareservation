@@ -6,11 +6,11 @@ class UserMailer < ApplicationMailer
 
   def vacation_true_mail(user)
     @user = user
-    mail(to: user.email, subject: 'You are on vacation, you will not get any emails from now on')
+    mail(to: user.email, subject: 'Vacation time!')
   end
 
   def vacation_false_mail(user)
     @user = user
-    mail(to: user.email, subject: 'Welcome back, enjoyed your vacation?')
+    mail(to: user.email, subject: 'Welcome back! Ready for new meetings?')
   end
 end
