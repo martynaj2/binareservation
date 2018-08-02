@@ -26,7 +26,7 @@ RSpec.describe ReservationsController, type: :controller do
   describe '#show' do
     let(:reservation) { create(:reservation) }
     before { get :show, params: { id: reservation.id } }
-
+    
     describe 'successful response' do
       it { expect(response).to be_successful }
       it { expect(response).to render_template('show') }

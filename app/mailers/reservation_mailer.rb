@@ -1,5 +1,6 @@
 class ReservationMailer < ApplicationMailer
   def quarter_notification_mail(user, reservation, invitor)
+    return if user.vacation
     @user = user
     @reservation = reservation
     @invitor = invitor
@@ -7,6 +8,7 @@ class ReservationMailer < ApplicationMailer
   end
 
   def twenty_four_notification_mail(user, reservation, invitor)
+    return if user.vacation
     @user = user
     @reservation = reservation
     @invitor = invitor
