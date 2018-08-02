@@ -16,7 +16,7 @@ class Reservation < ActiveRecord::Base
   validates_with DateValidator, if: proc { |f| f.start_date && f.end_date }
 
   scope :ended, -> { where('end_date < ?', Time.zone.now) }
-  scope :not_ended, -> { where('start_date > ?', Time.zone.now) }
+  scope :not_ended, -> { where('end_date > ?', Time.zone.now) }
 
   belongs_to :user
   belongs_to :hall

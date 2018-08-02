@@ -9,7 +9,7 @@
 
   <div class="edit-pswd">
     <div class="form-group">
-      <%= f.label :password, class:"control-label" %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.label :password, class:"control-label" %> <br />
       <%= f.password_field :password, autocomplete: "off", class: "form-control col-md-3 col-centered" %>
       <% if @minimum_password_length %>
         <em><%= @minimum_password_length %> characters minimum</em>
