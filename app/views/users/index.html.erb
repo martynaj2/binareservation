@@ -1,11 +1,20 @@
 <div class="user-data text-center">
 	<div class="profile-header">
 		<h2> My profile </h2>
+		<% unless current_user.avatar.url.present? %>
+			<%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
+		<% else %>
+			<%= image_tag current_user.avatar.url, class:"rounded-circle show-avatar", style:"width:100px; height:100px;", :alt => "avatar"%>
+		<% end %>
 		<div class="profile-buttons">
 			<%= link_to 'Edit', edit_profile_path(id: current_user.id), class:'btn btn-outline-success btn-customize' %>
 			<%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize' %>
 			<% if current_user.verified == true %>
-				<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), role:"button", method: :put, class:'btn btn-outline-success btn-customize'%>
+				<% if current_user.vacation == false %>
+					<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), role:"button", method: :put, class:'btn btn-outline-success btn-customize'%>
+				<% else %>
+							<%= link_to "Back from vacation", vacation_user_path(id: current_user.id), role:"button", method: :put, class:'btn btn-outline-success btn-customize'%>
+				<% end %>
 				<%= link_to 'My reservations', user_reservations_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
 				<%= link_to 'My groups', user_groups_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
 				<button onclick="showPicture()" class="btn btn-outline-success btn-customize">Palma</button>
@@ -13,15 +22,10 @@
 		</div>
 	</div>
 
-	<h3>
-		Name:
-		<%= current_user.fullname %>
-		<% unless current_user.avatar.url.present? %>
-			<%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
-		<% else %>
-			<%= image_tag current_user.avatar.url, class:"rounded-circle show-avatar", style:"width:100px; height:100px", :alt => "avatar"%>
-		<% end %>
-	</h3>
+	<div>
+		<h3><%= "Name: #{current_user.fullname}" %>
+		</h3>
+	</div>
 
 	<h5>
 		E-mail:
