@@ -1,14 +1,15 @@
 <h1 class="show-reservation text-center">
   <%= "Group: #{@group.title}" %>
 </h1>
-<div class="info-group">
+<div class="info-group col-md-6 col-centered">
   <div class="group-label">
     <div class="invited-label">
       Members:
-      <p class="invited-value">
-        <% @users.each do |user|%>
-        <%= user.fullname %>
-        <% end %></p>
+      <p class="invited-value"><% @users.each do |user|%>
+        <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="blablabla">
+          <%= user.fullname %> </button>
+        <% end %>
+      </p>
     </div>
   </div>
 </div>
