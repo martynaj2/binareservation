@@ -3,6 +3,9 @@ class DateValidator < ActiveModel::Validator
     if reservation.start_date < Time.zone.now
       reservation.errors[:base] << 'start_date > Time.zone.now'
     elsif reservation.start_date >= reservation.end_date
+      reservation.errors[:base] << 'start_date > end_date'
+    elsif reservation.start_date.hour < 7 || reservation.end_date.hour > 17
+      reservation.errors[:base] << 'We do not work in this hours'
     end
   end
 end
