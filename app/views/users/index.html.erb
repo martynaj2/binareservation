@@ -38,9 +38,12 @@
 			Yay! It's time for vacay!
 			<i class="fa fa-suitcase"></i>
 			<i class="fa fa-glass"></i>
+			<div class="text-center"><%= image_tag("palm.png", id:"palma", style:"display:none;", :alt => "palma") %></div>
+			<script type="text/javascript">
+				$('document').ready(showPicture());
+			</script>
 		<% end %>
 	</div>
 
-<%= image_tag("palm.png", id:"palma", style:"display:none;", :alt => "palma") %>
 
 </div>
