@@ -17,9 +17,6 @@ class Reservation < ActiveRecord::Base
 
   scope :ended, -> { where('end_date < ?', Time.zone.now) }
   scope :not_ended, -> { where('start_date > ?', Time.zone.now) }
-  scope :during, -> { where('start_date < ?', Time.zone.now) }
-  scope :quarter, -> { where('start_date < ?', Time.zone.now + 15.minutes) }
-  scope :twenty_four, -> { where('start_date > ?', Time.zone.now - 24.hours) }
 
   belongs_to :user
   belongs_to :hall
