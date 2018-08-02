@@ -47,7 +47,7 @@
         <li class="col-md-3 col-centered user-group-list-elem" user_id=<%= user.id %>><a><%= user.fullname %></a></li>
       <% end %>
       <% Group.all.each do |group| %>
-        <li class="col-md-3 col-centered user-group-list-elem" group_id=<%= group.id %>><a><%= group.title %></a></li>
+        <li class="col-md-3 col-centered user-group-list-elem" group_id=<%= group.invited_ids %>><a><%= group.title %></a></li>
       <% end %>
         <div id='empty-message'></div>
       </ul>
@@ -68,7 +68,7 @@
       event.preventDefault();
       var userIds = [];
       $('#list li.selected').each(function() {
-        userIds.push($(this).attr('user_id'));
+        userIds.push($(this).attr('user_id' && 'group_id'));
       });
       $('#reservation_invited_ids').attr('value', userIds)
       event.currentTarget.submit();
