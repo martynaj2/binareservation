@@ -1,3 +1,6 @@
 function showPicture() {
-  document.getElementById('palma').style.display='block';
+  var x = document.getElementById('palma');
+  x.classList.add('animated');
+  x.classList.add('lightSpeedIn');
+  x.style.display='inline-block';
 }
