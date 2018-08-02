@@ -76,6 +76,16 @@ label {
     border: 1px solid #ccc;
 }
 
+.login-container.edit{
+    position: relative;
+    width: 380px;
+    margin: 40px auto;
+    padding: 20px 10px 25px 10px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
 @media only screen and (max-width: 992px) {
   .login-container {
     width: 320px;
@@ -131,6 +141,7 @@ label {
 .avatar{
     width: 100px;height: 100px;
     margin: 10px auto 30px;
+    margin-bottom: 0px;
     border-radius: 100%;
     border: 2px solid #aaa;
     background-size: cover;
