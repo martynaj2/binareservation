@@ -33,6 +33,7 @@ class ReservationsController < ApplicationController
     reservation_params.merge(hash)
     if @conflicting_reservations.empty?
       if @reservation.update(reservation_params)
+
         Reservation.mail_helper(@reservation, 2)
         Reservation.delete_notification(@reservation)
         Reservation.notify_mail_helper(@reservation)

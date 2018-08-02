@@ -39,5 +39,11 @@
   <div class="reservation-buttons text-center">
     <%= link_to 'Back to reservations', reservations_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
     <%= link_to 'New reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
+    <% if current_user.id == @reservation.user_id || current_user.admin %>
+      <%= link_to 'Edit', edit_reservation_path(id: @reservation.id),role: 'button', class:'btn btn-outline-success btn-customize' %>
+      <%= link_to 'Delete', reservation_path(id: @reservation.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center btn-customize' %>
+    <% else %>
+      <button type="button" class="btn btn-outline-dark">You can't edit other's reservations</button>
+    <% end %>
   </div>
 </div>
