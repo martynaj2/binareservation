@@ -3,6 +3,9 @@ class DateValidator < ActiveModel::Validator
     if reservation.start_date < Time.zone.now
       reservation.errors[:base] << 'start_date > Time.zone.now'
     elsif reservation.start_date >= reservation.end_date
+      reservation.errors[:base] << 'start_date > end_date'
+    elsif reservation.start_date.hour < 7 || reservation.end_date.hour > 17
+      reservation.errors[:base] << 'We do not work in this hours'
     end
   end
 end
@@ -14,9 +17,6 @@ class Reservation < ActiveRecord::Base
 
   scope :ended, -> { where('end_date < ?', Time.zone.now) }
   scope :not_ended, -> { where('start_date > ?', Time.zone.now) }
-  scope :during, -> { where('start_date < ?', Time.zone.now) }
-  scope :quarter, -> { where('start_date < ?', Time.zone.now + 15.minutes) }
-  scope :twenty_four, -> { where('start_date > ?', Time.zone.now - 24.hours) }
 
   belongs_to :user
   belongs_to :hall
