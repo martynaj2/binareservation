@@ -1,25 +1,12 @@
 <h1 class="show-hall text-center">
- <%= "Room: #{@hall.title}" %>
+ <%= "#{@hall.title}" %>
 </h1>
 
 <div class="info-hall col-md-6 col-centered text-center">
   <div class="hall-label">
-    <h3> Room type: </h3>
-    <h5 class="capacity-value"><%= capacity_label(@hall) %></h5>
+    <h5> Room type: </h5>
+    <h6 class="capacity-value"><%= capacity_label(@hall) %></h6>
   </div>
-
-  <div class="room-reservations">
-    <% if @hall.reservations.empty? %>
-      <p class="text-center res-details"> No reservations connected with this room </p>
-    <% else %>
-      <p class="text-center res-details"> Reservations connected with this room: </p>
-      <% @reservations.not_ended.each do |r| %>
-        <%= link_to r.title, reservation_path(id: r.id) %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <h6><%= "Color: #{@hall.hall_color}" %></h6>
 
   <%= link_to 'Back to rooms', halls_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
   <%= link_to 'New reservation', new_reservation_path(hall_id: @hall.id), role: 'button', class:"btn btn-outline-success btn-customize"%>

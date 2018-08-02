@@ -1,5 +1,5 @@
 <div class="reservations-index">
-  <h1 class="text-center"> Reservation list </h1>
+  <h1 class="text-center"> Reservations list </h1>
     <div class="reservations-index text-center col-md-8 col-centered">
         <% @reservations.not_ended.each do |reservation| %>
          <%= render 'reservation', reservation: reservation %>

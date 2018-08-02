@@ -19,7 +19,7 @@ class ReservationMailer < ApplicationMailer
     @user = user
     @premium_user = premium_user
     @reservation = reservation
-    mail(to: @user.email, subject: "Your meeting #{reservation.title} was overwritten by #{premium_user.fullname}")
+    mail(to: @user.email, subject: "Something has changed with #{@reservation.title}")
   end
 
   def invitation_mail(user, reservation, invitor)
@@ -28,7 +28,7 @@ class ReservationMailer < ApplicationMailer
     @reservation = reservation
     @invitor = invitor
     mail(to: @user.email,
-         subject: "Hello #{@user.fullname}. You were invited to #{@reservation.title},	by #{@invitor.fullname}")
+         subject: "Hello #{@user.fullname}. You have one new invitation ")
   end
 
   def cancelation_mail(user, reservation, invitor)

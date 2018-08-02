@@ -1,3 +1,6 @@
+<head>
+  <link rel="stylesheet" href="animate.min.css">
+</head>
 <h1 class="show-reservation text-center">
  <%= "Reservation: #{@reservation.title}" %>
 </h1>
@@ -27,9 +30,9 @@
     </div>
 
     Invited:
-    <p class="invited-value"><% @users.each do |user|%>
-      <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="blablabla">
-        <%= user.fullname %> </button>
+    <p class="invited-value">
+      <% @users.each do |user|%>
+        <%= link_to user.fullname, user_path(id: user.id), role: 'button', class: "btn btn-secondary" %>
       <% end %>
     </p>
   </div>
