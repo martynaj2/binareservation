@@ -68,7 +68,7 @@
       event.preventDefault();
       var userIds = [];
       $('#list li.selected').each(function() {
-        userIds.push($(this).attr('user_id' && 'group_id'));
+        userIds.push($(this).attr('user_id' ));
       });
       $('#reservation_invited_ids').attr('value', userIds)
       event.currentTarget.submit();

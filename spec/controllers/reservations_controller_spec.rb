@@ -26,7 +26,7 @@ RSpec.describe ReservationsController, type: :controller do
   describe '#show' do
     let(:reservation) { create(:reservation) }
     before { get :show, params: { id: reservation.id } }
-    
+
     describe 'successful response' do
       it { expect(response).to be_successful }
       it { expect(response).to render_template('show') }
@@ -64,76 +64,6 @@ RSpec.describe ReservationsController, type: :controller do
       it { expect(assigns(:reservation)).to eq(reservation) }
     end
   end
-
-  # describe '#create' do
-  #   let(:valid_attributes) { { reservation: attributes_for(:reservation) } }
-  #   let(:invalid_attributes) { { reservation: attributes_for(:reservation, title: nil) } }
-  #
-  #   context 'valid params' do
-  #     subject { post :create, params: valid_attributes }
-  #
-  #     it 'should redirect to reservation index' do
-  #       expect(subject).to redirect_to(reservations_path)
-  #     end
-  #
-  #     it 'should redirect with notice' do
-  #       subject
-  #       expect(flash[:notice]).to be_present
-  #     end
-  #
-  #     it 'should create new reservation' do
-  #       expect{subject}.to change{ Reservation.count }.by(1)
-  #     end
-  #   end
-  #
-  #   context 'invalid params' do
-  #     subject { post :create, params: invalid_attributes }
-  #
-  #     it 'should render reservation list' do
-  #       expect(subject).to redirect_to(reservations_path)
-  #     end
-  #
-  #     it 'should not create new reservation' do
-  #       expect{ subject }.to change{ Reservation.count }
-  #     end
-  #   end
-  # end
-  #
-  # describe '#update' do
-  #   let(:reservation) {create(:reservation)}
-  #   let(:valid_attributes) { { id: reservation.id, reservation: { title: 'title' } } }
-  #   let(:invalid_attributes) { { id: reservation.id, reservation: { title: nil } } }
-  #
-  #   context 'valid params' do
-  #     subject { patch :update, params: valid_attributes }
-  #
-  #     it 'should redirect to reservations index' do
-  #       expect(subject).to redirect_to(reservations_path)
-  #     end
-  #
-  #     it 'should redirect with notice' do
-  #       expect(flash[:notice]).to be_present
-  #     end
-  #
-  #     it 'should change reservation title' do
-  #       subject
-  #       expect(reservation.reload.title).to eq( 'title' )
-  #     end
-  #   end
-  #
-  #   context 'invalid params' do
-  #     subject { patch :update, params: invalid_attributes }
-  #
-  #     it 'should render edit' do
-  #       expect(subject).to redirect_to(reservations_path)
-  #     end
-  #
-  #     it 'should not change title' do
-  #       subject
-  #       expect(reservation.reload.title).not_to eq('new title')
-  #     end
-  #   end
-  # end
 
   describe '#destroy' do
     let(:reservation) { create(:reservation) }
