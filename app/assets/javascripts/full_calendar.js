@@ -40,7 +40,6 @@ initialize_calendar = function() {
 
       eventClick: function(event) {
         if (event.id) {
-          alert(event.color);
           window.location = '/reservations/' + event.id;
         }
       },
