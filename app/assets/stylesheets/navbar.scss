@@ -12,6 +12,25 @@ $binar-red: #ef3f4a;
   font-family: "Raleway";
 }
 
+body {
+  cursor: auto;
+}
+
+.custom {
+  cursor: url('https://files.slack.com/files-pri/TBK7JFX8F-FC2JTTJQ7/guder.png'), auto;
+}
+
+.admin {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #3b3a3c;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 60px;
+  border-bottom: 3px solid $binar-red;
+  font-family: "Raleway";
+}
+
 @media only screen and (max-width: 992px) {
   .navbar {
     margin-bottom: 0.2rem;

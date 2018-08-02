@@ -9,7 +9,7 @@ initialize_calendar = function() {
         right: 'month,agendaWeek,agendaDay'
       },
       minTime: "07:00:00",
-      maxTime: "18:00:00",
+      maxTime: "17:00:00",
       selectable: true,
       selectHelper: true,
       editable: false,

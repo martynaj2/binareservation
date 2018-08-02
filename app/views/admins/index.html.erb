@@ -5,6 +5,7 @@
 	<%end%>
 </div>
 
+<% unless @not_verified_users.empty? %>
 <h3 class="text-center not-verified"> Not Verified: </h3>
 <div class="users-index-nv col-md-12 text-center">
 	<% @not_verified_users.each do |user| %>
@@ -14,3 +15,4 @@
 		<%= link_to "Verify all", verify_all_admin_path, method: :post, class:'btn btn-outline-success btn-customize' %>
 	</div>
 </div>
+<% end %>

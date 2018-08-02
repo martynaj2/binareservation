@@ -1,8 +1,7 @@
 <div class="reservations-user_index">
   <h1 class="text-center"> Reservation list </h1>
     <div class="container reservations">
-        <% @reservations.each do |reservation| %>
-        <!-- kazdy row ma zawsze 12 kolumn -->
+        <% @reservations.not_ended.each do |reservation| %>
          <%= render 'reservation', controller: 'reservations', action: 'user_index', reservation: reservation %>
         <% end %>
     </div>

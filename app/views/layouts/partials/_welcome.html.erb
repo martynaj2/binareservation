@@ -5,6 +5,9 @@
 <div class="home-page-header text-center col-md-12">
   <h2 class="welcome-header"> Welcome to Binar::Meeting</h2>
   <% if current_user %>
+    <% if current_user.vacation == true %>
+      <h3> What are you doing here? Go get some vacay! </h3>
+    <%end%>
     <% if current_user.verified == true %>
     <h3 class="rooms-header"> Available rooms: </h3>
 
@@ -22,12 +25,7 @@
 
   <%= link_to 'See all rooms', halls_path, role: 'button', class:'btn btn-danger text-center btn-customize see-all-btn' %>
 
-  <% if current_user.vacation == true %>
-    <h3> What are you doing here? Go get some vacay! </h3>
-    <%else%>
-    <div class="calendar"></div>
-  <%end%>
-
+  <div class="calendar"></div>
   <%= render 'layouts/partials/footer' %>
     <% else %>
       <h4>You're not verified</h4>

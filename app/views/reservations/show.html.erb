@@ -1,3 +1,6 @@
+<head>
+  <link rel="stylesheet" href="animate.min.css">
+</head>
 <h1 class="show-reservation text-center">
  <%= "Reservation: #{@reservation.title}" %>
 </h1>
@@ -27,9 +30,9 @@
     </div>
 
     Invited:
-    <p class="invited-value"><% @users.each do |user|%>
-      <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="blablabla">
-        <%= user.fullname %> </button>
+    <p class="invited-value">
+      <% @users.each do |user|%>
+        <%= link_to user.fullname, user_path(id: user.id), role: 'button', class: "btn btn-secondary" %>
       <% end %>
     </p>
   </div>
@@ -37,7 +40,7 @@
   <hr />
 
   <div class="reservation-buttons text-center">
-    <%= link_to 'Back to reservations', reservations_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
+    <%= link_to 'Back', :back, role: 'button', class:"btn btn-outline-success btn-customize"%>
     <%= link_to 'New reservation', new_reservation_path, role: 'button', class:"btn btn-outline-success btn-customize"%>
     <% if current_user.id == @reservation.user_id || current_user.admin %>
       <%= link_to 'Edit', edit_reservation_path(id: @reservation.id),role: 'button', class:'btn btn-outline-success btn-customize' %>

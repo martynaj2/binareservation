@@ -12,11 +12,16 @@
 
 .filter-buttons {
   justify-content: center;
+  margin-bottom: 2.0rem;
 }
 
 .halls-index-li {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.hall-label {
+  margin-bottom: 2.0rem;
 }
 
 .res-details {
@@ -29,6 +34,10 @@
 
 .row {
   padding: 2px;
+}
+
+.show-hall {
+  font-size: 45px;
 }
 
 @media only screen and (max-width: 992px) {
