@@ -28,6 +28,7 @@ class UsersController < ApplicationController
       @user.update(vacation: false)
     else
       @user.update(vacation: true)
+      UserMailer.vacation_mail(@user).deliver_now
     end
     redirect_to profile_path
   end
