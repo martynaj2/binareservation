@@ -39,20 +39,28 @@
       <%= f.collection_select(:hall_id, Hall.all, :id, :title, {:include_blank => true}, {:class => 'form-control'}) %>
     </div>
 
-    <div class="invited-picker">
-      <p> Choose who do you want to invite: </p>
-      <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names.." class="col-md-3">
-      <ul id='list'>
-      <% User.where.not(id: current_user.id).each do |user| %>
-        <li class="col-md-3 col-centered user-group-list-elem" user_id=<%= user.id %>><a><%= user.fullname %></a></li>
-      <% end %>
-      <% Group.all.each do |group| %>
-        <li class="col-md-3 col-centered user-group-list-elem" group_id=<%= group.invited_ids %>><a><%= group.title %></a></li>
-      <% end %>
-        <div id='empty-message'></div>
-      </ul>
+<div class="row row justify-content-around col-md-12">
+  <div class="invited-picker">
+    <p> Choose who do you want to invite: </p>
+    <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names..">
+    <ul id='list'>
+    <% User.where.not(id: current_user.id).each do |user| %>
+      <li class="col-centered user-group-list-elem" user_id=<%= user.id %>><a><%= user.fullname %></a></li>
+    <% end %>
+      <div id='empty-message'></div>
+    </ul>
+  </div>
+  <div class="invited-picker">
+    <p> Choose group you want to invite: </p>
+    <input type="text" id='invited2' onkeyup='FindGroups()' placeholder="Search for names..">
+    <ul id='list2'>
+    <% Group.all.each do |group| %>
+      <li class="col-centered user-group-list2-elem" group_id=<%= group.invited_ids %>><a><%= group.title %></a></li>
+    <% end %>
+      <div id='empty-message2'></div>
+    </ul>
+  </div>
 </div>
-
   <%= f.hidden_field :invited_ids, value: @reservation.invited_ids%>
   <%= f.submit 'Save', role: 'button', class:"btn btn-outline-success btn-customize save-reservation-btn" %>
   <%= link_to 'Go back', :back, role: 'button', class: 'btn btn-outline-success btn-customize' %>
@@ -60,17 +68,24 @@
 
 <script>
   $(document).on('turbolinks:load', function() {
-
       $('#list li').on('click',function() {
       $(this).toggleClass('selected');
+    });
+    $('#list2 li').on('click', function() {
+      $(this).toggleClass('selected_2');
     });
     $('#new_reservation').on('submit', function( event ){
       event.preventDefault();
       var userIds = [];
       $('#list li.selected').each(function() {
-        userIds.push($(this).attr('user_id' ));
+        userIds.push($(this).attr('user_id'));
       });
-      $('#reservation_invited_ids').attr('value', userIds)
+      var groupIds = [];
+      $('#list2 li.selected_2').each(function() {
+        groupIds.push($(this).attr('group_id'));
+      });
+      var Ids = userIds.reduce((x,y) => x.includes(y) ? x : groupIds, [])
+      $('#reservation_invited_ids').attr('value', Ids)
       event.currentTarget.submit();
     });
     invitedIds = $('#reservation_invited_ids').attr('value').split(',');
@@ -83,8 +98,16 @@
       $('#list li.selected').each(function() {
         userIds.push($(this).attr('user_id'));
       });
-      $('#reservation_invited_ids').attr('value', userIds)
+      var groupIds = [];
+      $('#list2 li.selected_2').each(function() {
+        groupIds.push($(this).attr('group_id'));
+      });
+      var Ids = userIds.reduce((x,y) => x.includes(y) ? x : groupIds, [])
+      $('#reservation_invited_ids').attr('value', Ids)
       event.currentTarget.submit();
     });
+
+
   });
+
 </script>
