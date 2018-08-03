@@ -1,7 +1,6 @@
 	<div data-user-id="<%= user.id %>" class="row">
 		 <div class="col-md-6 col-centered">
-				<%= user.fullname %>
-				<%= user.email %>
+			 <%= link_to user.fullname, user_path(id: user.id) %>
 			</div>
 			<div class="col-md-5 col-centered">
 				<%= link_to "Verify", verify_admin_path(id: user.id), method: :put, class:'btn btn-outline-success btn-customize' %>

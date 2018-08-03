@@ -1,0 +1,7 @@
+<h1> Hi <%= "#{@user.fullname}!" %> </h1>
+<p>You were invited to <%= @reservation.title %>,	by <%= @invitor.fullname %></p>
+<p>This meeting is going to start on <%= @reservation.start_date %>.<br>
+  To see more details <a href="meets.binarlab.com/reservations/<%=@reservation.id%>">click here</a>
+</p><br>
+
+<p>Have fun!</p>

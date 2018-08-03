@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 2018_08_01_162911) do
     t.string "hall_color"
   end
 
+  create_table "reservation_halls", force: :cascade do |t|
+    t.integer "reservation_id"
+    t.integer "hall_id"
+    t.index ["hall_id"], name: "index_reservation_halls_on_hall_id"
+    t.index ["reservation_id"], name: "index_reservation_halls_on_reservation_id"
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.string "title"
     t.integer "number_of_people"
@@ -67,6 +74,7 @@ ActiveRecord::Schema.define(version: 2018_08_01_162911) do
     t.boolean "verified", default: false
     t.string "avatar"
     t.boolean "vacation", default: false
+    t.integer "group_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

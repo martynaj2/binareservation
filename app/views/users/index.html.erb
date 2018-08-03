@@ -1,14 +1,30 @@
 <div class="user-data text-center">
-	<h2 class="profile-header"> My profile </h2>
-	<h3>
-		Name:
-		<%= current_user.fullname %>
+	<div class="profile-header">
+		<h2> My profile </h2>
 		<% unless current_user.avatar.url.present? %>
 			<%= image_tag("avatar.png", class:"rounded-circle", style:"width:100px; height:100px", :alt => "avatar") %>
 		<% else %>
-			<%= image_tag current_user.avatar.url, class:"rounded-circle show-avatar", style:"width:100px; height:100px", :alt => "avatar"%>
+			<%= image_tag current_user.avatar.url, class:"rounded-circle show-avatar", style:"width:100px; height:100px;", :alt => "avatar"%>
 		<% end %>
-	</h3>
+		<div class="profile-buttons">
+			<%= link_to 'Edit', edit_profile_path(id: current_user.id), class:'btn btn-outline-success btn-customize' %>
+			<%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize' %>
+			<% if current_user.verified == true %>
+				<% if current_user.vacation == false %>
+					<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), role:"button", method: :put, class:'btn btn-outline-success btn-customize'%>
+				<% else %>
+							<%= link_to "Back from vacation", vacation_user_path(id: current_user.id), role:"button", method: :put, class:'btn btn-outline-success btn-customize'%>
+				<% end %>
+				<%= link_to 'My reservations', user_reservations_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
+				<%= link_to 'My groups', user_groups_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
+			<% end %>
+		</div>
+	</div>
+
+	<div>
+		<h3><%= "Name: #{current_user.fullname}" %>
+		</h3>
+	</div>
 
 	<h5>
 		E-mail:
@@ -21,20 +37,12 @@
 			Yay! It's time for vacay!
 			<i class="fa fa-suitcase"></i>
 			<i class="fa fa-glass"></i>
+			<div class="text-center"><%= image_tag("palm.png", id:"palma", style:"display:none;", :alt => "palma") %></div>
+			<script type="text/javascript">
+				$('document').ready(showPicture());
+			</script>
 		<% end %>
 	</div>
 
-	<div class="profile-buttons">
-		<%= link_to 'Edit', edit_profile_path(id: current_user.id), class:'btn btn-outline-success btn-customize' %>
-		<%= link_to "Change your password", edit_user_registration_path, class:'btn btn-outline-success btn-customize' %>
-		<% if current_user.verified == true %>
-			<%= link_to "Set Vacation", vacation_user_path(id: current_user.id), role:"button", method: :put, class:'btn btn-outline-success btn-customize'%>
-			<%= link_to 'My reservations', user_reservations_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
-			<%= link_to 'My groups', user_groups_path(id: current_user.id), class: 'btn btn-outline-success btn-customize'%>
-			<button onclick="showPicture()" class="btn btn-outline-success btn-customize">Palma</button>
-		<% end %>
-	</div>
-
-<%= image_tag("palm.png", id:"palma", style:"display:none;", :alt => "palma") %>
 
 </div>

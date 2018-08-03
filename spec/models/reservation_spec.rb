@@ -19,52 +19,28 @@ RSpec.describe Reservation, type: :model do
 
 	describe 'scopes' do
 		let(:reservation1) { create(:reservation) }
-		let(:reservation2) { create(:reservation, end_date: Time.now + 5.minutes) }
-		let(:reservation3) { create(:reservation, start_date: Time.now + 10.minutes) }
-		let(:reservation4) { create(:reservation, start_date: Time.now + 20.hours, end_date: Time.now + 21.hours) }
+		let(:reservation2) { create(:reservation) }
 
 		it 'should have ended scope' do
-			reservation1.update_attribute(:start_date, Time.now - 15.minutes)
-			reservation1.update_attribute(:end_date, Time.now - 5.minutes)
+			reservation1.update_attribute(:start_date, DateTime.new(2017, 8, 29, 07, 35, 0))
+			reservation1.update_attribute(:end_date, DateTime.new(2017, 8, 29, 16, 35, 0))
 			expect(Reservation.ended).to include(reservation1)
 			expect(Reservation.ended).not_to include(reservation2)
-			expect(Reservation.ended).not_to include(reservation3)
-			expect(Reservation.ended).not_to include(reservation4)
-		end
-
-		it 'should have during scope' do
-			reservation2.update_attribute(:start_date, Time.now - 5.minutes)
-			expect(Reservation.during).to include(reservation2)
-			expect(Reservation.ended).not_to include(reservation1)
-			expect(Reservation.ended).not_to include(reservation3)
-			expect(Reservation.ended).not_to include(reservation4)
 		end
 
 		it 'should have not_ended scope' do
-			expect(Reservation.not_ended).to include(reservation4)
-			expect(Reservation.not_ended).to include(reservation3)
+			reservation1.update_attribute(:start_date, DateTime.new(2017, 8, 29, 07, 35, 0))
+			reservation1.update_attribute(:end_date, DateTime.new(2017, 8, 29, 16, 35, 0))
+			expect(Reservation.not_ended).not_to include(reservation1)
 			expect(Reservation.not_ended).to include(reservation2)
 		end
 
-		it 'should have quarter scope' do
-			expect(Reservation.quarter).to include(reservation3)
-			expect(Reservation.ended).not_to include(reservation1)
-			expect(Reservation.ended).not_to include(reservation2)
-			expect(Reservation.ended).not_to include(reservation4)
-		end
-
-		it 'should have twenty_four scope' do
-			expect(Reservation.twenty_four).to include(reservation4)
-			expect(Reservation.ended).not_to include(reservation1)
-			expect(Reservation.ended).not_to include(reservation2)
-			expect(Reservation.ended).not_to include(reservation3)
-		end
 	end
 
 	describe '#conflict_validation' do
-		let(:reservation1) { create(:reservation, start_date: Time.now + 5.minutes, end_date: Time.now + 30.minutes ) }
-		let(:reservation2) { create(:reservation, start_date: Time.now + 5.minutes, end_date: Time.now + 15.minutes ) }
-		let(:reservation3) { create(:reservation, start_date: Time.now + 15.minutes, end_date: Time.now + 30.minutes ) }
+		let(:reservation1) { create(:reservation) }
+		let(:reservation2) { create(:reservation, start_date: reservation1.start_date + 5.minutes, end_date: reservation1.end_date + 15.minutes ) }
+		let(:reservation3) { create(:reservation, start_date: reservation1.start_date + 15.minutes, end_date: reservation1.end_date + 30.minutes ) }
 		it 'should have working #conflict_validation method' do
 			expect(Reservation.conflict_validation([reservation2, reservation3], reservation1)).to eq([reservation2, reservation3])
 		end

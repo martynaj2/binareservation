@@ -2,6 +2,7 @@
   "name": "Calendar",
   "private": true,
   "dependencies": {
+    "animate.css": "^3.7.0",
     "fullcalendar": "^3.9.0"
   }
 }

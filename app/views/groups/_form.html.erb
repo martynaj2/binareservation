@@ -10,7 +10,7 @@
     </p>
     <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names.." class="col-md-3">
     <ul id='list'>
-      <% User.where.not(id: current_user.id).each do |user| %>
+      <% User.where.not(id: current_user.id, verified: false).each do |user| %>
         <li class="col-md-3 col-centered user-group-list-elem" user_id=<%= user.id %>>
           <a><%= user.fullname %></a>
         </li>

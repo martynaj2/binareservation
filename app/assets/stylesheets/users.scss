@@ -17,17 +17,18 @@ img.rounded-circle {
   box-shadow: 0px 0px 20px 1px #380364;
 }
 
-img.show-avatar {
-  margin-left: 10px;
-}
-
 .not-verified {
   color: $binar-red;
   margin-top: 30px;
 }
 
+.user-show {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .profile-header {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 20px;

@@ -3,6 +3,9 @@ class DateValidator < ActiveModel::Validator
     if reservation.start_date < Time.zone.now
       reservation.errors[:base] << 'start_date > Time.zone.now'
     elsif reservation.start_date >= reservation.end_date
+      reservation.errors[:base] << 'start_date > end_date'
+    elsif reservation.start_date.hour < 7 || reservation.end_date.hour > 17
+      reservation.errors[:base] << 'We do not work in this hours'
     end
   end
 end
@@ -13,10 +16,7 @@ class Reservation < ActiveRecord::Base
   validates_with DateValidator, if: proc { |f| f.start_date && f.end_date }
 
   scope :ended, -> { where('end_date < ?', Time.zone.now) }
-  scope :not_ended, -> { where('start_date > ?', Time.zone.now) }
-  scope :during, -> { where('start_date < ?', Time.zone.now) }
-  scope :quarter, -> { where('start_date < ?', Time.zone.now + 15.minutes) }
-  scope :twenty_four, -> { where('start_date > ?', Time.zone.now - 24.hours) }
+  scope :not_ended, -> { where('end_date > ?', Time.zone.now) }
 
   belongs_to :user
   belongs_to :hall
@@ -84,11 +84,11 @@ class Reservation < ActiveRecord::Base
   def self.mail_case_helper(user, reservation, invitor, option)
     case option
     when 0
-      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_now
+      ReservationMailer.invitation_mail(user, reservation, invitor).deliver_later
     when 1
-      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_now
+      ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
     when 2
-      ReservationMailer.update_mail(user, reservation, invitor).deliver_now
+      ReservationMailer.update_mail(user, reservation, invitor).deliverlater
     when 3
       ReservationMailer.quarter_notification_mail(user, reservation, invitor).deliver
     when 4

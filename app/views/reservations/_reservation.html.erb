@@ -4,11 +4,11 @@
       <tr class="row-for-tables">
         <td style="width: 50%"><%= link_to reservation.title, reservation_path(id: reservation.id), class: 'reservation-a' %></td>
         <td style="width: 40%">
-          <% if current_user.id == reservation.user_id %>
+          <% if current_user.id == reservation.user_id || current_user.admin%>
             <%= link_to 'Edit', edit_reservation_path(id: reservation.id),role: 'button', class:'btn btn-outline-success btn-customize' %>
             <%= link_to 'Delete', reservation_path(id: reservation.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, role: 'button', class:'btn btn-danger text-center btn-customize' %>
           <% else %>
-            <button type="button" class="btn btn-outline-dark">You can't edit other's reservations</button>
+            <button type="button" class="btn btn-outline-dark col-md-5" style="white-space: normal;"><%= "#{reservation.user.name}'s reservation" %></button>
           <% end %>
         </td>
       </tr>

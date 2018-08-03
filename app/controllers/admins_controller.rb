@@ -2,8 +2,8 @@ class AdminsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @users = User.where(verified: true).paginate(page: params[:page], per_page: 3)
-    @not_verified_users = User.not_verified.paginate(page: params[:page], per_page: 3)
+    @users = User.where(verified: true)
+    @not_verified_users = User.not_verified
   end
 
   def destroy
