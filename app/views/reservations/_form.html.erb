@@ -84,7 +84,7 @@
       $('#list2 li.selected_2').each(function() {
         groupIds.push($(this).attr('group_id'));
       });
-      var Ids = userIds.reduce((x,y) => x.includes(y) ? x : groupIds, []);
+      var Ids = userIds.reduce((x,y) => x.includes(y) ? x : [userIds, groupIds], []);
       $('#reservation_invited_ids').attr('value', Ids)
       event.currentTarget.submit();
     });
@@ -98,7 +98,12 @@
       $('#list li.selected').each(function() {
         userIds.push($(this).attr('user_id'));
       });
-      $('#reservation_invited_ids').attr('value', userIds)
+      var groupIds = [];
+      $('#list2 li.selected_2').each(function() {
+        groupIds.push($(this).attr('group_id'));
+      });
+      var Ids = userIds.reduce((x,y) => x.includes(y) ? x : [userIds, groupIds], []);
+      $('#reservation_invited_ids').attr('value', Ids)
       event.currentTarget.submit();
     });
 
