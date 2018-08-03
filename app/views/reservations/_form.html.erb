@@ -44,7 +44,7 @@
     <p> Choose who do you want to invite: </p>
     <input type="text" id='invited' onkeyup='FindUsers()' placeholder="Search for names..">
     <ul id='list'>
-    <% User.where.not(id: current_user.id).each do |user| %>
+    <% User.where.not(id: current_user.id, verified: false).each do |user| %>
       <li class="col-centered user-group-list-elem" user_id=<%= user.id %>><a><%= user.fullname %></a></li>
     <% end %>
       <div id='empty-message'></div>
@@ -88,6 +88,7 @@
       $('#reservation_invited_ids').attr('value', Ids)
       event.currentTarget.submit();
     });
+
     invitedIds = $('#reservation_invited_ids').attr('value').split(',');
     for (var i = 0; i < invitedIds.length; i++) {
       $('#list li[user_id=' + invitedIds[i] + ']').addClass('selected');
