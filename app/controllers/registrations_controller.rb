@@ -8,6 +8,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def registration_mail
-    UserMailer.registration_mail(current_user).deliver_now
+    UserMailer.registration_mail(current_user).deliver_later
   end
 end
