@@ -34,7 +34,7 @@ class ReservationsController < ApplicationController
     if @conflicting_reservations.empty?
       if @reservation.update(reservation_params)
         Reservation.mail_helper(@reservation, 2)
-        Reservation.delete_notification(@reservation)
+        # Reservation.delete_notification(@reservation)
         Reservation.notify_mail_helper(@reservation)
         redirect_to reservations_path, notice: 'Reservation Updated'
       else
@@ -85,7 +85,7 @@ class ReservationsController < ApplicationController
         ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
         r.destroy
         Reservation.mail_helper(r, 1)
-        Reservation.delete_notification(r)
+        # Reservation.delete_notification(r)
       end
       Reservation.mail_helper(@reservation, 0)
       Reservation.notify_mail_helper(@reservation)
@@ -106,7 +106,7 @@ class ReservationsController < ApplicationController
         ReservationMailer.overwrite_mail(User.find(r.user_id), current_user, r).deliver_now
         r.destroy
         Reservation.mail_helper(r, 1)
-        Reservation.delete_notification(r)
+        # Reservation.delete_notification(r)
       end
       Reservation.mail_helper(@reservation, 2)
       Reservation.notify_mail_helper(@reservation)
