@@ -88,7 +88,7 @@ class Reservation < ActiveRecord::Base
     when 1
       ReservationMailer.cancelation_mail(user, reservation, invitor).deliver_later
     when 2
-      ReservationMailer.update_mail(user, reservation, invitor).deliverlater
+      ReservationMailer.update_mail(user, reservation, invitor).deliver_later
     when 3
       ReservationMailer.quarter_notification_mail(user, reservation, invitor).deliver
     when 4
