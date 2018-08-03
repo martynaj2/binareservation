@@ -26,10 +26,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.vacation == true
       @user.update(vacation: false)
-      # UserMailer.vacation_false_mail(@user).deliver_now
+      UserMailer.vacation_false_mail(@user).deliver_now
     else
       @user.update(vacation: true)
-      # UserMailer.vacation_true_mail(@user).deliver_now
+      UserMailer.vacation_true_mail(@user).deliver_now
     end
     redirect_to profile_path
   end
