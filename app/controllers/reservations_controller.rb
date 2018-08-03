@@ -69,7 +69,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     if @reservation.destroy
       Reservation.mail_helper(@reservation, 1)
-      Reservation.delete_notification(@reservation)
+      # Reservation.delete_notification(@reservation)
       redirect_to reservations_path, notice: 'Reservation was deleted'
     else
       redirect_to reservations_path, alert: 'Something went wrong'
